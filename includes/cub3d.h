@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/01/13 16:47:25 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/01/13 17:12:32 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct		s_settings
 }					t_settings;
 
 int					parse_config(int fd, t_settings *settings);
-void				print_error(char *message);
+int					print_error(char *message);
 int					parse_resolution(char *line, t_settings *settings);
 int					parse_color(char *line, t_settings *settings, int ground);
 int					rgbint(int r, int g, int b);

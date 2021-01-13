@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:36:35 by lbertran          #+#    #+#             */
-/*   Updated: 2021/01/13 16:41:03 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/01/13 17:07:33 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int		parse_line(char *line, t_settings *settings)
 {
 	if (line[0] == 'R')
 		return (parse_resolution(line, settings));
+	else if (line[0] == 'F' || line[0] == 'C')
+		return (parse_color(line, settings, line[0] == 'F'));
 	return (ERROR);
 }
 
@@ -28,7 +30,8 @@ int		parse_config(int fd, t_settings *settings)
 		if (ft_strlen(line) == 0)
 			continue ;
 		if (ft_isalpha(line[0]))
-			return (parse_line(line, settings));
+			if (parse_line(line, settings) == ERROR)
+				return (ERROR);
 	}
 	return (SUCCESS);
 }
