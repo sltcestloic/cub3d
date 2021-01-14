@@ -6,11 +6,13 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 16:46:43 by lbertran          #+#    #+#             */
-/*   Updated: 2021/01/13 16:47:02 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/01/14 11:34:16 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	rgbint(int r, int g, int b)
 {
+	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+		return (0);
 	return (65536 * r + 256 * g + b);
 }

@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/01/13 17:12:32 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/01/14 11:43:44 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,20 @@ typedef struct		s_settings
 {
 	int				width;
 	int				height;
-	char			*north_texture;	//SO
-	char			*south_texture;	//NO
-	char			*east_texture;	//EA
-	char			*west_texture;	//WE
-	char			*sprite_texture;//S
-	int				ground_color;	//F
-	int				sky_color;		//C
+	char			*north_texture;
+	char			*south_texture;
+	char			*east_texture;
+	char			*west_texture;
+	char			*sprite_texture;
+	int				ground_color;
+	int				sky_color;
 }					t_settings;
 
 int					parse_config(int fd, t_settings *settings);
 int					print_error(char *message);
 int					parse_resolution(char *line, t_settings *settings);
 int					parse_color(char *line, t_settings *settings, int ground);
+int					parse_texture(char **split, t_settings *settings);
 int					rgbint(int r, int g, int b);
 
 #endif
