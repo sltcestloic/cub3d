@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/01/14 11:43:44 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/01/14 15:21:21 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,18 @@ typedef struct		s_settings
 	int				sky_color;
 }					t_settings;
 
-int					parse_config(int fd, t_settings *settings);
+typedef struct		s_map
+{
+	char			**content;
+	int				lines;
+}					t_map;
+
+int					parse_config(int fd, t_settings *settings, t_map *map);
 int					print_error(char *message);
 int					parse_resolution(char *line, t_settings *settings);
 int					parse_color(char *line, t_settings *settings, int ground);
 int					parse_texture(char **split, t_settings *settings);
+int					parse_map_line(char *line, t_map *map);
 int					rgbint(int r, int g, int b);
 
 #endif
