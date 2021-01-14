@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:36:35 by lbertran          #+#    #+#             */
-/*   Updated: 2021/01/14 15:38:27 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/01/14 15:50:51 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,8 @@ int			parse_config(int fd, t_settings *settings, t_map *map)
 		if (ret == 0)
 			break ;
 	}
+	int i = 0;
+	while (map->content[i])
+		printf("%s\n", map->content[i++]);
 	return (validate_settings(settings));
 }

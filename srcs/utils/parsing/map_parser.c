@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 12:14:16 by lbertran          #+#    #+#             */
-/*   Updated: 2021/01/14 15:36:37 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/01/14 16:00:25 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,25 @@ static int		validate_map_line(char *line)
 		i++;
 	if (!line[i] || line[i] != '1')
 		return (FALSE);
-	while (is_valid_map_char(line[i]))
+	while (is_valid_map_char(line[i]) || line[i] == ' ')
 		i++;
-	return (line[i - 1] == '1');
+	if (line[i - 1] != '1')
+		return (FALSE);
+	i = 0;
+	while (line[i])
+	{
+		if (ft_iswhitespace(line[i]))
+		{
+			i++;
+			continue;
+		}
+		if (i > 0 && line[i - 1] == ' ' && line[i] != '1')
+			return (FALSE);
+		if (line[i + 1] && line[i + 1] == ' ' && line[i] != '1')
+			return (FALSE);
+		i++;
+	}
+	return (TRUE);
 }
 
 void			copy_content(char **old, char **new)
@@ -57,7 +73,7 @@ int				parse_map_line(char *line, t_map *map)
 	if (!validate_map_line(line))
 	{
 		print_error("Invalid map line.");
-		printf("Invalid line: %s\n", line);
+		printf("Invalid line: #%d (%s)\n", map->lines + 1, line);
 		return (ERROR);
 	}
 	if (!(new_content = malloc(sizeof(char *) * (map->lines + 2))))
