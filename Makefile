@@ -6,7 +6,7 @@
 #    By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/18 16:40:32 by lbertran          #+#    #+#              #
-#    Updated: 2021/01/14 15:19:10 by lbertran         ###   ########lyon.fr    #
+#    Updated: 2021/01/15 09:43:58 by lbertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ SRC		= cub3d.c \
 			utils/parsing/settings_parser.c \
 			utils/parsing/textures_parser.c \
 			utils/error.c \
+			utils/is_valid.c \
 			utils/rgbint.c
 SRCS 	= $(addprefix srcs/, ${SRC})
 OBJS	= ${SRCS:.c=.o}

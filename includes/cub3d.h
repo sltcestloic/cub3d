@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/01/14 15:21:21 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/01/15 09:54:30 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,15 @@ typedef struct		s_map
 }					t_map;
 
 int					parse_config(int fd, t_settings *settings, t_map *map);
-int					print_error(char *message);
 int					parse_resolution(char *line, t_settings *settings);
 int					parse_color(char *line, t_settings *settings, int ground);
 int					parse_texture(char **split, t_settings *settings);
 int					parse_map_line(char *line, t_map *map);
+
+int					validate_map_columns(t_map *map);
+
+int					print_error(char *message);
 int					rgbint(int r, int g, int b);
+int					is_valid_map_char(char c);
 
 #endif

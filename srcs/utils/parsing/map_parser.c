@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 12:14:16 by lbertran          #+#    #+#             */
-/*   Updated: 2021/01/14 16:00:25 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/01/15 10:08:02 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,34 @@
 ** 
 */
 
-int				is_valid_map_char(char c)
+int				validate_map_columns(t_map *map)
 {
-	return (c == '0' || c == '1' || c == '2' || c == 'N' || c == 'S' ||
-			c == 'E' || c == 'W');
+	size_t	x;
+	size_t	y;
+
+	x = 0;
+	y = 0;
+	while (map->content[y][x])
+	{
+		if ((y == 0 || (int)y == map->lines - 1) && map->content[y][x] != '1'
+			&& map->content[y][x] != ' ')
+			return (FALSE);
+		if (y < (size_t)map->lines - 1 && map->content[y + 1][x] == ' ' &&
+			map->content[y][x] != '1' && map->content[y][x] != ' ')
+				return (FALSE);
+		if (y > 0 && map->content[y - 1][x] == ' ' &&
+			map->content[y][x] != '1' && map->content[y][x] != ' ')
+				return (FALSE);
+		if (!map->content[y][x + 1])
+		{
+			y++;
+			x = -1;
+		}
+		if (y == (size_t)map->lines - 1)
+			break ;
+		x++;
+	}
+	return (TRUE);
 }
 
 static int		validate_map_line(char *line)
@@ -43,9 +67,10 @@ static int		validate_map_line(char *line)
 			i++;
 			continue;
 		}
-		if (i > 0 && line[i - 1] == ' ' && line[i] != '1')
+		if (i > 0 && line[i - 1] == ' ' && line[i] != '1' && line[i] != ' ')
 			return (FALSE);
-		if (line[i + 1] && line[i + 1] == ' ' && line[i] != '1')
+		if (line[i + 1] && line[i + 1] == ' ' && line[i] != '1' &&
+			line[i] != ' ')
 			return (FALSE);
 		i++;
 	}
@@ -85,8 +110,7 @@ int				parse_map_line(char *line, t_map *map)
 	if (map->content)
 		copy_content(map->content, new_content);
 	new_content[map->lines] = line;
-	map->lines++;
-	new_content[map->lines] = 0;
+	new_content[++map->lines] = 0;
 	map->content = new_content;
 	return (SUCCESS);
 }

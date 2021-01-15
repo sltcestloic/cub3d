@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 16:06:08 by lbertran          #+#    #+#             */
-/*   Updated: 2021/01/14 13:29:17 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/01/15 09:25:01 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int		parse_resolution(char *line, t_settings *settings)
 	split = ft_split(line, ' ');
 	settings->width = ft_atoi(split[1]);
 	settings->height = ft_atoi(split[2]);
+	free_split(split);
 	if (settings->width == 0 || settings->height == 0)
 	{
 		print_error("Invalid width or height in .cub file.");
