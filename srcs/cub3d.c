@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:12:30 by lbertran          #+#    #+#             */
-/*   Updated: 2021/01/14 15:21:35 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/01/15 14:25:21 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,16 @@ void	init_map(t_map *map)
 	map->lines = 0;
 }
 
+t_view	init_window(t_settings settings)
+{
+	t_view	view;
+
+	view.mlx = mlx_init();
+	view.window = (view.mlx, settings.width, settings.height, "Cub3D");
+	mlx_loop(view.mlx);
+	return (view);
+}
+
 int		main(int ac, char **av)
 {
 	char		*path;
@@ -53,7 +63,7 @@ int		main(int ac, char **av)
 		return (FALSE);
 	}
 	if (parse_config(fd, &settings, &map) == SUCCESS)
-		printf("%d | %d\n", settings.sky_color, settings.ground_color);
+		init_window(settings);
 	close(fd);
 	return (TRUE);
 }

@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/01/15 09:54:30 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/01/15 14:22:51 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include "../libft/libft.h"
 # include <stdio.h>
 # include <fcntl.h>
+# include "../mlx/mlx.h"
 
 typedef struct		s_settings
 {
@@ -34,6 +35,12 @@ typedef struct		s_map
 	char			**content;
 	int				lines;
 }					t_map;
+
+typedef struct		s_view
+{
+	void			*mlx;
+	void			*window;
+}					t_view;
 
 int					parse_config(int fd, t_settings *settings, t_map *map);
 int					parse_resolution(char *line, t_settings *settings);
