@@ -6,11 +6,12 @@
 #    By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/18 16:40:32 by lbertran          #+#    #+#              #
-#    Updated: 2021/01/15 14:16:29 by lbertran         ###   ########lyon.fr    #
+#    Updated: 2021/01/15 14:59:30 by lbertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 SRC		= cub3d.c \
+			window.c \
 			utils/parsing/map_parser.c \
 			utils/parsing/parser.c \
 			utils/parsing/settings_parser.c \

@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/01/15 14:22:51 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/01/15 15:29:31 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int					parse_texture(char **split, t_settings *settings);
 int					parse_map_line(char *line, t_map *map);
 
 int					validate_map_columns(t_map *map);
+
+void				init_window(t_settings settings);
 
 int					print_error(char *message);
 int					rgbint(int r, int g, int b);

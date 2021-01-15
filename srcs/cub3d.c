@@ -6,13 +6,13 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:12:30 by lbertran          #+#    #+#             */
-/*   Updated: 2021/01/15 14:25:21 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/01/15 15:06:21 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	init_settings(t_settings *settings)
+static void	init_settings(t_settings *settings)
 {
 	settings->width = 0;
 	settings->height = 0;
@@ -25,23 +25,13 @@ void	init_settings(t_settings *settings)
 	settings->sprite_texture = NULL;
 }
 
-void	init_map(t_map *map)
+static void	init_map(t_map *map)
 {
 	map->content = NULL;
 	map->lines = 0;
 }
 
-t_view	init_window(t_settings settings)
-{
-	t_view	view;
-
-	view.mlx = mlx_init();
-	view.window = (view.mlx, settings.width, settings.height, "Cub3D");
-	mlx_loop(view.mlx);
-	return (view);
-}
-
-int		main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	char		*path;
 	int			fd;
@@ -64,6 +54,5 @@ int		main(int ac, char **av)
 	}
 	if (parse_config(fd, &settings, &map) == SUCCESS)
 		init_window(settings);
-	close(fd);
 	return (TRUE);
 }
