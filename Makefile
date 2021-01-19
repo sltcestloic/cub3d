@@ -6,16 +6,16 @@
 #    By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/18 16:40:32 by lbertran          #+#    #+#              #
-#    Updated: 2021/01/15 14:59:30 by lbertran         ###   ########lyon.fr    #
+#    Updated: 2021/01/19 11:12:16 by lbertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 SRC		= cub3d.c \
 			window.c \
-			utils/parsing/map_parser.c \
-			utils/parsing/parser.c \
-			utils/parsing/settings_parser.c \
-			utils/parsing/textures_parser.c \
+			parsing/map_parser.c \
+			parsing/parser.c \
+			parsing/settings_parser.c \
+			parsing/textures_parser.c \
 			utils/error.c \
 			utils/is_valid.c \
 			utils/rgbint.c
@@ -35,7 +35,6 @@ srcs/%.o: srcs/%.c ${INCS}
 ${NAME}: ${OBJS}
 	@${MAKE} bonus -C ./libft
 	@${MAKE} -C ${MLX}
-	cp libft/libft.a ${NAME}
 	${CC} -Lmlx -lmlx -framework OpenGL -framework AppKit -o ${NAME} ${OBJS} libft/libft.a ${MLX}/libmlx.a
 
 all: ${NAME}

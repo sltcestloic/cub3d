@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:12:30 by lbertran          #+#    #+#             */
-/*   Updated: 2021/01/15 15:06:21 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/01/19 10:52:14 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static void	init_map(t_map *map)
 {
 	map->content = NULL;
 	map->lines = 0;
+	map->px = -1;
+	map->py = -1;
 }
 
 int			main(int ac, char **av)

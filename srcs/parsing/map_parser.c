@@ -6,47 +6,44 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 12:14:16 by lbertran          #+#    #+#             */
-/*   Updated: 2021/01/15 10:08:02 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/01/19 11:10:57 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 /*
 ** 
 */
 
-int				validate_map_columns(t_map *map)
+int				validate_map(t_map *map)
 {
 	size_t	x;
 	size_t	y;
 
-	x = 0;
 	y = 0;
-	while (map->content[y][x])
+	while (map->content[y])
 	{
-		if ((y == 0 || (int)y == map->lines - 1) && map->content[y][x] != '1'
-			&& map->content[y][x] != ' ')
-			return (FALSE);
-		if (y < (size_t)map->lines - 1 && map->content[y + 1][x] == ' ' &&
-			map->content[y][x] != '1' && map->content[y][x] != ' ')
-				return (FALSE);
-		if (y > 0 && map->content[y - 1][x] == ' ' &&
-			map->content[y][x] != '1' && map->content[y][x] != ' ')
-				return (FALSE);
-		if (!map->content[y][x + 1])
+		x = 0;
+		while (map->content[y][x])
 		{
-			y++;
-			x = -1;
+			if ((y == 0 || (int)y == map->lines - 1) && map->content[y][x] != '1'
+				&& map->content[y][x] != ' ')
+				return (FALSE);
+			if (y < (size_t)map->lines - 1 && map->content[y + 1][x] == ' ' &&
+				map->content[y][x] != '1' && map->content[y][x] != ' ')
+					return (FALSE);
+			if (y > 0 && map->content[y - 1][x] == ' ' &&
+				map->content[y][x] != '1' && map->content[y][x] != ' ')
+					return (FALSE);
+			x++;
 		}
-		if (y == (size_t)map->lines - 1)
-			break ;
-		x++;
+		y++;
 	}
 	return (TRUE);
 }
 
-static int		validate_map_line(char *line)
+static int		validate_map_line(char *line, t_map *map)
 {
 	size_t	i;
 
@@ -56,24 +53,21 @@ static int		validate_map_line(char *line)
 	if (!line[i] || line[i] != '1')
 		return (FALSE);
 	while (is_valid_map_char(line[i]) || line[i] == ' ')
-		i++;
-	if (line[i - 1] != '1')
-		return (FALSE);
-	i = 0;
-	while (line[i])
 	{
-		if (ft_iswhitespace(line[i]))
+		if (is_valid_player_char(line[i]))
 		{
-			i++;
-			continue;
+			if (map->px == -1)
+			{
+				map->px = i;
+				map->py = map->lines;
+			}
+			else
+				return (print_error("More than one player in map.") + 1);
 		}
-		if (i > 0 && line[i - 1] == ' ' && line[i] != '1' && line[i] != ' ')
-			return (FALSE);
-		if (line[i + 1] && line[i + 1] == ' ' && line[i] != '1' &&
-			line[i] != ' ')
-			return (FALSE);
 		i++;
 	}
+	if (line[i - 1] != '1')
+		return (FALSE);
 	return (TRUE);
 }
 
@@ -95,7 +89,7 @@ int				parse_map_line(char *line, t_map *map)
 {
 	char	**new_content;
 
-	if (!validate_map_line(line))
+	if (!validate_map_line(line, map))
 	{
 		print_error("Invalid map line.");
 		printf("Invalid line: #%d (%s)\n", map->lines + 1, line);
