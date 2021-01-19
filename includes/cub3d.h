@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/01/19 10:51:43 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/01/19 13:43:24 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,28 @@ typedef struct		s_mouse
 	int				y;
 }					t_mouse;
 
+typedef struct		s_keyboard
+{
+	int				w_pressed;
+	int				a_pressed;
+	int				s_pressed;
+	int				d_pressed;
+}					t_keyboard;
+
+typedef struct		s_circle
+{
+	int				x;
+	int				y;
+}					t_circle;
+
 typedef struct		s_view
 {
 	void			*mlx;
 	void			*window;
 	t_mouse			*mouse;
 	t_settings		*settings;
+	t_keyboard		*keyboard;
+	t_circle		*circle;
 }					t_view;
 
 int					parse_config(int fd, t_settings *settings, t_map *map);
@@ -68,5 +84,15 @@ int					rgbint(int r, int g, int b);
 
 int					is_valid_map_char(char c);
 int					is_valid_player_char(char c);
+
+int					handle_close_button();
+int					handle_key_press(int keycode, t_view *view);
+int					handle_key_release(int keycode, t_view *view);
+int					handle_click_release(int button, int x, int y, t_view *view);
+int					handle_click(int button, int x, int y, t_view *view);
+
+void				handle_keyboard(t_view *view);
+
+int					render_frame(t_view *view);
 
 #endif
