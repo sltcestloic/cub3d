@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:36:35 by lbertran          #+#    #+#             */
-/*   Updated: 2021/01/19 11:11:00 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/01/20 10:10:12 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 static int	validate_settings(t_settings *settings, t_map *map)
 {
-	if (settings->north_texture == NULL)
+	if (settings->north_texture.img == NULL)
 		return (print_error("North texture not specified in .cub file"));
-	if (settings->south_texture == NULL)
+	if (settings->south_texture.img == NULL)
 		return (print_error("South texture not specified in .cub file"));
-	if (settings->east_texture == NULL)
+	if (settings->east_texture.img == NULL)
 		return (print_error("East texture not specified in .cub file."));
-	if (settings->west_texture == NULL)
+	if (settings->west_texture.img == NULL)
 		return (print_error("West texture not specified in .cub file."));
-	if (settings->sprite_texture == NULL)
+	if (settings->sprite_texture.img == NULL)
 		return (print_error("Sprite texture not specified in .cub file."));
 	if (settings->ground_color == 0)
 		return (print_error("Ground color not specified in .cub file."));
@@ -37,23 +37,23 @@ static int	validate_settings(t_settings *settings, t_map *map)
 	return (SUCCESS);
 }
 
-int			parse_line(char *line, t_settings *settings)
+int			parse_line(char *line, t_view *view)
 {
 	char	**split;
 
 	if (line[0] == 'R')
-		return (parse_resolution(line, settings));
+		return (parse_resolution(line, view->settings));
 	else if (line[0] == 'F' || line[0] == 'C')
-		return (parse_color(line, settings, line[0] == 'F'));
+		return (parse_color(line, view->settings, line[0] == 'F'));
 	split = ft_split(line, ' ');
 	if (ft_strcmp(split[0], "SO") == 0 || ft_strcmp(split[0], "NO")
 		|| ft_strcmp(split[0], "EA") || ft_strcmp(split[0], "WE")
 		|| ft_strcmp(split[0], "S"))
-		return (parse_texture(split, settings));
+		return (parse_texture(split, view));
 	return (ERROR);
 }
 
-int			parse_config(int fd, t_settings *settings, t_map *map)
+int			parse_config(int fd, t_map *map, t_view *view)
 {
 	char	*line;
 	int		ret;
@@ -64,8 +64,9 @@ int			parse_config(int fd, t_settings *settings, t_map *map)
 			continue ;
 		if (ft_isalpha(line[0]))
 		{
-			if (parse_line(line, settings) == ERROR)
+			if (parse_line(line, view) == ERROR)
 				return (ERROR);
+			
 		}
 		else
 			if (parse_map_line(line, map) == ERROR)
@@ -78,5 +79,5 @@ int			parse_config(int fd, t_settings *settings, t_map *map)
 	for (int i = 0; map->content[i]; i++)
 		printf("%s\n", map->content[i]);
 	close(fd);
-	return (validate_settings(settings, map));
+	return (validate_settings(view->settings, map));
 }

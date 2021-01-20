@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/01/19 13:43:24 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/01/20 09:56:31 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,22 @@
 # include <fcntl.h>
 # include "../mlx/mlx.h"
 
+typedef struct		s_texture
+{
+	void			*img;
+	int				width;
+	int				height;
+}					t_texture;
+
 typedef struct		s_settings
 {
 	int				width;
 	int				height;
-	char			*north_texture;
-	char			*south_texture;
-	char			*east_texture;
-	char			*west_texture;
-	char			*sprite_texture;
+	t_texture		north_texture;
+	t_texture		south_texture;
+	t_texture		east_texture;
+	t_texture		west_texture;
+	t_texture		sprite_texture;
 	int				ground_color;
 	int				sky_color;
 }					t_settings;
@@ -69,15 +76,15 @@ typedef struct		s_view
 	t_circle		*circle;
 }					t_view;
 
-int					parse_config(int fd, t_settings *settings, t_map *map);
+int					parse_config(int fd, t_map *map, t_view *view);
 int					parse_resolution(char *line, t_settings *settings);
 int					parse_color(char *line, t_settings *settings, int ground);
-int					parse_texture(char **split, t_settings *settings);
+int					parse_texture(char **split, t_view *view);
 int					parse_map_line(char *line, t_map *map);
 
 int					validate_map(t_map *map);
 
-void				init_window(t_settings settings);
+void				init_window(t_settings settings, t_view view);
 
 int					print_error(char *message);
 int					rgbint(int r, int g, int b);

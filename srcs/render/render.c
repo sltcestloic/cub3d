@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:27:54 by lbertran          #+#    #+#             */
-/*   Updated: 2021/01/19 13:50:43 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/01/20 11:10:38 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void    draw_point(int x, int y, int rgb, t_view *view)
 
 int		render_frame(t_view *view)
 {
-	draw_point(view->circle->x, view->circle->y, randomrgb(), view);
+	mlx_put_image_to_window(view->mlx, view->window, view->settings->north_texture.img, view->circle->x, view->circle->y);
 	handle_keyboard(view);
 	return (0);
 }

@@ -6,64 +6,64 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 11:21:01 by lbertran          #+#    #+#             */
-/*   Updated: 2021/01/19 11:11:06 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/01/20 10:11:10 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static int		validate_texture(char *texture)
+static int			validate_texture(t_texture texture)
 {
-	int		fd;
-
-	fd = open(texture, O_RDONLY);
-	close(fd);
-	if (fd == -1)
+	if (texture.img == NULL)
 		return (print_error("At least one texture is invalid in .cub file."));
 	return (SUCCESS);
 }
 
-static int		parse_texture2(char **split, t_settings *settings)
+static t_texture	read_texture(char *path, t_view *view)
+{
+	t_texture	texture;
+
+	printf("reading texture %s\n", path);
+	texture.img = mlx_xpm_file_to_image(view->mlx, path, &texture.width, &texture.height);
+	return (texture);
+}
+
+static int			parse_texture2(char **split, t_view *view)
 {
 	if (ft_strcmp(split[0], "WE") == 0)
 	{
-		settings->west_texture = ft_strdup(split[1]);
+		view->settings->west_texture = read_texture(split[1], view);
 		free_split(split);
-		if (!validate_texture(settings->west_texture))
-			return (ERROR);
+		return (validate_texture(view->settings->west_texture));
 	}
 	else if (ft_strcmp(split[0], "S") == 0)
 	{
-		settings->sprite_texture = ft_strdup(split[1]);
+		view->settings->sprite_texture = read_texture(split[1], view);
 		free_split(split);
-		if (!validate_texture(settings->sprite_texture))
-			return (ERROR);
+		return (validate_texture(view->settings->sprite_texture));
 	}
 	return (SUCCESS);
 }
 
-int				parse_texture(char **split, t_settings *settings)
+int					parse_texture(char **split, t_view *view)
 {
 	if (ft_strcmp(split[0], "NO") == 0)
 	{
-		settings->north_texture = ft_strdup(split[1]);
+		view->settings->north_texture = read_texture(split[1], view);
 		free_split(split);
-		if (!validate_texture(settings->north_texture))
-			return (ERROR);
+		return (validate_texture(view->settings->north_texture));
 	}
 	else if (ft_strcmp(split[0], "SO") == 0)
 	{
-		settings->south_texture = ft_strdup(split[1]);
+		view->settings->south_texture = read_texture(split[1], view);
 		free_split(split);
-		if (!validate_texture(settings->south_texture))
-			return (ERROR);
+		return (validate_texture(view->settings->south_texture));
 	}
 	else if (ft_strcmp(split[0], "EA") == 0)
 	{
-		settings->east_texture = ft_strdup(split[1]);
+		view->settings->east_texture = read_texture(split[1], view);
 		free_split(split);
-		if (!validate_texture(settings->east_texture))
-			return (ERROR);
+		return (validate_texture(view->settings->east_texture));
 	}
-	return (parse_texture2(split, settings));
+	return (parse_texture2(split, view));
 }

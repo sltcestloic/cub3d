@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:12:30 by lbertran          #+#    #+#             */
-/*   Updated: 2021/01/19 10:52:14 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/01/20 10:00:14 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ static void	init_settings(t_settings *settings)
 	settings->height = 0;
 	settings->sky_color = 0;
 	settings->ground_color = 0;
-	settings->north_texture = NULL;
-	settings->south_texture = NULL;
-	settings->east_texture = NULL;
-	settings->west_texture = NULL;
-	settings->sprite_texture = NULL;
+	settings->north_texture.img = NULL;
+	settings->south_texture.img = NULL;
+	settings->east_texture.img = NULL;
+	settings->west_texture.img = NULL;
+	settings->sprite_texture.img = NULL;
 }
 
 static void	init_map(t_map *map)
@@ -39,6 +39,7 @@ int			main(int ac, char **av)
 	int			fd;
 	t_settings	settings;
 	t_map		map;
+	t_view		view;
 
 	init_settings(&settings);
 	init_map(&map);
@@ -47,6 +48,7 @@ int			main(int ac, char **av)
 		print_error("Usage: ./cub3d <map path> (--save)");
 		return (FALSE);
 	}
+	view.mlx = mlx_init();
 	path = av[1];
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
@@ -54,7 +56,8 @@ int			main(int ac, char **av)
 		print_error("Please provide a valid file path.");
 		return (FALSE);
 	}
-	if (parse_config(fd, &settings, &map) == SUCCESS)
-		init_window(settings);
+	view.settings = &settings;
+	if (parse_config(fd, &map, &view) == SUCCESS)
+		init_window(settings, view);
 	return (TRUE);
 }

@@ -19,7 +19,7 @@ C 232,0,254
 11111111 1111111 111111111111
 
 NO textures/brick.xpm
-SO textures/texture
-EA textures/texture
-WE textures/texture
-S textures/texture
+SO textures/stone.xpm
+EA textures/brick.xpm
+WE textures/stone.xpm
+S textures/bookshelf.xpm
