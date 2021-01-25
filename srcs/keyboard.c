@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:39:33 by lbertran          #+#    #+#             */
-/*   Updated: 2021/01/19 14:13:20 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/01/21 15:56:38 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,26 @@
 void	handle_keyboard(t_view *view)
 {
 	t_keyboard	*keyboard;
+	double		olddirx;
+	double		oldplanex;
 
 	keyboard = view->keyboard;
-	if (keyboard->w_pressed && view->circle->y > 2)
-		view->circle->y--;
-	if (keyboard->a_pressed && view->circle->x > 2)
-		view->circle->x--;
-	if (keyboard->s_pressed && view->circle->y < view->settings->height - 2)
-		view->circle->y++;
-	if (keyboard->d_pressed && view->circle->x < view->settings->width - 2)
-		view->circle->x++;
+	if (keyboard->d_pressed)
+	{
+		olddirx = view->player->dirx;
+		view->player->dirx = view->player->dirx * cos(-0.02) - view->player->diry * sin(-0.02);
+		view->player->diry = olddirx * sin(-0.02) + view->player->diry * cos(-0.02);
+		oldplanex = view->player->planex; 
+		view->player->planex = view->player->planex * cos(-0.02) - view->player->planey * sin(-0.02);
+		view->player->planey = oldplanex * sin(-0.02) + view->player->planey * cos(-0.02);
+	}
+	else if (keyboard->a_pressed)
+	{
+		olddirx = view->player->dirx;
+		view->player->dirx = view->player->dirx * cos(0.02) - view->player->diry * sin(0.02);
+		view->player->diry = olddirx * sin(0.02) + view->player->diry * cos(0.02);
+		oldplanex = view->player->planex; 
+		view->player->planex = view->player->planex * cos(0.02) - view->player->planey * sin(0.02);
+		view->player->planey = oldplanex * sin(0.2) + view->player->planey * cos(0.02);
+	}
 }

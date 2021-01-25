@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/01/20 09:56:31 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/01/25 10:41:10 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include "../mlx/mlx.h"
+# include <math.h>
 
 typedef struct		s_texture
 {
@@ -41,8 +42,7 @@ typedef struct		s_map
 {
 	char			**content;
 	int				lines;
-	int				px;
-	int				py;
+	int				longest;
 }					t_map;
 
 typedef struct		s_mouse
@@ -60,11 +60,36 @@ typedef struct		s_keyboard
 	int				d_pressed;
 }					t_keyboard;
 
-typedef struct		s_circle
+typedef struct		s_player
 {
-	int				x;
-	int				y;
-}					t_circle;
+	double			posx;
+	double			posy;
+	double			dirx;
+	double			diry;
+	double			planex;
+	double			planey;
+}					t_player;
+
+typedef struct		s_ray
+{
+	double			camx;
+	double			dirx;
+	double			diry;
+	int				mapx;
+	int				mapy;
+	double			sidedistx;
+	double			sidedisty;
+	double			deltadistx;
+	double			deltadisty;
+	double			perpwalldist;
+	int				stepx;
+	int				stepy;
+	int				hit;
+	int				side;
+	int				lineheight;
+	int				drawstart;
+	int				drawend;
+}					t_ray;
 
 typedef struct		s_view
 {
@@ -73,14 +98,24 @@ typedef struct		s_view
 	t_mouse			*mouse;
 	t_settings		*settings;
 	t_keyboard		*keyboard;
-	t_circle		*circle;
+	t_player		*player;
+	t_map			*map;
 }					t_view;
+
+typedef struct		s_image
+{
+	void			*img;
+	char			*addr;
+	int				bits_per_pixel;
+	int				line_len;
+	int				endian;
+}					t_image;
 
 int					parse_config(int fd, t_map *map, t_view *view);
 int					parse_resolution(char *line, t_settings *settings);
 int					parse_color(char *line, t_settings *settings, int ground);
 int					parse_texture(char **split, t_view *view);
-int					parse_map_line(char *line, t_map *map);
+int					parse_map_line(char *line, t_map *map, t_player *player);
 
 int					validate_map(t_map *map);
 
@@ -101,5 +136,7 @@ int					handle_click(int button, int x, int y, t_view *view);
 void				handle_keyboard(t_view *view);
 
 int					render_frame(t_view *view);
+void				put_pixel_to_img(t_image *img, int x, int y, int color);
+void				do_raycast(t_view *view);
 
 #endif

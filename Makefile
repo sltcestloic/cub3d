@@ -6,7 +6,7 @@
 #    By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/18 16:40:32 by lbertran          #+#    #+#              #
-#    Updated: 2021/01/19 13:43:35 by lbertran         ###   ########lyon.fr    #
+#    Updated: 2021/01/21 13:18:14 by lbertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,9 @@ SRC		= cub3d.c \
 			parsing/parser.c \
 			parsing/settings_parser.c \
 			parsing/textures_parser.c \
+			render/image.c \
 			render/render.c \
+			render/raycaster.c \
 			utils/error.c \
 			utils/is_valid.c \
 			utils/rgbint.c

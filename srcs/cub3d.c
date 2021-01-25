@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:12:30 by lbertran          #+#    #+#             */
-/*   Updated: 2021/01/20 10:00:14 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/01/25 10:53:45 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,33 +29,52 @@ static void	init_map(t_map *map)
 {
 	map->content = NULL;
 	map->lines = 0;
-	map->px = -1;
-	map->py = -1;
+	map->longest = 0;
 }
 
-int			main(int ac, char **av)
+static void	init_player(t_player *player)
 {
-	char		*path;
-	int			fd;
-	t_settings	settings;
-	t_map		map;
-	t_view		view;
+	player->dirx = -1;
+	player->diry = 0;
+	player->planex = 0;
+	player->planey = 0.66;
+	player->posx = -1;
+	player->posy = 0;
+}
 
-	init_settings(&settings);
-	init_map(&map);
-	if (ac < 2)
+int			validate_args(int ac, char **av)
+{
+	int	fd;
+
+	if (ac < 2 || ac > 3)
 	{
 		print_error("Usage: ./cub3d <map path> (--save)");
 		return (FALSE);
 	}
-	view.mlx = mlx_init();
-	path = av[1];
-	fd = open(path, O_RDONLY);
+	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 	{
 		print_error("Please provide a valid file path.");
 		return (FALSE);
 	}
+	return (TRUE);
+}
+
+int			main(int ac, char **av)
+{
+	int			fd;
+	t_settings	settings;
+	t_map		map;
+	t_view		view;
+	t_player	player;
+
+	init_settings(&settings);
+	init_map(&map);
+	init_player(&player);
+	if (!validate_args(ac, av))
+		return (FALSE);
+	view.mlx = mlx_init();
+	view.player = &player;
 	view.settings = &settings;
 	if (parse_config(fd, &map, &view) == SUCCESS)
 		init_window(settings, view);

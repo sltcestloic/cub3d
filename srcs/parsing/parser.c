@@ -6,13 +6,13 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:36:35 by lbertran          #+#    #+#             */
-/*   Updated: 2021/01/20 10:10:12 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/01/25 10:10:25 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static int	validate_settings(t_settings *settings, t_map *map)
+static int	validate_settings(t_settings *settings, t_player *player)
 {
 	if (settings->north_texture.img == NULL)
 		return (print_error("North texture not specified in .cub file"));
@@ -32,7 +32,7 @@ static int	validate_settings(t_settings *settings, t_map *map)
 		return (print_error("Resolution width not specified in .cub file."));
 	if (settings->height == 0)
 		return (print_error("Resolution height not specified in .cub file."));
-	if (map->px == -1)
+	if (player->posx == -1)
 		return (print_error("No player in map."));
 	return (SUCCESS);
 }
@@ -66,18 +66,18 @@ int			parse_config(int fd, t_map *map, t_view *view)
 		{
 			if (parse_line(line, view) == ERROR)
 				return (ERROR);
-			
 		}
 		else
-			if (parse_map_line(line, map) == ERROR)
+			if (parse_map_line(line, map, view->player) == ERROR)
 				return (ERROR);
 		if (ret == 0)
 			break ;
 	}
 	if (!validate_map(map))
-		return (print_error("Invalid map.") + 1);
+		return (ERROR);
 	for (int i = 0; map->content[i]; i++)
 		printf("%s\n", map->content[i]);
+	view->map = map;
 	close(fd);
-	return (validate_settings(view->settings, map));
+	return (validate_settings(view->settings, view->player));
 }

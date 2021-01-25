@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 14:57:02 by lbertran          #+#    #+#             */
-/*   Updated: 2021/01/20 10:00:22 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/01/21 13:18:34 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	init_window(t_settings settings, t_view view)
 {
 	t_mouse		mouse;
 	t_keyboard	keyboard;
-	t_circle	circle;
 
 	view.window = mlx_new_window(view.mlx, settings.width, settings.height, "Cub3D");
 	mouse.x = -1;
@@ -26,11 +25,8 @@ void	init_window(t_settings settings, t_view view)
 	keyboard.a_pressed = 0;
 	keyboard.s_pressed = 0;
 	keyboard.d_pressed = 0;
-	circle.x = settings.width / 2;
-	circle.y = settings.height / 2;
 	view.mouse = &mouse;
 	view.keyboard = &keyboard;
-	view.circle = &circle;
 	mlx_hook(view.window, 4, 1L<<2, handle_click, &view);
 	mlx_hook(view.window, 5, 1L<<3, handle_click_release, &view);
 	mlx_hook(view.window, 2, 1L<<0, handle_key_press, &view);

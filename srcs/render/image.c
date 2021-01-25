@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_valid.c                                         :+:      :+:    :+:   */
+/*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/15 09:26:39 by lbertran          #+#    #+#             */
-/*   Updated: 2021/01/25 09:40:53 by lbertran         ###   ########lyon.fr   */
+/*   Created: 2021/01/21 13:05:12 by lbertran          #+#    #+#             */
+/*   Updated: 2021/01/21 13:10:28 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int				is_valid_map_char(char c)
-{
-	return (c == '0' || c == '1' || c == '2' || c == 'N' || c == 'S' ||
-			c == 'E' || c == 'W');
-}
+/*
+** https://harm-smits.github.io/42docs/libs/
+** minilibx/getting_started.html#writing-pixels-to-a-image
+*/
 
-int				is_valid_player_char(char c)
+void	put_pixel_to_img(t_image *img, int x, int y, int color)
 {
-	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
-}
+	char	*dest;
 
-int				is_empty(char c)
-{
-	return (c == 0 || c == ' ');
+	dest = img->addr + (y * img->line_len + x * (img->bits_per_pixel / 8));
+	*(unsigned int*)dest = color;
 }
