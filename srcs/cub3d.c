@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:12:30 by lbertran          #+#    #+#             */
-/*   Updated: 2021/01/25 10:53:45 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/02 12:24:31 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,15 @@ static void	init_player(t_player *player)
 	player->posy = 0;
 }
 
-int			validate_args(int ac, char **av)
+int			validate_args(int ac, char **av, int *fd)
 {
-	int	fd;
-
 	if (ac < 2 || ac > 3)
 	{
 		print_error("Usage: ./cub3d <map path> (--save)");
 		return (FALSE);
 	}
-	fd = open(av[1], O_RDONLY);
-	if (fd == -1)
+	*fd = open(av[1], O_RDONLY);
+	if (*fd == -1)
 	{
 		print_error("Please provide a valid file path.");
 		return (FALSE);
@@ -71,7 +69,7 @@ int			main(int ac, char **av)
 	init_settings(&settings);
 	init_map(&map);
 	init_player(&player);
-	if (!validate_args(ac, av))
+	if (!validate_args(ac, av, &fd))
 		return (FALSE);
 	view.mlx = mlx_init();
 	view.player = &player;

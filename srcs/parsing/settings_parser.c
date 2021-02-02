@@ -6,13 +6,13 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 16:06:08 by lbertran          #+#    #+#             */
-/*   Updated: 2021/01/19 11:11:03 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/02 12:54:32 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int		parse_resolution(char *line, t_settings *settings)
+int	parse_resolution(char *line, t_settings *settings)
 {
 	char	**split;
 
@@ -28,7 +28,7 @@ int		parse_resolution(char *line, t_settings *settings)
 	return (SUCCESS);
 }
 
-int		parse_color(char *line, t_settings *settings, int ground)
+int	parse_color(char *line, t_settings *settings, int ground)
 {
 	char	**split;
 	char	**colorsplit;
@@ -38,19 +38,21 @@ int		parse_color(char *line, t_settings *settings, int ground)
 	free_split(split);
 	if (ground)
 	{
-		settings->ground_color = \
+		settings->ground_color =
 		rgbint(ft_atoi(colorsplit[0]), ft_atoi(colorsplit[1]),
 			ft_atoi(colorsplit[2]));
 		free_split(colorsplit);
+		printf("set ground color %d\n", settings->ground_color);
 		if (settings->ground_color == 0)
 			return (print_error("Invalid ground color in .cub file."));
 	}
 	else
 	{
-		settings->sky_color = \
+		settings->sky_color =
 		rgbint(ft_atoi(colorsplit[0]), ft_atoi(colorsplit[1]),
 			ft_atoi(colorsplit[2]));
 		free_split(colorsplit);
+		printf("set sky color %d\n", settings->sky_color);
 		if (settings->sky_color == 0)
 			return (print_error("Invalid sky color in .cub file."));
 	}

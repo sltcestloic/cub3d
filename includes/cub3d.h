@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/01/25 10:41:10 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/02 12:43:36 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct		s_settings
 typedef struct		s_map
 {
 	char			**content;
+	char			**content_copy;
 	int				lines;
 	int				longest;
 }					t_map;
@@ -122,6 +123,7 @@ int					validate_map(t_map *map);
 void				init_window(t_settings settings, t_view view);
 
 int					print_error(char *message);
+int					print_error_exit(char *message, int ext);
 int					rgbint(int r, int g, int b);
 
 int					is_valid_map_char(char c);
@@ -136,6 +138,7 @@ int					handle_click(int button, int x, int y, t_view *view);
 void				handle_keyboard(t_view *view);
 
 int					render_frame(t_view *view);
+void				rotate_camera(t_view *view, int side);
 void				put_pixel_to_img(t_image *img, int x, int y, int color);
 void				do_raycast(t_view *view);
 

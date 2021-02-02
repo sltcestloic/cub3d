@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 11:27:01 by lbertran          #+#    #+#             */
-/*   Updated: 2021/01/19 11:31:15 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/02 12:25:03 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		handle_key_press(int keycode, t_view *view)
 	printf("press key %d\n", keycode);
 	if (keycode == 53)
 	{
-   		mlx_destroy_window(view->mlx, view->window);
+		mlx_destroy_window(view->mlx, view->window);
 		exit(0);
 	}
 	else if (keycode == 13)
@@ -61,7 +61,7 @@ int		handle_key_release(int keycode, t_view *view)
 	return (0);
 }
 
-int		handle_close_button()
+int		handle_close_button(void)
 {
 	exit(0);
 	return (0);

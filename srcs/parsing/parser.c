@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:36:35 by lbertran          #+#    #+#             */
-/*   Updated: 2021/01/25 10:10:25 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/02 12:58:40 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int			parse_config(int fd, t_map *map, t_view *view)
 {
 	char	*line;
 	int		ret;
-	
+
 	while ((ret = ft_get_next_line(fd, &line)) >= 0)
 	{
 		if (ft_strlen(line) == 0)
@@ -67,14 +67,12 @@ int			parse_config(int fd, t_map *map, t_view *view)
 			if (parse_line(line, view) == ERROR)
 				return (ERROR);
 		}
-		else
-			if (parse_map_line(line, map, view->player) == ERROR)
-				return (ERROR);
+		else if (parse_map_line(line, map, view->player) == ERROR)
+			return (ERROR);
 		if (ret == 0)
 			break ;
 	}
-	if (!validate_map(map))
-		return (ERROR);
+	validate_map(map);
 	for (int i = 0; map->content[i]; i++)
 		printf("%s\n", map->content[i]);
 	view->map = map;
