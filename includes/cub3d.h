@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/02 12:43:36 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/03 14:52:43 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,12 @@ typedef struct		s_keyboard
 	int				a_pressed;
 	int				s_pressed;
 	int				d_pressed;
+	int				la_pressed;
+	int				ra_pressed;
+	int				ua_pressed;
+	int				da_pressed;
+	int				shift_pressed;
+	int				ctrl_pressed;
 }					t_keyboard;
 
 typedef struct		s_player
@@ -92,6 +98,15 @@ typedef struct		s_ray
 	int				drawend;
 }					t_ray;
 
+typedef struct		s_image
+{
+	void			*img;
+	char			*addr;
+	int				bits_per_pixel;
+	int				line_len;
+	int				endian;
+}					t_image;
+
 typedef struct		s_view
 {
 	void			*mlx;
@@ -101,16 +116,12 @@ typedef struct		s_view
 	t_keyboard		*keyboard;
 	t_player		*player;
 	t_map			*map;
+	t_image			*image;
+	int				horizon;
+	double			sensivity;
 }					t_view;
 
-typedef struct		s_image
-{
-	void			*img;
-	char			*addr;
-	int				bits_per_pixel;
-	int				line_len;
-	int				endian;
-}					t_image;
+
 
 int					parse_config(int fd, t_map *map, t_view *view);
 int					parse_resolution(char *line, t_settings *settings);
@@ -124,7 +135,13 @@ void				init_window(t_settings settings, t_view view);
 
 int					print_error(char *message);
 int					print_error_exit(char *message, int ext);
+
 int					rgbint(int r, int g, int b);
+
+void				put_pixel(t_image *image, int x, int y, int color);
+int					get_pixel_color(t_image *image, int x, int y);
+
+void				set_direction(t_player *player, char dir);
 
 int					is_valid_map_char(char c);
 int					is_valid_player_char(char c);
@@ -134,11 +151,13 @@ int					handle_key_press(int keycode, t_view *view);
 int					handle_key_release(int keycode, t_view *view);
 int					handle_click_release(int button, int x, int y, t_view *view);
 int					handle_click(int button, int x, int y, t_view *view);
+int 				handle_mouse_motion(int x, int y, t_view *view);
 
 void				handle_keyboard(t_view *view);
 
 int					render_frame(t_view *view);
-void				rotate_camera(t_view *view, int side);
+void				rotate_camera_lr(t_view *view, int right, int mouse);
+void				rotate_camera_ud(t_view *view, int up, int mouse);
 void				put_pixel_to_img(t_image *img, int x, int y, int color);
 void				do_raycast(t_view *view);
 

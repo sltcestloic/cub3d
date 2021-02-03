@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   pixel.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/19 13:27:54 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/02 15:47:18 by lbertran         ###   ########lyon.fr   */
+/*   Created: 2021/01/27 13:15:10 by lbertran          #+#    #+#             */
+/*   Updated: 2021/02/02 15:44:32 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int		render_frame(t_view *view)
+void	put_pixel(t_image *image, int x, int y, int color)
 {
-	t_image	img;
+    char    *dst;
 
-	img.img = mlx_new_image(view->mlx, view->settings->width,
-		view->settings->height);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
-		&img.line_len, &img.endian);
-	view->image = &img;
-	handle_keyboard(view);
-	do_raycast(view);
-	mlx_put_image_to_window(view->mlx, view->window, img.img, 0, 0);
-	return (0);
+	if (x > 1000 || x < 0 || y > 750 - 66 || y < 0)
+		return ;
+    dst = image->addr + (y * image->line_len + x * (image->bits_per_pixel / 8));
+    *(unsigned int*)dst = color;
+}
+
+int		get_pixel_color(t_image *image, int x, int y)
+{
+    char    *dst;
+
+    dst = image->addr + (y * image->line_len + x * (image->bits_per_pixel / 8));
+    return (*(unsigned int*)dst);
 }

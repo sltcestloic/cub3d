@@ -6,21 +6,24 @@
 #    By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/18 16:40:32 by lbertran          #+#    #+#              #
-#    Updated: 2021/01/21 13:18:14 by lbertran         ###   ########lyon.fr    #
+#    Updated: 2021/02/03 13:55:48 by lbertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 SRC		= cub3d.c \
-			hooks.c \
 			keyboard.c \
 			window.c \
+			hooks/action_hooks.c \
+			hooks/motion_hooks.c \
 			parsing/map_parser.c \
 			parsing/parser.c \
 			parsing/settings_parser.c \
 			parsing/textures_parser.c \
 			render/image.c \
+			render/pixel.c \
 			render/render.c \
 			render/raycaster.c \
+			utils/direction.c \
 			utils/error.c \
 			utils/is_valid.c \
 			utils/rgbint.c

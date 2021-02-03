@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   action_hooks.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 11:27:01 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/02 12:25:03 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/03 14:53:59 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 int		handle_click(int button, int x, int y, t_view *view)
 {
@@ -37,13 +37,25 @@ int		handle_key_press(int keycode, t_view *view)
 		exit(0);
 	}
 	else if (keycode == 13)
-		view->keyboard->w_pressed = 1;
+		view->keyboard->w_pressed = TRUE;
 	else if (keycode == 0)
-		view->keyboard->a_pressed = 1;
+		view->keyboard->a_pressed = TRUE;
 	else if (keycode == 1)
-		view->keyboard->s_pressed = 1;
+		view->keyboard->s_pressed = TRUE;
 	else if (keycode == 2)
-		view->keyboard->d_pressed = 1;
+		view->keyboard->d_pressed = TRUE;
+	if (keycode == 123)
+		view->keyboard->la_pressed = TRUE;
+	else if (keycode == 124)
+		view->keyboard->ra_pressed = TRUE;
+	if (keycode == 125)
+		view->keyboard->da_pressed = TRUE;
+	else if (keycode == 126)
+		view->keyboard->ua_pressed = TRUE;
+	if (keycode == 257)
+		view->keyboard->shift_pressed = TRUE;
+	else if (keycode == 256)
+		view->keyboard->ctrl_pressed = TRUE;
 	return (0);
 }
 
@@ -51,13 +63,25 @@ int		handle_key_release(int keycode, t_view *view)
 {
 	printf("release key %d\n", keycode);
 	if (keycode == 13)
-		view->keyboard->w_pressed = 0;
+		view->keyboard->w_pressed = FALSE;
 	else if (keycode == 0)
-		view->keyboard->a_pressed = 0;
+		view->keyboard->a_pressed = FALSE;
 	else if (keycode == 1)
-		view->keyboard->s_pressed = 0;
+		view->keyboard->s_pressed = FALSE;
 	else if (keycode == 2)
-		view->keyboard->d_pressed = 0;
+		view->keyboard->d_pressed = FALSE;
+	if (keycode == 123)
+		view->keyboard->la_pressed = FALSE;
+	else if (keycode == 124)
+		view->keyboard->ra_pressed = FALSE;
+	if (keycode == 125)
+		view->keyboard->da_pressed = FALSE;
+	else if (keycode == 126)
+		view->keyboard->ua_pressed = FALSE;
+	if (keycode == 257)
+		view->keyboard->shift_pressed = FALSE;
+	else if (keycode == 256)
+		view->keyboard->ctrl_pressed = FALSE;
 	return (0);
 }
 

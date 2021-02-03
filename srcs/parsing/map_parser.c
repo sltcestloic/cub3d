@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 12:14:16 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/02 13:03:52 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/02 16:08:50 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 
 void			run_map_validation(t_map *map, int x, int y)
 {
-	printf("validating %d %d\n", x, y);
 	if (map->content_copy[y][x] != '1')
 	{
 		if (x == 0 || y == 0 || x == map->longest - 1 || y == map->lines - 1)
@@ -88,6 +87,7 @@ static int		validate_map_line(char *line, t_map *map, t_player *player)
 			{
 				player->posx = i;
 				player->posy = map->lines;
+				set_direction(player, line[i]);
 			}
 			else
 				return (print_error("More than one player in map.") + 1);

@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:12:30 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/02 12:24:31 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/03 14:47:50 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ int			main(int ac, char **av)
 	view.mlx = mlx_init();
 	view.player = &player;
 	view.settings = &settings;
+	view.horizon = 0;
+	view.sensivity = 0.54;
 	if (parse_config(fd, &map, &view) == SUCCESS)
 		init_window(settings, view);
 	return (TRUE);
