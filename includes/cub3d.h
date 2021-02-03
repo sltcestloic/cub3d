@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/03 15:24:41 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/03 15:40:19 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int					parse_color(char *line, t_settings *settings, int ground);
 int					parse_texture(char **split, t_view *view);
 int					parse_map_line(char *line, t_map *map, t_player *player);
 
-int					validate_map(t_map *map);
+int					validate_map(t_map *map, t_player *player);
 
 void				init_window(t_settings settings, t_view view);
 

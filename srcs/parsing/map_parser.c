@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 12:14:16 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/02 16:08:50 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/03 15:45:42 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,21 +52,11 @@ void			copy_content(char **old, char **new, int mlc)
 	new[i] = 0;
 }
 
-int				validate_map(t_map *map)
+int				validate_map(t_map *map, t_player *player)
 {
-	int		i;
-
-	i = 0;
 	copy_content(map->content, map->content_copy, map->longest);
-	while (map->content_copy[1][i])
-	{
-		if (map->content_copy[1][i] != ' ' && map->content_copy[1][i] != '1')
-		{
-			run_map_validation(map, i, 1);
-			break ;
-		}
-		i++;
-	}
+	map->content_copy[(int)player->posy][(int)player->posx] = '0';
+	run_map_validation(map, (int)player->posx, (int)player->posy);
 	return (TRUE);
 }
 
