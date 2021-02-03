@@ -6,12 +6,12 @@
 #    By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/18 16:40:32 by lbertran          #+#    #+#              #
-#    Updated: 2021/02/03 13:55:48 by lbertran         ###   ########lyon.fr    #
+#    Updated: 2021/02/03 15:11:31 by lbertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 SRC		= cub3d.c \
-			keyboard.c \
+			move.c \
 			window.c \
 			hooks/action_hooks.c \
 			hooks/motion_hooks.c \

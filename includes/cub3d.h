@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/03 14:52:43 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/03 15:24:41 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,23 +79,23 @@ typedef struct		s_player
 
 typedef struct		s_ray
 {
-	double			camx;
-	double			dirx;
-	double			diry;
-	int				mapx;
-	int				mapy;
-	double			sidedistx;
-	double			sidedisty;
-	double			deltadistx;
-	double			deltadisty;
-	double			perpwalldist;
-	int				stepx;
-	int				stepy;
+	double			cam_x;
+	double			dir_x;
+	double			dir_y;
+	int				map_x;
+	int				map_y;
+	double			side_x;
+	double			side_y;
+	double			delta_x;
+	double			delta_y;
+	double			wall_dist;
+	int				step_x;
+	int				step_y;
 	int				hit;
 	int				side;
-	int				lineheight;
-	int				drawstart;
-	int				drawend;
+	int				line_height;
+	int				draw_start;
+	int				draw_end;
 }					t_ray;
 
 typedef struct		s_image
@@ -155,10 +155,12 @@ int 				handle_mouse_motion(int x, int y, t_view *view);
 
 void				handle_keyboard(t_view *view);
 
+void				put_pixel_to_img(t_image *img, int x, int y, int color);
 int					render_frame(t_view *view);
+void				do_raycast(t_view *view);
+void				draw_ray(t_view *view, t_ray *ray, int x);
+
 void				rotate_camera_lr(t_view *view, int right, int mouse);
 void				rotate_camera_ud(t_view *view, int up, int mouse);
-void				put_pixel_to_img(t_image *img, int x, int y, int color);
-void				do_raycast(t_view *view);
 
 #endif

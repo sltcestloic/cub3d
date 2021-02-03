@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 11:19:24 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/03 14:56:44 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/03 15:22:50 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,99 +14,90 @@
 
 void	init_ray(t_ray *ray)
 {
-	ray->camx = 0;
-	ray->deltadistx = 0;
-	ray->deltadisty = 0;
-	ray->dirx = 0;
-	ray->diry = 0;
-	ray->drawend = 0;
-	ray->drawstart = 0;
+	ray->cam_x = 0;
+	ray->delta_x = 0;
+	ray->delta_y = 0;
+	ray->dir_x = 0;
+	ray->dir_y = 0;
+	ray->draw_end = 0;
+	ray->draw_start = 0;
 	ray->hit = 0;
-	ray->lineheight = 0;
-	ray->mapx = 0;
-	ray->mapy = 0;
-	ray->perpwalldist = 0;
+	ray->line_height = 0;
+	ray->map_x = 0;
+	ray->map_y = 0;
+	ray->wall_dist = 0;
 	ray->side = 0;
-	ray->sidedistx = 0;
-	ray->sidedisty = 0;
-	ray->stepx = 0;
-	ray->stepy = 0;
+	ray->side_x = 0;
+	ray->side_y = 0;
+	ray->step_x = 0;
+	ray->step_y = 0;
 }
 
 void	do_dda(t_view *view, t_ray *ray)
 {
 	while (ray->hit == 0)
 	{
-		if (ray->sidedistx < ray->sidedisty)
+		if (ray->side_x < ray->side_y)
 		{
-			ray->sidedistx += ray->deltadistx;
-			ray->mapx += ray->stepx;
+			ray->side_x += ray->delta_x;
+			ray->map_x += ray->step_x;
 			ray->side = 0;
 		}
 		else
 		{
-			ray->sidedisty += ray->deltadisty;
-			ray->mapy += ray->stepy;
+			ray->side_y += ray->delta_y;
+			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (view->map->content[ray->mapy][ray->mapx] == '1')
+		if (view->map->content[ray->map_y][ray->map_x] == '1')
 			ray->hit = 1;
 	}
 }
 
 void 	calculate_side_dist(t_view *view, t_ray *ray)
 {
-	if (ray->dirx < 0)
+	if (ray->dir_x < 0)
 	{
-		ray->stepx = -1;
-		ray->sidedistx = (view->player->posx - ray->mapx) * ray->deltadistx;
+		ray->step_x = -1;
+		ray->side_x = (view->player->posx - ray->map_x) * ray->delta_x;
 	}
 	else
 	{
-		ray->stepx = 1;
-		ray->sidedistx = (ray->mapx + 1 - view->player->posx) * ray->deltadistx;
+		ray->step_x = 1;
+		ray->side_x = (ray->map_x + 1 - view->player->posx) * ray->delta_x;
 	}
-	if (ray->diry < 0)
+	if (ray->dir_y < 0)
 	{
-		ray->stepy = -1;
-		ray->sidedisty = (view->player->posy - ray->mapy) * ray->deltadisty;
+		ray->step_y = -1;
+		ray->side_y = (view->player->posy - ray->map_y) * ray->delta_y;
 	}
 	else
 	{
-		ray->stepy = 1;
-		ray->sidedisty = (ray->mapy + 1 - view->player->posy) * ray->deltadisty;
+		ray->step_y = 1;
+		ray->side_y = (ray->map_y + 1 - view->player->posy) * ray->delta_y;
 	}
 }
 
-void	draw(t_view *view, t_ray *ray, int x)
+void	set_ray_height(t_view *view, t_ray *ray)
 {
 	int	line_height;
 	int	view_height;
-	int color = rgbint(0, 255, 0);
 	
 	view_height = view->settings->height;
-	line_height = view_height / ray->perpwalldist;
-	ray->drawstart = -line_height / 2 + view_height / 2;
-	ray->drawstart += view->horizon;
-	if (ray->drawstart < 0)
-		ray->drawstart = 0;
-	ray->drawend = line_height / 2 + view_height / 2;
-	ray->drawend += view->horizon;
+	line_height = view_height / ray->wall_dist;
+	ray->draw_start = -line_height / 2 + view_height / 2;
+	ray->draw_start += view->horizon;
+	if (ray->draw_start < 0)
+		ray->draw_start = 0;
+	ray->draw_end = line_height / 2 + view_height / 2;
+	ray->draw_end += view->horizon;
 	if (view->keyboard->ctrl_pressed)
 	{
-		ray->drawstart -= 50;
-		ray->drawend -= 50;
+		ray->draw_start -= 50;
+		ray->draw_end -= 50;
 	}
-	if (ray->drawend > view->settings->height)
-		ray->drawend = view->settings->height;
-	if (ray->side == 0)
-		color /= 2;
-	for (int y = 0; y < ray->drawstart; y++)
-		put_pixel(view->image, x, y, view->settings->sky_color);
-	for (int y = ray->drawstart; y < ray->drawend; y++)
-		put_pixel(view->image, x, y, color);
-	for (int y = ray->drawend; y < view->settings->height; y++)
-		put_pixel(view->image, x, y, view->settings->ground_color);
+	if (ray->draw_end > view->settings->height)
+		ray->draw_end = view->settings->height;
 }
 
 void	do_raycast(t_view *view)
@@ -118,26 +109,21 @@ void	do_raycast(t_view *view)
 	while (x < view->settings->width)
 	{
 		init_ray(&ray);
-		ray.camx = ((2 * x) / (double)view->settings->width) - 1;
-		//printf("x = %d cam x = %f width = %d\n", x, ray.camx, view->settings->width);
-		ray.dirx = view->player->dirx + view->player->planex * ray.camx;
-	//	printf("dir x %f\n", ray.dirx);
-		ray.diry = view->player->diry + view->player->planey * ray.camx;
-	//	printf("dir y %f\n", ray.diry);
-		ray.mapx = (int)view->player->posx;
-		ray.mapy = (int)view->player->posy;
-		ray.deltadistx = fabs(1 / ray.dirx);
-		//printf("fabs(1 / %f) = %f\n", ray.dirx, ray.deltadistx);
-		ray.deltadisty = fabs(1 / ray.diry);
-		//printf("fabs(1 / %f) = %f\n", ray.diry, ray.deltadisty);
+		ray.cam_x = ((2 * x) / (double)view->settings->width) - 1;
+		ray.dir_x = view->player->dirx + view->player->planex * ray.cam_x;
+		ray.dir_y = view->player->diry + view->player->planey * ray.cam_x;
+		ray.map_x = (int)view->player->posx;
+		ray.map_y = (int)view->player->posy;
+		ray.delta_x = fabs(1 / ray.dir_x);
+		ray.delta_y = fabs(1 / ray.dir_y);
 		calculate_side_dist(view, &ray);
 		do_dda(view, &ray);
 		if (ray.side == 0)
-			ray.perpwalldist = (ray.mapx - view->player->posx + (1 - ray.stepx) / 2) / ray.dirx;
+			ray.wall_dist = (ray.map_x - view->player->posx + (1 - ray.step_x) / 2) / ray.dir_x;
 		else
-			ray.perpwalldist = (ray.mapy - view->player->posy + (1 - ray.stepy) / 2) / ray.diry;
-		//printf("dist = %f\n", ray.perpwalldist);
-		draw(view, &ray, x);
+			ray.wall_dist = (ray.map_y - view->player->posy + (1 - ray.step_y) / 2) / ray.dir_y;
+		set_ray_height(view, &ray);
+		draw_ray(view, &ray, x);
 		x++;
 	}
 }

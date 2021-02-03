@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keyboard.c                                         :+:      :+:    :+:   */
+/*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:39:33 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/03 14:59:21 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/03 15:12:06 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	move_player_fb(t_view *view, int forward)
 	move_speed = 0.03;
 	if (view->keyboard->ctrl_pressed)
 		move_speed /= 2.3;
-	else if (view->keyboard->shift_pressed)
+	else if (view->keyboard->shift_pressed && forward)
 		move_speed *= 1.8;
 	if (forward)
 	{
