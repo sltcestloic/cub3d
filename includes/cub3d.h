@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/03 15:40:19 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/03 16:09:29 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 # include <fcntl.h>
 # include "../mlx/mlx.h"
 # include <math.h>
+# define NORTH	0
+# define SOUTH	1
+# define EAST 	2
+# define WEST	3
 
 typedef struct		s_texture
 {

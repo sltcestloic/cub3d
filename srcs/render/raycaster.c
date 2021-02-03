@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 11:19:24 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/03 15:22:50 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/03 16:06:09 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ void	do_dda(t_view *view, t_ray *ray)
 		{
 			ray->side_x += ray->delta_x;
 			ray->map_x += ray->step_x;
-			ray->side = 0;
+			ray->side = ray->step_x == 1 ? EAST : WEST;
 		}
 		else
 		{
 			ray->side_y += ray->delta_y;
 			ray->map_y += ray->step_y;
-			ray->side = 1;
+			ray->side = ray->step_y == 1 ? SOUTH : NORTH;
 		}
 		if (view->map->content[ray->map_y][ray->map_x] == '1')
 			ray->hit = 1;
@@ -118,7 +118,7 @@ void	do_raycast(t_view *view)
 		ray.delta_y = fabs(1 / ray.dir_y);
 		calculate_side_dist(view, &ray);
 		do_dda(view, &ray);
-		if (ray.side == 0)
+		if (ray.side == EAST || ray.side == WEST)
 			ray.wall_dist = (ray.map_x - view->player->posx + (1 - ray.step_x) / 2) / ray.dir_x;
 		else
 			ray.wall_dist = (ray.map_y - view->player->posy + (1 - ray.step_y) / 2) / ray.dir_y;

@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:39:33 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/03 15:12:06 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/03 15:58:49 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	rotate_camera_lr(t_view *view, int right, int mouse)
 	rot_speed = (double)view->settings->width / 40000.0;
 	if (mouse)
 		rot_speed *= view->sensivity;
-	printf("%f\n", rot_speed);
 	player = view->player;
 	if (right)
 		rot_speed = -rot_speed;

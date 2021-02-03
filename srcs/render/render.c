@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:27:54 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/03 15:25:41 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/03 16:09:43 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,12 @@ void	draw_ray(t_view *view, t_ray *ray, int x)
 	int	y;
 
 	y = 0;
-	if (ray->side == 0)
+	if (ray->side == NORTH)
 		color /= 2;
+	else if (ray->side == SOUTH)
+		color /= 1.6;
+	else if (ray->side == EAST)
+		color /= 1.2;
 	while (y < ray->draw_start)
 		put_pixel(view->image, x, y++, view->settings->sky_color);
 	while (y < ray->draw_end)
