@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:39:33 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/04 15:55:21 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/04 16:05:06 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ void	move_player_fb(t_view *view, int forward)
 	move_speed = get_speed(view, forward);
 	if (forward)
 	{
-		x = view->player->posx + view->player->dirx * move_speed;
-		y = view->player->posy + view->player->diry * move_speed;
+		x = view->player->posx + view->player->dirx * (move_speed * 6);
+		y = view->player->posy + view->player->diry * (move_speed * 6);
 		if (view->map->content[(int)view->player->posy][x] != '1')
 			view->player->posx += view->player->dirx * move_speed;
 		if (view->map->content[y][(int)view->player->posx] != '1')
@@ -79,8 +79,8 @@ void	move_player_fb(t_view *view, int forward)
 	}
 	else
 	{
-		x = view->player->posx - view->player->dirx * move_speed;
-		y = view->player->posy - view->player->diry * move_speed;
+		x = view->player->posx - view->player->dirx * (move_speed * 6);
+		y = view->player->posy - view->player->diry * (move_speed * 6);
 		if (view->map->content[(int)view->player->posy][x] != '1')
 			view->player->posx -= view->player->dirx * move_speed;
 		if (view->map->content[y][(int)view->player->posx] != '1')
@@ -97,8 +97,8 @@ void	move_player_lr(t_view *view, int right)
 	move_speed = get_speed(view, TRUE);
 	if (right)
 	{
-		x = view->player->posx + view->player->planex * move_speed;
-		y = view->player->posy + view->player->planey * move_speed;
+		x = view->player->posx + view->player->planex * (move_speed * 6);
+		y = view->player->posy + view->player->planey * (move_speed * 6);
 		if (view->map->content[(int)view->player->posy][x] != '1')
 			view->player->posx += view->player->planex * move_speed;
 		if (view->map->content[y][(int)view->player->posx] != '1')
@@ -106,8 +106,8 @@ void	move_player_lr(t_view *view, int right)
 	}
 	else
 	{
-		x = view->player->posx - view->player->planex * move_speed;
-		y = view->player->posy - view->player->planey * move_speed;
+		x = view->player->posx - view->player->planex * (move_speed * 6);
+		y = view->player->posy - view->player->planey * (move_speed * 6);
 		if (view->map->content[(int)view->player->posy][x] != '1')
 			view->player->posx -= view->player->planex * move_speed;
 		if (view->map->content[y][(int)view->player->posx] != '1')
