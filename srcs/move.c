@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:39:33 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/04 16:16:51 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/04 16:25:12 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,11 @@ void	rotate_camera_lr(t_view *view, int right, int mouse)
 	t_player	*player;
 
 	rot_speed = (double)view->settings->width / 40000.0;
-	if (mouse)
+	if (mouse > 0)
+	{
 		rot_speed *= view->sensivity;
+		rot_speed *= (mouse * 100 / 500);
+	}
 	player = view->player;
 	if (right)
 		rot_speed = -rot_speed;
@@ -41,8 +44,11 @@ void	rotate_camera_ud(t_view *view, int up, int mouse)
 	int			rot_speed;
 
 	rot_speed = view->settings->height / 40;
-	if (mouse)
+	if (mouse > 0)
+	{
 		rot_speed *= view->sensivity;
+		rot_speed *= (mouse * 100 / 500);
+	}
 	if (up && view->horizon < (view->settings->height * 2.5))
 		view->horizon += rot_speed;
 	else if (view->horizon > -(view->settings->height * 2.5))
