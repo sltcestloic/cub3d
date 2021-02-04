@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:27:54 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/03 16:09:43 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/04 15:40:36 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,28 @@ int		render_frame(t_view *view)
 
 void	draw_ray(t_view *view, t_ray *ray, int x)
 {
-	int color = rgbint(0, 255, 0);
-	int	y;
+	int			y;
+	double		wx;
+	int			tx;
+	int			ty;
+	t_texture	texture;
 
 	y = 0;
-	if (ray->side == NORTH)
-		color /= 2;
-	else if (ray->side == SOUTH)
-		color /= 1.6;
-	else if (ray->side == EAST)
-		color /= 1.2;
+	texture = get_texture(ray->side, view);
 	while (y < ray->draw_start)
-		put_pixel(view->image, x, y++, view->settings->sky_color);
+		put_pixel(view, x, y++, view->settings->sky_color);
+	if (ray->side == EAST || ray->side == WEST)
+		wx = view->player->posy + ray->wall_dist * ray->dir_y;
+	else
+		wx = view->player->posx + ray->wall_dist * ray->dir_x;
+	wx -= floor(wx);
 	while (y < ray->draw_end)
-		put_pixel(view->image, x, y++, color);
+	{
+		ty = (y - ray->draw_start) * texture.height / (ray->draw_end
+			- ray->draw_start);
+		tx = (wx - (int)wx) * texture.width;
+		put_pixel(view, x, y++, texture.addr[(ty * texture.width) + tx]);
+	}
 	while (y < view->settings->height)
-		put_pixel(view->image, x, y++, view->settings->ground_color);
+		put_pixel(view, x, y++, view->settings->ground_color);
 }

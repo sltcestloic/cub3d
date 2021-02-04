@@ -6,15 +6,11 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 12:14:16 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/03 15:45:42 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/04 15:32:49 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-/*
-** 
-*/
 
 void			run_map_validation(t_map *map, int x, int y)
 {
@@ -36,24 +32,26 @@ void			run_map_validation(t_map *map, int x, int y)
 	}
 }
 
-void			copy_content(char **old, char **new, int mlc)
+void			copy_content(char **old, char **next, int mlc)
 {
 	size_t	i;
 
 	i = 0;
 	while (old[i])
 	{
-		if (!(new[i] = malloc(sizeof(char) * mlc)))
+		if (!(next[i] = malloc(sizeof(char) * mlc)))
 			return ;
-		ft_bzero(new[i], mlc);
-		ft_strlcpy(new[i], old[i], ft_strlen(old[i]) + 1);
+		ft_bzero(next[i], mlc);
+		ft_strlcpy(next[i], old[i], ft_strlen(old[i]) + 1);
 		i++;
 	}
-	new[i] = 0;
+	next[i] = 0;
 }
 
 int				validate_map(t_map *map, t_player *player)
 {
+	if (!(map->content_copy = malloc(sizeof(char *) * (map->lines + 2))))
+		return (print_error_exit("Map copy malloc failed.", 1));
 	copy_content(map->content, map->content_copy, map->longest);
 	map->content_copy[(int)player->posy][(int)player->posx] = '0';
 	run_map_validation(map, (int)player->posx, (int)player->posy);
@@ -92,6 +90,7 @@ static int		validate_map_line(char *line, t_map *map, t_player *player)
 int				parse_map_line(char *line, t_map *map, t_player *player)
 {
 	char	**new_content;
+
 	if (!validate_map_line(line, map, player))
 	{
 		print_error("Invalid map line.");

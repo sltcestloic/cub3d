@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 11:27:01 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/03 14:53:59 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/04 15:21:40 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ int		handle_key_press(int keycode, t_view *view)
 {
 	printf("press key %d\n", keycode);
 	if (keycode == 53)
-	{
-		mlx_destroy_window(view->mlx, view->window);
 		exit(0);
-	}
 	else if (keycode == 13)
 		view->keyboard->w_pressed = TRUE;
 	else if (keycode == 0)

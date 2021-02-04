@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/03 16:09:29 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/04 15:50:26 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ typedef struct		s_texture
 	void			*img;
 	int				width;
 	int				height;
+	int				*addr;
+	int				bits_per_pixel;
+	int				line_len;
+	int				endian;
 }					t_texture;
 
 typedef struct		s_settings
@@ -123,9 +127,13 @@ typedef struct		s_view
 	t_image			*image;
 	int				horizon;
 	double			sensivity;
+	double			move_speed;
 }					t_view;
 
 
+/*
+** Parsing
+*/
 
 int					parse_config(int fd, t_map *map, t_view *view);
 int					parse_resolution(char *line, t_settings *settings);
@@ -133,22 +141,45 @@ int					parse_color(char *line, t_settings *settings, int ground);
 int					parse_texture(char **split, t_view *view);
 int					parse_map_line(char *line, t_map *map, t_player *player);
 
-int					validate_map(t_map *map, t_player *player);
+/*
+** Window
+*/
 
 void				init_window(t_settings settings, t_view view);
+
+/*
+** Print
+*/
 
 int					print_error(char *message);
 int					print_error_exit(char *message, int ext);
 
-int					rgbint(int r, int g, int b);
+/*
+** Pixels / colors
+*/
 
-void				put_pixel(t_image *image, int x, int y, int color);
+int					rgbint(int r, int g, int b);
+void				put_pixel(t_view *view, int x, int y, int color);
 int					get_pixel_color(t_image *image, int x, int y);
 
-void				set_direction(t_player *player, char dir);
+/*
+** Direction
+*/
 
+void				set_direction(t_player *player, char dir);
+t_texture			get_texture(int direction, t_view *view);
+
+/*
+** Validation
+*/
+
+int					validate_map(t_map *map, t_player *player);
 int					is_valid_map_char(char c);
 int					is_valid_player_char(char c);
+
+/*
+** Hooks
+*/
 
 int					handle_close_button();
 int					handle_key_press(int keycode, t_view *view);
@@ -156,15 +187,24 @@ int					handle_key_release(int keycode, t_view *view);
 int					handle_click_release(int button, int x, int y, t_view *view);
 int					handle_click(int button, int x, int y, t_view *view);
 int 				handle_mouse_motion(int x, int y, t_view *view);
-
 void				handle_keyboard(t_view *view);
+
+/*
+** Render
+*/
 
 void				put_pixel_to_img(t_image *img, int x, int y, int color);
 int					render_frame(t_view *view);
 void				do_raycast(t_view *view);
 void				draw_ray(t_view *view, t_ray *ray, int x);
 
+/*
+** Player/camera movement
+*/
+
 void				rotate_camera_lr(t_view *view, int right, int mouse);
 void				rotate_camera_ud(t_view *view, int up, int mouse);
+void				move_player_fb(t_view *view, int forward);
+void				move_player_lr(t_view *view, int forward);
 
 #endif

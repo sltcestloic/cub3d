@@ -6,15 +6,15 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 11:19:24 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/03 16:06:09 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/04 15:47:13 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	init_ray(t_ray *ray)
+void	init_ray(t_ray *ray, int x, double width)
 {
-	ray->cam_x = 0;
+	ray->cam_x = ((2 * x) / width) - 1;
 	ray->delta_x = 0;
 	ray->delta_y = 0;
 	ray->dir_x = 0;
@@ -54,7 +54,7 @@ void	do_dda(t_view *view, t_ray *ray)
 	}
 }
 
-void 	calculate_side_dist(t_view *view, t_ray *ray)
+void	calculate_side_dist(t_view *view, t_ray *ray)
 {
 	if (ray->dir_x < 0)
 	{
@@ -82,13 +82,11 @@ void	set_ray_height(t_view *view, t_ray *ray)
 {
 	int	line_height;
 	int	view_height;
-	
+
 	view_height = view->settings->height;
 	line_height = view_height / ray->wall_dist;
 	ray->draw_start = -line_height / 2 + view_height / 2;
 	ray->draw_start += view->horizon;
-	if (ray->draw_start < 0)
-		ray->draw_start = 0;
 	ray->draw_end = line_height / 2 + view_height / 2;
 	ray->draw_end += view->horizon;
 	if (view->keyboard->ctrl_pressed)
@@ -96,8 +94,6 @@ void	set_ray_height(t_view *view, t_ray *ray)
 		ray->draw_start -= 50;
 		ray->draw_end -= 50;
 	}
-	if (ray->draw_end > view->settings->height)
-		ray->draw_end = view->settings->height;
 }
 
 void	do_raycast(t_view *view)
@@ -108,8 +104,7 @@ void	do_raycast(t_view *view)
 	x = 0;
 	while (x < view->settings->width)
 	{
-		init_ray(&ray);
-		ray.cam_x = ((2 * x) / (double)view->settings->width) - 1;
+		init_ray(&ray, x, (double)view->settings->width);
 		ray.dir_x = view->player->dirx + view->player->planex * ray.cam_x;
 		ray.dir_y = view->player->diry + view->player->planey * ray.cam_x;
 		ray.map_x = (int)view->player->posx;
@@ -119,9 +114,11 @@ void	do_raycast(t_view *view)
 		calculate_side_dist(view, &ray);
 		do_dda(view, &ray);
 		if (ray.side == EAST || ray.side == WEST)
-			ray.wall_dist = (ray.map_x - view->player->posx + (1 - ray.step_x) / 2) / ray.dir_x;
+			ray.wall_dist = (ray.map_x - view->player->posx +
+				(1 - ray.step_x) / 2) / ray.dir_x;
 		else
-			ray.wall_dist = (ray.map_y - view->player->posy + (1 - ray.step_y) / 2) / ray.dir_y;
+			ray.wall_dist = (ray.map_y - view->player->posy +
+				(1 - ray.step_y) / 2) / ray.dir_y;
 		set_ray_height(view, &ray);
 		draw_ray(view, &ray, x);
 		x++;

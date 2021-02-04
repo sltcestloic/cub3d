@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 11:21:01 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/02 12:34:09 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/04 15:31:37 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static t_texture	read_texture(char *path, t_view *view)
 	printf("reading texture %s\n", path);
 	texture.img = mlx_xpm_file_to_image(view->mlx, path, &texture.width,
 		&texture.height);
+	texture.addr = (int *)mlx_get_data_addr(texture.img,
+		&texture.bits_per_pixel, &texture.line_len, &texture.endian);
 	return (texture);
 }
 

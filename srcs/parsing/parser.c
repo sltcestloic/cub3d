@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:36:35 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/03 15:40:09 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/04 15:28:40 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,6 @@ int			parse_config(int fd, t_map *map, t_view *view)
 			break ;
 	}
 	validate_map(map, view->player);
-	for (int i = 0; map->content[i]; i++)
-		printf("%s\n", map->content[i]);
 	view->map = map;
 	close(fd);
 	return (validate_settings(view->settings, view->player));

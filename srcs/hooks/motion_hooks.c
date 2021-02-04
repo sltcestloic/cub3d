@@ -6,15 +6,14 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 13:56:05 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/03 14:46:00 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/04 15:27:34 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int handle_mouse_motion(int x, int y, t_view *view)
+int	handle_mouse_motion(int x, int y, t_view *view)
 {
-	(void)y;
 	if (x > view->settings->width / 2)
 		rotate_camera_lr(view, TRUE, TRUE);
 	else if (x < view->settings->width / 2)

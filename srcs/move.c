@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:39:33 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/03 15:58:49 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/04 15:55:21 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,14 @@ void	rotate_camera_lr(t_view *view, int right, int mouse)
 	if (right)
 		rot_speed = -rot_speed;
 	dx_old = player->dirx;
-	player->dirx = player->dirx * cos(rot_speed) - player->diry * sin(rot_speed);
+	player->dirx = player->dirx * cos(rot_speed) - player->diry *
+		sin(rot_speed);
 	player->diry = dx_old * sin(rot_speed) + player->diry * cos(rot_speed);
-    px_old = player->planex;
-	player->planex = player->planex * cos(rot_speed) - player->planey * sin(rot_speed);
-    player->planey = px_old * sin(rot_speed) + player->planey * cos(rot_speed);
+	px_old = player->planex;
+	player->planex = player->planex * cos(rot_speed) - player->planey *
+		sin(rot_speed);
+	player->planey = px_old * sin(rot_speed) + player->planey *
+		cos(rot_speed);
 }
 
 void	rotate_camera_ud(t_view *view, int up, int mouse)
@@ -46,17 +49,25 @@ void	rotate_camera_ud(t_view *view, int up, int mouse)
 		view->horizon -= rot_speed;
 }
 
+double	get_speed(t_view *view, int forward)
+{
+	double	base_speed;
+
+	base_speed = 0.03;
+	if (view->keyboard->ctrl_pressed)
+		base_speed /= 2.3;
+	else if (view->keyboard->shift_pressed && forward)
+		base_speed *= 1.8;
+	return (base_speed);
+}
+
 void	move_player_fb(t_view *view, int forward)
 {
 	double	move_speed;
 	int		x;
 	int		y;
 
-	move_speed = 0.03;
-	if (view->keyboard->ctrl_pressed)
-		move_speed /= 2.3;
-	else if (view->keyboard->shift_pressed && forward)
-		move_speed *= 1.8;
+	move_speed = get_speed(view, forward);
 	if (forward)
 	{
 		x = view->player->posx + view->player->dirx * move_speed;
@@ -83,11 +94,7 @@ void	move_player_lr(t_view *view, int right)
 	int		x;
 	int		y;
 
-	move_speed = 0.03;
-	if (view->keyboard->ctrl_pressed)
-		move_speed /= 2.3;
-	else if (view->keyboard->shift_pressed)
-		move_speed *= 1.8;
+	move_speed = get_speed(view, TRUE);
 	if (right)
 	{
 		x = view->player->posx + view->player->planex * move_speed;
@@ -106,27 +113,4 @@ void	move_player_lr(t_view *view, int right)
 		if (view->map->content[y][(int)view->player->posx] != '1')
 			view->player->posy -= view->player->planey * move_speed;
 	}
-}
-
-void	handle_keyboard(t_view *view)
-{
-	t_keyboard	*keyboard;
-
-	keyboard = view->keyboard;
-	if (keyboard->d_pressed)
-		move_player_lr(view, 1);
-	else if (keyboard->a_pressed)
-		move_player_lr(view, 0);
-	else if (keyboard->w_pressed)
-		move_player_fb(view, 1);
-	else if (keyboard->s_pressed)
-		move_player_fb(view, 0);
-	if (keyboard->la_pressed)
-		rotate_camera_lr(view, 0, FALSE);
-	else if (keyboard->ra_pressed)
-		rotate_camera_lr(view, 1, FALSE);
-	if (keyboard->ua_pressed)
-		rotate_camera_ud(view, 1, FALSE);
-	else if (keyboard->da_pressed)
-		rotate_camera_ud(view, 0, FALSE);
 }

@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:14:41 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/02 16:04:44 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/04 15:02:42 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,21 @@
 /*
 ** norm split
 */
+
+t_texture	get_texture(int direction, t_view *view)
+{
+	t_texture	texture;
+
+	if (direction == NORTH)
+		texture = view->settings->north_texture;
+	else if (direction == SOUTH)
+		texture = view->settings->south_texture;
+	else if (direction == EAST)
+		texture = view->settings->east_texture;
+	else
+		texture = view->settings->west_texture;
+	return (texture);
+}
 
 static void	set_direction2(t_player *player, char dir)
 {
