@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:39:33 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/04 16:05:06 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/04 16:16:51 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	move_player_lr(t_view *view, int right)
 	int		x;
 	int		y;
 
-	move_speed = get_speed(view, TRUE);
+	move_speed = get_speed(view, FALSE);
 	if (right)
 	{
 		x = view->player->posx + view->player->planex * (move_speed * 6);
