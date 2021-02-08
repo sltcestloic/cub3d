@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:36:35 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/04 15:28:40 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/08 16:01:22 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int			parse_config(int fd, t_map *map, t_view *view)
 	char	*line;
 	int		ret;
 
+	view->map = map;
 	while ((ret = ft_get_next_line(fd, &line)) >= 0)
 	{
 		if (ft_strlen(line) == 0)
@@ -67,13 +68,14 @@ int			parse_config(int fd, t_map *map, t_view *view)
 			if (parse_line(line, view) == ERROR)
 				return (ERROR);
 		}
-		else if (parse_map_line(line, map, view->player) == ERROR)
+		else if (parse_map_line(line, view) == ERROR)
 			return (ERROR);
 		if (ret == 0)
 			break ;
 	}
 	validate_map(map, view->player);
-	view->map = map;
+	if (!(view->z_buffer = malloc(sizeof(double) * view->settings->width)))
+		return (print_error_exit("Failed to malloc z buffer.", 1));
 	close(fd);
 	return (validate_settings(view->settings, view->player));
 }

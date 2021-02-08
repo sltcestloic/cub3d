@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:12:30 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/04 15:34:32 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/08 15:25:22 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int			main(int ac, char **av)
 	view.horizon = 0;
 	view.sensivity = 0.54;
 	view.move_speed = 0.03;
+	view.sprite_count = 0;
 	if (parse_config(fd, &map, &view) == SUCCESS)
 		init_window(settings, view);
 	return (TRUE);

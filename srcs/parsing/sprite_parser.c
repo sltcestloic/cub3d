@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   image.c                                            :+:      :+:    :+:   */
+/*   sprite_parser.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/21 13:05:12 by lbertran          #+#    #+#             */
-/*   Updated: 2021/01/21 13:10:28 by lbertran         ###   ########lyon.fr   */
+/*   Created: 2021/02/08 14:18:48 by lbertran          #+#    #+#             */
+/*   Updated: 2021/02/08 16:08:31 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-/*
-** https://harm-smits.github.io/42docs/libs/
-** minilibx/getting_started.html#writing-pixels-to-a-image
-*/
-
-void	put_pixel_to_img(t_image *img, int x, int y, int color)
+void	parse_sprite(int x, int y, t_view *view)
 {
-	char	*dest;
+	t_sprite	sprite;
 
-	dest = img->addr + (y * img->line_len + x * (img->bits_per_pixel / 8));
-	*(unsigned int*)dest = color;
+	sprite.pos_x = x + 0.5;
+	sprite.pos_y = y + 0.5;
+	sprite.order = view->sprite_count;
+	printf("x: %f y: %f order: %d\n", sprite.pos_x, sprite.pos_y, sprite.order);
+	view->sprites[sprite.order] = sprite;
+	view->sprite_count++;
 }

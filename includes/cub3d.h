@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/04 15:50:26 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/08 16:32:10 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,24 @@ typedef struct		s_image
 	int				endian;
 }					t_image;
 
+typedef struct		s_sprite
+{
+	double			pos_x;
+	double			pos_y;
+	double			invdet;
+	double			tr_x;
+	double			tr_y;
+	int				screen_x;
+	int				height;
+	int				width;
+	int				draw_start_x;
+	int				draw_end_x;
+	int				draw_start_y;
+	int				draw_end_y;
+	int				order;
+	double			distance;
+}					t_sprite;
+
 typedef struct		s_view
 {
 	void			*mlx;
@@ -128,6 +146,9 @@ typedef struct		s_view
 	int				horizon;
 	double			sensivity;
 	double			move_speed;
+	double			*z_buffer;
+	t_sprite		sprites[50];
+	int				sprite_count;
 }					t_view;
 
 
@@ -139,7 +160,9 @@ int					parse_config(int fd, t_map *map, t_view *view);
 int					parse_resolution(char *line, t_settings *settings);
 int					parse_color(char *line, t_settings *settings, int ground);
 int					parse_texture(char **split, t_view *view);
-int					parse_map_line(char *line, t_map *map, t_player *player);
+int					parse_map_line(char *line, t_view *view);
+void				parse_sprite(int x, int y, t_view *view);
+void				copy_content(char **old, char **next, int mlc);
 
 /*
 ** Window
@@ -174,6 +197,7 @@ t_texture			get_texture(int direction, t_view *view);
 */
 
 int					validate_map(t_map *map, t_player *player);
+int					validate_map_line(char *line, t_view *view);
 int					is_valid_map_char(char c);
 int					is_valid_player_char(char c);
 
@@ -195,7 +219,8 @@ void				handle_keyboard(t_view *view);
 
 void				put_pixel_to_img(t_image *img, int x, int y, int color);
 int					render_frame(t_view *view);
-void				do_raycast(t_view *view);
+void				do_raycast(t_view *view, t_ray *ray);
+void				do_spritecast(t_view *view, t_ray *ray);
 void				draw_ray(t_view *view, t_ray *ray, int x);
 
 /*

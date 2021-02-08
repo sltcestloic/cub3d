@@ -6,7 +6,7 @@
 #    By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/18 16:40:32 by lbertran          #+#    #+#              #
-#    Updated: 2021/02/04 15:49:23 by lbertran         ###   ########lyon.fr    #
+#    Updated: 2021/02/08 16:13:23 by lbertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,13 +17,15 @@ SRC		= cub3d.c \
 			hooks/action_hooks.c \
 			hooks/motion_hooks.c \
 			parsing/map_parser.c \
+			parsing/map_validation.c \
 			parsing/parser.c \
 			parsing/settings_parser.c \
+			parsing/sprite_parser.c \
 			parsing/textures_parser.c \
-			render/image.c \
 			render/pixel.c \
 			render/render.c \
 			render/raycaster.c \
+			render/spritecaster.c \
 			utils/direction.c \
 			utils/error.c \
 			utils/is_valid.c \
