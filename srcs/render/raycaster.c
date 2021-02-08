@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 11:19:24 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/08 16:33:17 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/08 16:52:22 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,31 +96,32 @@ void	set_ray_height(t_view *view, t_ray *ray)
 	}
 }
 
-void	do_raycast(t_view *view, t_ray *ray)
+void	do_raycast(t_view *view)
 {
 	int		x;
+	t_ray	ray;
 
 	x = 0;
 	while (x < view->settings->width)
 	{
-		init_ray(ray, x, (double)view->settings->width);
-		ray->dir_x = view->player->dirx + view->player->planex * ray->cam_x;
-		ray->dir_y = view->player->diry + view->player->planey * ray->cam_x;
-		ray->map_x = (int)view->player->posx;
-		ray->map_y = (int)view->player->posy;
-		ray->delta_x = fabs(1 / ray->dir_x);
-		ray->delta_y = fabs(1 / ray->dir_y);
-		calculate_side_dist(view, ray);
-		do_dda(view, ray);
-		if (ray->side == EAST || ray->side == WEST)
-			ray->wall_dist = (ray->map_x - view->player->posx +
-				(1 - ray->step_x) / 2) / ray->dir_x;
+		init_ray(&ray, x, (double)view->settings->width);
+		ray.dir_x = view->player->dirx + view->player->planex * ray.cam_x;
+		ray.dir_y = view->player->diry + view->player->planey * ray.cam_x;
+		ray.map_x = (int)view->player->posx;
+		ray.map_y = (int)view->player->posy;
+		ray.delta_x = fabs(1 / ray.dir_x);
+		ray.delta_y = fabs(1 / ray.dir_y);
+		calculate_side_dist(view, &ray);
+		do_dda(view, &ray);
+		if (ray.side == EAST || ray.side == WEST)
+			ray.wall_dist = (ray.map_x - view->player->posx +
+				(1 - ray.step_x) / 2) / ray.dir_x;
 		else
-			ray->wall_dist = (ray->map_y - view->player->posy +
-				(1 - ray->step_y) / 2) / ray->dir_y;
-		view->z_buffer[x] = ray->wall_dist;
-		set_ray_height(view, ray);
-		draw_ray(view, ray, x);
+			ray.wall_dist = (ray.map_y - view->player->posy +
+				(1 - ray.step_y) / 2) / ray.dir_y;
+		view->z_buffer[x] = ray.wall_dist;
+		set_ray_height(view, &ray);
+		draw_ray(view, &ray, x);
 		x++;
 	}
 }

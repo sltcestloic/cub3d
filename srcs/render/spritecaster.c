@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:09:44 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/08 16:47:14 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/08 16:56:49 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	sort_sprites(t_view *view)
 	}
 }
 
-void	do_spritecast(t_view *view, t_ray *ray)
+void	do_spritecast(t_view *view)
 {
 	t_sprite	sprite;
 	int			i;
@@ -73,11 +73,12 @@ void	do_spritecast(t_view *view, t_ray *ray)
 		sprite.tr_x = sprite.invdet * (view->player->diry * sprite.pos_x - view->player->dirx * sprite.pos_y);
 		sprite.tr_y = sprite.invdet * (-view->player->planey * sprite.pos_x + view->player->planex * sprite.pos_y);
 		sprite.screen_x = (int)view->settings->width / 2 * (1 + sprite.tr_x / sprite.tr_y);
-		sprite.height = abs(view->settings->height / sprite.tr_y);
+		sprite.height = abs((int)(view->settings->height / sprite.tr_y));
 		sprite.draw_start_y = -sprite.height / 2 + view->settings->height / 2;
 		sprite.draw_end_y = sprite.height / 2 + view->settings->height / 2;
-		sprite.width = abs(view->settings->height / sprite.tr_y);
+		sprite.width = abs((int)(view->settings->height / sprite.tr_y));
 		sprite.draw_start_x = -sprite.width / 2 + sprite.screen_x;
 		sprite.draw_end_x = sprite.width / 2 + sprite.screen_x;
+		i++;
 	}
 }

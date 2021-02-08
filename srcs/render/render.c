@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:27:54 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/08 16:31:58 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/08 16:52:04 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int		render_frame(t_view *view)
 {
 	t_image	img;
-	t_ray	ray;
 
 	img.img = mlx_new_image(view->mlx, view->settings->width,
 		view->settings->height);
@@ -23,8 +22,8 @@ int		render_frame(t_view *view)
 		&img.line_len, &img.endian);
 	view->image = &img;
 	handle_keyboard(view);
-	do_raycast(view, &ray);
-	do_spritecast(view, &ray);
+	do_raycast(view);
+	do_spritecast(view);
 	mlx_put_image_to_window(view->mlx, view->window, img.img, 0, 0);
 	return (0);
 }

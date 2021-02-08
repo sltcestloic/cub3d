@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/08 16:32:10 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/08 16:52:10 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,8 +219,8 @@ void				handle_keyboard(t_view *view);
 
 void				put_pixel_to_img(t_image *img, int x, int y, int color);
 int					render_frame(t_view *view);
-void				do_raycast(t_view *view, t_ray *ray);
-void				do_spritecast(t_view *view, t_ray *ray);
+void				do_raycast(t_view *view);
+void				do_spritecast(t_view *view);
 void				draw_ray(t_view *view, t_ray *ray, int x);
 
 /*
