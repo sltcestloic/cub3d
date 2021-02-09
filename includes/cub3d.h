@@ -6,16 +6,16 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/08 16:52:10 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/09 15:32:34 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 # include "../libft/libft.h"
+# include "../mlx/mlx.h"
 # include <stdio.h>
 # include <fcntl.h>
-# include "../mlx/mlx.h"
 # include <math.h>
 # define NORTH	0
 # define SOUTH	1
@@ -217,11 +217,11 @@ void				handle_keyboard(t_view *view);
 ** Render
 */
 
-void				put_pixel_to_img(t_image *img, int x, int y, int color);
 int					render_frame(t_view *view);
 void				do_raycast(t_view *view);
 void				do_spritecast(t_view *view);
 void				draw_ray(t_view *view, t_ray *ray, int x);
+void				draw_sprite(t_view *view, t_sprite *sprite);
 
 /*
 ** Player/camera movement
@@ -231,5 +231,6 @@ void				rotate_camera_lr(t_view *view, int right, int mouse);
 void				rotate_camera_ud(t_view *view, int up, int mouse);
 void				move_player_fb(t_view *view, int forward);
 void				move_player_lr(t_view *view, int forward);
+int					collision(t_view *view, double x, double y);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 11:19:24 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/08 16:52:22 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/09 15:07:24 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,6 @@ void	do_raycast(t_view *view)
 				(1 - ray.step_y) / 2) / ray.dir_y;
 		view->z_buffer[x] = ray.wall_dist;
 		set_ray_height(view, &ray);
-		draw_ray(view, &ray, x);
-		x++;
+		draw_ray(view, &ray, x++);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:39:33 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/04 16:32:42 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/09 15:48:29 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	rotate_camera_lr(t_view *view, int right, int mouse)
 	if (mouse > 0)
 	{
 		rot_speed *= view->sensivity;
-		rot_speed *= (mouse * 100 / 500);;
+		rot_speed *= (mouse * 100 / 500);
 	}
 	player = view->player;
 	if (right)
@@ -70,26 +70,26 @@ double	get_speed(t_view *view, int forward)
 void	move_player_fb(t_view *view, int forward)
 {
 	double	move_speed;
-	int		x;
-	int		y;
+	double	x;
+	double	y;
 
 	move_speed = get_speed(view, forward);
 	if (forward)
 	{
 		x = view->player->posx + view->player->dirx * (move_speed * 6);
 		y = view->player->posy + view->player->diry * (move_speed * 6);
-		if (view->map->content[(int)view->player->posy][x] != '1')
+		if (!collision(view, view->player->posy, x))
 			view->player->posx += view->player->dirx * move_speed;
-		if (view->map->content[y][(int)view->player->posx] != '1')
+		if (!collision(view, y, view->player->posx))
 			view->player->posy += view->player->diry * move_speed;
 	}
 	else
 	{
 		x = view->player->posx - view->player->dirx * (move_speed * 6);
 		y = view->player->posy - view->player->diry * (move_speed * 6);
-		if (view->map->content[(int)view->player->posy][x] != '1')
+		if (!collision(view, view->player->posy, x))
 			view->player->posx -= view->player->dirx * move_speed;
-		if (view->map->content[y][(int)view->player->posx] != '1')
+		if (!collision(view, y, view->player->posx))
 			view->player->posy -= view->player->diry * move_speed;
 	}
 }
@@ -97,26 +97,26 @@ void	move_player_fb(t_view *view, int forward)
 void	move_player_lr(t_view *view, int right)
 {
 	double	move_speed;
-	int		x;
-	int		y;
+	double	x;
+	double	y;
 
 	move_speed = get_speed(view, FALSE);
 	if (right)
 	{
 		x = view->player->posx + view->player->planex * (move_speed * 6);
 		y = view->player->posy + view->player->planey * (move_speed * 6);
-		if (view->map->content[(int)view->player->posy][x] != '1')
+		if (!collision(view, view->player->posy, x))
 			view->player->posx += view->player->planex * move_speed;
-		if (view->map->content[y][(int)view->player->posx] != '1')
+		if (!collision(view, y, view->player->posx))
 			view->player->posy += view->player->planey * move_speed;
 	}
 	else
 	{
 		x = view->player->posx - view->player->planex * (move_speed * 6);
 		y = view->player->posy - view->player->planey * (move_speed * 6);
-		if (view->map->content[(int)view->player->posy][x] != '1')
+		if (!collision(view, view->player->posy, x))
 			view->player->posx -= view->player->planex * move_speed;
-		if (view->map->content[y][(int)view->player->posx] != '1')
+		if (!collision(view, y, view->player->posx))
 			view->player->posy -= view->player->planey * move_speed;
 	}
 }

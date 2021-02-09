@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:27:54 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/08 16:52:04 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/09 15:15:20 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,44 @@ void	draw_ray(t_view *view, t_ray *ray, int x)
 	}
 	while (y < view->settings->height)
 		put_pixel(view, x, y++, view->settings->ground_color);
+}
+
+void	draw_sprite_stripe(t_view *view, t_sprite *sprite, int x, int tx)
+{
+	int			y;
+	int			ty;
+	t_texture	texture;
+
+	texture = view->settings->sprite_texture;
+	y = sprite->draw_start_y;
+	while (y < sprite->draw_end_y)
+	{
+		ty = (y - sprite->draw_start_y) * texture.height /
+			(sprite->draw_end_y - sprite->draw_start_y);
+		put_pixel(view, x, y++, view->settings->
+			sprite_texture.addr[(texture.width * ty) + tx]);
+	}
+}
+
+void	draw_sprite(t_view *view, t_sprite *sprite)
+{
+	int			x;
+	int			y;
+	int			tx;
+	t_texture	texture;
+
+	x = sprite->draw_start_x;
+	y = sprite->draw_start_y;
+	texture = view->settings->sprite_texture;
+	while (x < sprite->draw_end_x)
+	{
+		tx = (x - sprite->draw_start_x) * texture.width /
+			(sprite->draw_end_x - sprite->draw_start_x);
+		if (sprite->tr_y > 0 && x > 0 && x < view->settings->width &&
+			sprite->tr_y < view->z_buffer[x])
+		{
+			draw_sprite_stripe(view, sprite, x, tx);
+		}
+		x++;
+	}
 }
