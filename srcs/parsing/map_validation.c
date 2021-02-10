@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 14:26:16 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/08 16:01:31 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/10 14:14:46 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,17 @@ void	run_map_validation(t_map *map, int x, int y)
 
 void	check_player(int x, int y, char direction, t_player *player)
 {
-	if (player->posx == -1)
+	if (player->pos_x == -1)
 	{
-		player->posx = x;
-		player->posy = y;
+		player->pos_x = x + 0.5;
+		player->pos_y = y + 0.5;
 		set_direction(player, direction);
+		player->spawn_px = player->pos_x;
+		player->spawn_py = player->pos_y;
+		player->spawn_dx = player->dir_x;
+		player->spawn_dy = player->dir_y;
+		player->spawn_plx = player->plane_x;
+		player->spawn_ply = player->plane_y;
 	}
 	else
 		print_error_exit("More than one player in map.", 1);
@@ -57,8 +63,8 @@ int		validate_map_line(char *line, t_view *view)
 	{
 		if (is_valid_player_char(line[i]))
 			check_player(i, view->map->lines, line[i], view->player);
-		else if (line[i] == '2')
-			parse_sprite(i, view->map->lines, view);
+		else if (is_valid_sprite_char(line[i]))
+			parse_sprite(i, view->map->lines, view, line[i] - 48);
 		i++;
 	}
 	if (line[i - 1] != '1')
@@ -71,7 +77,7 @@ int		validate_map(t_map *map, t_player *player)
 	if (!(map->content_copy = malloc(sizeof(char *) * (map->lines + 2))))
 		return (print_error_exit("Map copy malloc failed.", 1));
 	copy_content(map->content, map->content_copy, map->longest);
-	map->content_copy[(int)player->posy][(int)player->posx] = '0';
-	run_map_validation(map, (int)player->posx, (int)player->posy);
+	map->content_copy[(int)player->pos_y][(int)player->pos_x] = '0';
+	run_map_validation(map, (int)player->pos_x, (int)player->pos_y);
 	return (TRUE);
 }

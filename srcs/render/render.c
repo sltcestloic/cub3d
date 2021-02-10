@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:27:54 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/09 15:15:20 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/10 15:17:16 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ int		render_frame(t_view *view)
 	handle_keyboard(view);
 	do_raycast(view);
 	do_spritecast(view);
+	draw_hud(view);
 	mlx_put_image_to_window(view->mlx, view->window, img.img, 0, 0);
+	draw_health(view);
 	return (0);
 }
 
@@ -41,9 +43,9 @@ void	draw_ray(t_view *view, t_ray *ray, int x)
 	while (y < ray->draw_start)
 		put_pixel(view, x, y++, view->settings->sky_color);
 	if (ray->side == EAST || ray->side == WEST)
-		wx = view->player->posy + ray->wall_dist * ray->dir_y;
+		wx = view->player->pos_y + ray->wall_dist * ray->dir_y;
 	else
-		wx = view->player->posx + ray->wall_dist * ray->dir_x;
+		wx = view->player->pos_x + ray->wall_dist * ray->dir_x;
 	wx -= floor(wx);
 	while (y < ray->draw_end)
 	{
@@ -62,14 +64,14 @@ void	draw_sprite_stripe(t_view *view, t_sprite *sprite, int x, int tx)
 	int			ty;
 	t_texture	texture;
 
-	texture = view->settings->sprite_texture;
+	texture = view->settings->sprite_texture[sprite->type];
 	y = sprite->draw_start_y;
 	while (y < sprite->draw_end_y)
 	{
 		ty = (y - sprite->draw_start_y) * texture.height /
 			(sprite->draw_end_y - sprite->draw_start_y);
 		put_pixel(view, x, y++, view->settings->
-			sprite_texture.addr[(texture.width * ty) + tx]);
+			sprite_texture[sprite->type].addr[(texture.width * ty) + tx]);
 	}
 }
 
@@ -80,18 +82,18 @@ void	draw_sprite(t_view *view, t_sprite *sprite)
 	int			tx;
 	t_texture	texture;
 
+	if (!sprite->visible)
+		return ;
 	x = sprite->draw_start_x;
 	y = sprite->draw_start_y;
-	texture = view->settings->sprite_texture;
+	texture = view->settings->sprite_texture[sprite->type];
 	while (x < sprite->draw_end_x)
 	{
 		tx = (x - sprite->draw_start_x) * texture.width /
 			(sprite->draw_end_x - sprite->draw_start_x);
 		if (sprite->tr_y > 0 && x > 0 && x < view->settings->width &&
 			sprite->tr_y < view->z_buffer[x])
-		{
-			draw_sprite_stripe(view, sprite, x, tx);
-		}
+			draw_sprite_stripe(view, sprite, view->settings->width - x, tx);
 		x++;
 	}
 }

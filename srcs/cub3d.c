@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:12:30 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/08 15:25:22 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/10 13:36:21 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ static void	init_settings(t_settings *settings)
 	settings->south_texture.img = NULL;
 	settings->east_texture.img = NULL;
 	settings->west_texture.img = NULL;
-	settings->sprite_texture.img = NULL;
+	settings->sprite_texture[SPRITE_DEFAULT].img = NULL;
+	settings->sprite_texture[SPRITE_HEALTH].img = NULL;
+	settings->sprite_texture[SPRITE_TRAP].img = NULL;
 }
 
 static void	init_map(t_map *map)
@@ -34,12 +36,13 @@ static void	init_map(t_map *map)
 
 static void	init_player(t_player *player)
 {
-	player->dirx = -1;
-	player->diry = 0;
-	player->planex = 0;
-	player->planey = 0.66;
-	player->posx = -1;
-	player->posy = 0;
+	player->dir_x = 0;
+	player->dir_y = 0;
+	player->plane_x = 0;
+	player->plane_y = 0;
+	player->pos_x = -1;
+	player->pos_y = -1;
+	player->health = MAX_HEALTH;
 }
 
 int			validate_args(int ac, char **av, int *fd)

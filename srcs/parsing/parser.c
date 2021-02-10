@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:36:35 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/08 16:01:22 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/10 13:04:41 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ static int	validate_settings(t_settings *settings, t_player *player)
 		return (print_error("East texture not specified in .cub file."));
 	if (settings->west_texture.img == NULL)
 		return (print_error("West texture not specified in .cub file."));
-	if (settings->sprite_texture.img == NULL)
-		return (print_error("Sprite texture not specified in .cub file."));
+	if (settings->sprite_texture[SPRITE_DEFAULT].img == NULL)
+		return (print_error("Default sprite texture not specified \
+		in .cub file."));
 	if (settings->ground_color == 0)
 		return (print_error("Ground color not specified in .cub file."));
 	if (settings->sky_color == 0)
@@ -32,7 +33,7 @@ static int	validate_settings(t_settings *settings, t_player *player)
 		return (print_error("Resolution width not specified in .cub file."));
 	if (settings->height == 0)
 		return (print_error("Resolution height not specified in .cub file."));
-	if (player->posx == -1)
+	if (player->pos_x == -1)
 		return (print_error("No player in map."));
 	return (SUCCESS);
 }
@@ -48,7 +49,7 @@ int			parse_line(char *line, t_view *view)
 	split = ft_split(line, ' ');
 	if (ft_strcmp(split[0], "SO") == 0 || ft_strcmp(split[0], "NO")
 		|| ft_strcmp(split[0], "EA") || ft_strcmp(split[0], "WE")
-		|| ft_strcmp(split[0], "S"))
+		|| ft_strcmp(split[0], "S") || ft_strcmp(split[0], "HE"))
 		return (parse_texture(split, view));
 	return (ERROR);
 }

@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 11:19:24 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/09 15:07:24 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/10 16:33:59 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	do_dda(t_view *view, t_ray *ray)
 			ray->map_y += ray->step_y;
 			ray->side = ray->step_y == 1 ? SOUTH : NORTH;
 		}
-		if (view->map->content[ray->map_y][ray->map_x] == '1')
+		if (is_wall(view->map->content[ray->map_y][ray->map_x]))
 			ray->hit = 1;
 	}
 }
@@ -59,22 +59,22 @@ void	calculate_side_dist(t_view *view, t_ray *ray)
 	if (ray->dir_x < 0)
 	{
 		ray->step_x = -1;
-		ray->side_x = (view->player->posx - ray->map_x) * ray->delta_x;
+		ray->side_x = (view->player->pos_x - ray->map_x) * ray->delta_x;
 	}
 	else
 	{
 		ray->step_x = 1;
-		ray->side_x = (ray->map_x + 1 - view->player->posx) * ray->delta_x;
+		ray->side_x = (ray->map_x + 1 - view->player->pos_x) * ray->delta_x;
 	}
 	if (ray->dir_y < 0)
 	{
 		ray->step_y = -1;
-		ray->side_y = (view->player->posy - ray->map_y) * ray->delta_y;
+		ray->side_y = (view->player->pos_y - ray->map_y) * ray->delta_y;
 	}
 	else
 	{
 		ray->step_y = 1;
-		ray->side_y = (ray->map_y + 1 - view->player->posy) * ray->delta_y;
+		ray->side_y = (ray->map_y + 1 - view->player->pos_y) * ray->delta_y;
 	}
 }
 
@@ -105,22 +105,22 @@ void	do_raycast(t_view *view)
 	while (x < view->settings->width)
 	{
 		init_ray(&ray, x, (double)view->settings->width);
-		ray.dir_x = view->player->dirx + view->player->planex * ray.cam_x;
-		ray.dir_y = view->player->diry + view->player->planey * ray.cam_x;
-		ray.map_x = (int)view->player->posx;
-		ray.map_y = (int)view->player->posy;
+		ray.dir_x = view->player->dir_x + view->player->plane_x * ray.cam_x;
+		ray.dir_y = view->player->dir_y + view->player->plane_y * ray.cam_x;
+		ray.map_x = (int)view->player->pos_x;
+		ray.map_y = (int)view->player->pos_y;
 		ray.delta_x = fabs(1 / ray.dir_x);
 		ray.delta_y = fabs(1 / ray.dir_y);
 		calculate_side_dist(view, &ray);
 		do_dda(view, &ray);
 		if (ray.side == EAST || ray.side == WEST)
-			ray.wall_dist = (ray.map_x - view->player->posx +
+			ray.wall_dist = (ray.map_x - view->player->pos_x +
 				(1 - ray.step_x) / 2) / ray.dir_x;
 		else
-			ray.wall_dist = (ray.map_y - view->player->posy +
+			ray.wall_dist = (ray.map_y - view->player->pos_y +
 				(1 - ray.step_y) / 2) / ray.dir_y;
 		view->z_buffer[x] = ray.wall_dist;
 		set_ray_height(view, &ray);
-		draw_ray(view, &ray, x++);
+		draw_ray(view, &ray, view->settings->width - x++);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:14:41 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/04 15:02:42 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/10 15:04:48 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,17 @@ static void	set_direction2(t_player *player, char dir)
 {
 	if (dir == 'E')
 	{
-		player->dirx = 1;
-		player->diry = 0;
-		player->planex = 0;
-		player->planey = -0.66;
+		player->dir_x = 1.000001;
+		player->dir_y = 0;
+		player->plane_x = 0;
+		player->plane_y = -0.66;
 	}
 	else if (dir == 'W')
 	{
-		player->dirx = -1;
-		player->diry = 0;
-		player->planex = 0;
-		player->planey = 0.66;
+		player->dir_x = -1.000001;
+		player->dir_y = 0;
+		player->plane_x = 0;
+		player->plane_y = 0.66;
 	}
 }
 
@@ -53,17 +53,17 @@ void		set_direction(t_player *player, char dir)
 {
 	if (dir == 'S')
 	{
-		player->dirx = 0;
-		player->diry = 1;
-		player->planex = 0.66;
-		player->planey = 0;
+		player->dir_x = 0;
+		player->dir_y = 1.000001;
+		player->plane_x = 0.66;
+		player->plane_y = 0;
 	}
 	else if (dir == 'N')
 	{
-		player->dirx = 0;
-		player->diry = -1;
-		player->planex = -0.66;
-		player->planey = 0;
+		player->dir_x = 0;
+		player->dir_y = -1.000001;
+		player->plane_x = -0.66;
+		player->plane_y = 0;
 	}
 	else
 		set_direction2(player, dir);

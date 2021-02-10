@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 11:21:01 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/04 15:31:37 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/10 13:07:09 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,18 @@ static t_texture	read_texture(char *path, t_view *view)
 	return (texture);
 }
 
+static int			parse_texture3(char **split, t_view *view)
+{
+	if (ft_strcmp(split[0], "TR") == 0)
+	{
+		view->settings->sprite_texture[SPRITE_TRAP] =
+			read_texture(split[1], view);
+		free_split(split);
+		return (validate_texture(view->settings->sprite_texture[SPRITE_TRAP]));
+	}
+	return (SUCCESS);
+}
+
 static int			parse_texture2(char **split, t_view *view)
 {
 	if (ft_strcmp(split[0], "WE") == 0)
@@ -41,10 +53,22 @@ static int			parse_texture2(char **split, t_view *view)
 	}
 	else if (ft_strcmp(split[0], "S") == 0)
 	{
-		view->settings->sprite_texture = read_texture(split[1], view);
+		view->settings->sprite_texture[SPRITE_DEFAULT] =
+			read_texture(split[1], view);
 		free_split(split);
-		return (validate_texture(view->settings->sprite_texture));
+		return (validate_texture(view->settings->
+			sprite_texture[SPRITE_DEFAULT]));
 	}
+	else if (ft_strcmp(split[0], "HE") == 0)
+	{
+		view->settings->sprite_texture[SPRITE_HEALTH] =
+			read_texture(split[1], view);
+		free_split(split);
+		return (validate_texture(view->settings->
+			sprite_texture[SPRITE_HEALTH]));
+	}
+	else
+		return (parse_texture3(split, view));
 	return (SUCCESS);
 }
 

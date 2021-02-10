@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/09 15:32:34 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/10 16:09:12 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@
 # define SOUTH	1
 # define EAST 	2
 # define WEST	3
+# define SPRITE_DEFAULT 0
+# define SPRITE_HEALTH 1
+# define SPRITE_TRAP 2
+# define MAX_HEALTH 5
 
 typedef struct		s_texture
 {
@@ -41,7 +45,7 @@ typedef struct		s_settings
 	t_texture		south_texture;
 	t_texture		east_texture;
 	t_texture		west_texture;
-	t_texture		sprite_texture;
+	t_texture		sprite_texture[3];
 	int				ground_color;
 	int				sky_color;
 }					t_settings;
@@ -77,12 +81,19 @@ typedef struct		s_keyboard
 
 typedef struct		s_player
 {
-	double			posx;
-	double			posy;
-	double			dirx;
-	double			diry;
-	double			planex;
-	double			planey;
+	double			pos_x;
+	double			pos_y;
+	double			dir_x;
+	double			dir_y;
+	double			plane_x;
+	double			plane_y;
+	double			spawn_px;
+	double			spawn_py;
+	double			spawn_dx;
+	double			spawn_dy;
+	double			spawn_plx;
+	double			spawn_ply;
+	int				health;
 }					t_player;
 
 typedef struct		s_ray
@@ -131,6 +142,8 @@ typedef struct		s_sprite
 	int				draw_end_y;
 	int				order;
 	double			distance;
+	int				type;
+	int				visible;
 }					t_sprite;
 
 typedef struct		s_view
@@ -161,7 +174,7 @@ int					parse_resolution(char *line, t_settings *settings);
 int					parse_color(char *line, t_settings *settings, int ground);
 int					parse_texture(char **split, t_view *view);
 int					parse_map_line(char *line, t_view *view);
-void				parse_sprite(int x, int y, t_view *view);
+void				parse_sprite(int x, int y, t_view *view, int type);
 void				copy_content(char **old, char **next, int mlc);
 
 /*
@@ -200,6 +213,8 @@ int					validate_map(t_map *map, t_player *player);
 int					validate_map_line(char *line, t_view *view);
 int					is_valid_map_char(char c);
 int					is_valid_player_char(char c);
+int					is_valid_sprite_char(char c);
+int					is_wall(char c);
 
 /*
 ** Hooks
@@ -222,6 +237,8 @@ void				do_raycast(t_view *view);
 void				do_spritecast(t_view *view);
 void				draw_ray(t_view *view, t_ray *ray, int x);
 void				draw_sprite(t_view *view, t_sprite *sprite);
+void				draw_hud(t_view *view);
+void				draw_health(t_view *view);
 
 /*
 ** Player/camera movement

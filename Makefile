@@ -6,12 +6,11 @@
 #    By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/18 16:40:32 by lbertran          #+#    #+#              #
-#    Updated: 2021/02/09 15:21:55 by lbertran         ###   ########lyon.fr    #
+#    Updated: 2021/02/10 13:52:05 by lbertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
-SRC		= collision.c \
-			cub3d.c \
+SRC		= cub3d.c \
 			keyboard.c \
 			move.c \
 			window.c \
@@ -23,10 +22,12 @@ SRC		= collision.c \
 			parsing/settings_parser.c \
 			parsing/sprite_parser.c \
 			parsing/textures_parser.c \
+			render/hud.c \
 			render/pixel.c \
 			render/render.c \
 			render/raycaster.c \
 			render/spritecaster.c \
+			utils/collision.c \
 			utils/direction.c \
 			utils/error.c \
 			utils/is_valid.c \
