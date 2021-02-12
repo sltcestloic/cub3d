@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/10 16:09:12 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/12 14:46:06 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <math.h>
+# include <sys/time.h>
 # define NORTH	0
 # define SOUTH	1
 # define EAST 	2
@@ -24,7 +25,11 @@
 # define SPRITE_DEFAULT 0
 # define SPRITE_HEALTH 1
 # define SPRITE_TRAP 2
+# define SPRITE_CUP 3
 # define MAX_HEALTH 5
+# define BYTES_PER_PIXEL 3
+# define FILE_HEADER_SIZE 14
+# define INFO_HEADER_SIZE 40
 
 typedef struct		s_texture
 {
@@ -45,7 +50,7 @@ typedef struct		s_settings
 	t_texture		south_texture;
 	t_texture		east_texture;
 	t_texture		west_texture;
-	t_texture		sprite_texture[3];
+	t_texture		sprite_texture[4];
 	int				ground_color;
 	int				sky_color;
 }					t_settings;
@@ -94,6 +99,7 @@ typedef struct		s_player
 	double			spawn_plx;
 	double			spawn_ply;
 	int				health;
+	int				move_count;
 }					t_player;
 
 typedef struct		s_ray
@@ -116,6 +122,23 @@ typedef struct		s_ray
 	int				draw_start;
 	int				draw_end;
 }					t_ray;
+
+typedef struct		s_fray
+{
+	double			dir_x_0;
+	double			dir_y_0;
+	double			dir_x_1;
+	double			dir_y_1;
+	int				y_dif;
+	double			pos_z;
+	double			row_distance;
+	double			step_x;
+	double			step_y;
+	double			floor_x;
+	double			floor_y;
+	int				cell_x;
+	int				cell_y;
+}					t_fray;
 
 typedef struct		s_image
 {
@@ -162,6 +185,9 @@ typedef struct		s_view
 	double			*z_buffer;
 	t_sprite		sprites[50];
 	int				sprite_count;
+	int				save;
+	long long		start_timestamp;
+	long long		frame_timestamp;
 }					t_view;
 
 
@@ -195,6 +221,9 @@ int					print_error_exit(char *message, int ext);
 */
 
 int					rgbint(int r, int g, int b);
+int					rgbint_r(int rgb);
+int					rgbint_g(int rgb);
+int					rgbint_b(int rgb);
 void				put_pixel(t_view *view, int x, int y, int color);
 int					get_pixel_color(t_image *image, int x, int y);
 
@@ -239,6 +268,7 @@ void				draw_ray(t_view *view, t_ray *ray, int x);
 void				draw_sprite(t_view *view, t_sprite *sprite);
 void				draw_hud(t_view *view);
 void				draw_health(t_view *view);
+void				save_screen(t_view *view);
 
 /*
 ** Player/camera movement
@@ -249,5 +279,11 @@ void				rotate_camera_ud(t_view *view, int up, int mouse);
 void				move_player_fb(t_view *view, int forward);
 void				move_player_lr(t_view *view, int forward);
 int					collision(t_view *view, double x, double y);
+
+/*
+** Time
+*/
+
+long long			current_millis(void);
 
 #endif

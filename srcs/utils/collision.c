@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 15:18:31 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/10 16:28:13 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/12 14:38:27 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,30 @@ int		handle_death(t_view *view)
 	player->dir_x = player->spawn_dx;
 	player->dir_y = player->spawn_dy;
 	player->health = MAX_HEALTH;
-	reset_sprites(view);
-	printf("death handled %f %f\n", view->player->pos_x, view->player->pos_y);
+	player->move_count = 0;
 	return (FALSE);
+}
+
+void	handle_win(t_view *view)
+{
+	int		time;
+	int		minutes;
+	int		secondes;
+
+	time = (current_millis() - view->start_timestamp) / 1000;
+	if (time > 60)
+	{
+		secondes = time % 60;
+		minutes = time / 60;
+	}
+	else
+	{
+		minutes = 0;
+		secondes = time;
+	}
+	printf("t'as win bravo\n");
+	printf("Tu as mit %d minutes et %d secondes", minutes, secondes);
+	exit(0);
 }
 
 int		handle_sprite_collision(t_view *view, t_sprite *sprite)
@@ -50,10 +71,14 @@ int		handle_sprite_collision(t_view *view, t_sprite *sprite)
 	{
 		view->player->health--;
 		if (view->player->health == 0)
-			return (handle_death(view));
+		{
+			handle_death(view);
+			reset_sprites(view);
+			return (FALSE);
+		}
 	}
-	printf("hit sprite %f %f\n", sprite->pos_x, sprite->pos_y);
-	printf("Health: %d\n", view->player->health);
+	else if (sprite->type == SPRITE_CUP)
+		handle_win(view);
 	sprite->visible = FALSE;
 	return (FALSE);
 }
@@ -72,7 +97,7 @@ int		collision(t_view *view, double y, double x)
 			(x - sprite->pos_x) +
 			(y - sprite->pos_y) *
 			(y - sprite->pos_y));
-		if (distance < 0.2 && sprite->visible)
+		if (distance < 0.2 && sprite->visible && view->player->move_count > 0)
 		{
 			if (sprite->type != SPRITE_DEFAULT)
 				return (handle_sprite_collision(view, sprite));

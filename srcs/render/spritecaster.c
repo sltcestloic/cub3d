@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:09:44 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/10 13:33:47 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/12 13:26:41 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ void	spritecast(t_view *view, t_sprite *sprite, t_player *player)
 	sprite->draw_end_x = sprite->width / 2 + sprite->screen_x;
 	if (view->keyboard->ctrl_pressed)
 	{
-		sprite->draw_start_y += 50;
-		sprite->draw_end_y += 50;
+		sprite->draw_start_y -= 50;
+		sprite->draw_end_y -= 50;
 	}
 }
 

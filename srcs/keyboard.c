@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 15:36:06 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/10 14:27:44 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/12 11:22:32 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	handle_keyboard(t_view *view)
 		move_player_lr(view, 1);
 	else if (keyboard->a_pressed && !keyboard->d_pressed)
 		move_player_lr(view, 0);
-	else if (keyboard->w_pressed && !keyboard->s_pressed)
+	if (keyboard->w_pressed && !keyboard->s_pressed)
 		move_player_fb(view, 1);
 	else if (keyboard->s_pressed && !keyboard->w_pressed)
 		move_player_fb(view, 0);

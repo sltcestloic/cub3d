@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 11:27:01 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/04 15:21:40 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/12 12:12:38 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int		handle_click(int button, int x, int y, t_view *view)
 {
-	printf("press button %d %d %d\n", button, x, y);
+	(void)x;
+	(void)y;
 	if (button == 1)
 		view->mouse->pressed = 1;
 	return (0);
@@ -22,7 +23,8 @@ int		handle_click(int button, int x, int y, t_view *view)
 
 int		handle_click_release(int button, int x, int y, t_view *view)
 {
-	printf("release button %d %d %d\n", button, x, y);
+	(void)x;
+	(void)y;
 	if (button == 1)
 		view->mouse->pressed = 0;
 	return (0);
@@ -30,7 +32,6 @@ int		handle_click_release(int button, int x, int y, t_view *view)
 
 int		handle_key_press(int keycode, t_view *view)
 {
-	printf("press key %d\n", keycode);
 	if (keycode == 53)
 		exit(0);
 	else if (keycode == 13)
@@ -58,7 +59,6 @@ int		handle_key_press(int keycode, t_view *view)
 
 int		handle_key_release(int keycode, t_view *view)
 {
-	printf("release key %d\n", keycode);
 	if (keycode == 13)
 		view->keyboard->w_pressed = FALSE;
 	else if (keycode == 0)

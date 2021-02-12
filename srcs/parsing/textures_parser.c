@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 11:21:01 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/10 13:07:09 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/12 14:10:23 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static t_texture	read_texture(char *path, t_view *view)
 {
 	t_texture	texture;
 
-	printf("reading texture %s\n", path);
 	texture.img = mlx_xpm_file_to_image(view->mlx, path, &texture.width,
 		&texture.height);
 	texture.addr = (int *)mlx_get_data_addr(texture.img,
@@ -39,6 +38,13 @@ static int			parse_texture3(char **split, t_view *view)
 			read_texture(split[1], view);
 		free_split(split);
 		return (validate_texture(view->settings->sprite_texture[SPRITE_TRAP]));
+	}
+	else if (ft_strcmp(split[0], "WI") == 0)
+	{
+		view->settings->sprite_texture[SPRITE_CUP] =
+			read_texture(split[1], view);
+		free_split(split);
+		return (validate_texture(view->settings->sprite_texture[SPRITE_CUP]));
 	}
 	return (SUCCESS);
 }

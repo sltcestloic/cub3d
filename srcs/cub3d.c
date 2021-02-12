@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:12:30 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/10 13:36:21 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/12 14:42:23 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,21 @@ static void	init_player(t_player *player)
 	player->pos_x = -1;
 	player->pos_y = -1;
 	player->health = MAX_HEALTH;
+	player->move_count = 0;
 }
 
-int			validate_args(int ac, char **av, int *fd)
+int			validate_args(int ac, char **av, int *fd, t_view *view)
 {
 	if (ac < 2 || ac > 3)
 	{
 		print_error("Usage: ./cub3d <map path> (--save)");
 		return (FALSE);
+	}
+	if (ac == 3)
+	{
+		if (ft_strcmp(av[2], "--save") != 0)
+			return (print_error("Usage: ./cub3d <map path> (--save)") + 1);
+		view->save = TRUE;
 	}
 	*fd = open(av[1], O_RDONLY);
 	if (*fd == -1)
@@ -72,7 +79,8 @@ int			main(int ac, char **av)
 	init_settings(&settings);
 	init_map(&map);
 	init_player(&player);
-	if (!validate_args(ac, av, &fd))
+	view.save = FALSE;
+	if (!validate_args(ac, av, &fd, &view))
 		return (FALSE);
 	view.mlx = mlx_init();
 	view.player = &player;
@@ -81,6 +89,7 @@ int			main(int ac, char **av)
 	view.sensivity = 0.54;
 	view.move_speed = 0.03;
 	view.sprite_count = 0;
+	view.start_timestamp = current_millis();
 	if (parse_config(fd, &map, &view) == SUCCESS)
 		init_window(settings, view);
 	return (TRUE);

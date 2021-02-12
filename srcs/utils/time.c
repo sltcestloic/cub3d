@@ -1,34 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_valid.c                                         :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/15 09:26:39 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/12 13:54:33 by lbertran         ###   ########lyon.fr   */
+/*   Created: 2021/02/12 14:28:57 by lbertran          #+#    #+#             */
+/*   Updated: 2021/02/12 14:31:43 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int				is_valid_player_char(char c)
-{
-	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
-}
+long long	current_millis(void) {
+	struct timeval time;
+	long long		s1;
+	long long		s2;
 
-int				is_valid_sprite_char(char c)
-{
-	return (c == '2' || c == '3' || c == '4' || c == '5');
-}
-
-int				is_wall(char c)
-{
-	return (c == '9' || c == '1');
-}
-
-int				is_valid_map_char(char c)
-{
-	return (c == '0' || is_valid_player_char(c) ||
-		is_valid_sprite_char(c) || is_wall(c));
+	gettimeofday(&time, NULL);
+	s1 = (long long)(time.tv_sec) * 1000;
+	s2 = (time.tv_usec / 1000);
+	return (s1 + s2);
 }

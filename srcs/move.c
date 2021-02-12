@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:39:33 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/10 15:43:51 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/12 13:39:56 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	rotate_camera_lr(t_view *view, int right, int mouse)
 		rot_speed *= view->sensivity;
 		rot_speed *= (mouse * 100 / 500);
 	}
+	if (view->keyboard->shift_pressed && !mouse)
+		rot_speed *= 2;
 	player = view->player;
 	if (!right)
 		rot_speed = -rot_speed;
@@ -44,6 +46,8 @@ void	rotate_camera_ud(t_view *view, int up, int mouse)
 	int			rot_speed;
 
 	rot_speed = view->settings->height / 40;
+	if (view->keyboard->shift_pressed)
+		rot_speed *= 2;
 	if (mouse > 0)
 	{
 		rot_speed *= view->sensivity;
@@ -64,6 +68,9 @@ double	get_speed(t_view *view, int forward)
 		base_speed /= 2.3;
 	else if (view->keyboard->shift_pressed && forward)
 		base_speed *= 1.8;
+	if ((view->keyboard->w_pressed && view->keyboard->a_pressed)
+		|| (view->keyboard->w_pressed && view->keyboard->d_pressed))
+		base_speed /= 1.5;
 	return (base_speed);
 }
 
@@ -92,6 +99,7 @@ void	move_player_fb(t_view *view, int forward)
 		if (!collision(view, y, view->player->pos_x))
 			view->player->pos_y -= view->player->dir_y * move_speed;
 	}
+	view->player->move_count++;
 }
 
 void	move_player_lr(t_view *view, int right)
@@ -119,4 +127,5 @@ void	move_player_lr(t_view *view, int right)
 		if (!collision(view, y, view->player->pos_x))
 			view->player->pos_y -= view->player->plane_y * move_speed;
 	}
+	view->player->move_count++;
 }

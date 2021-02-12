@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:27:54 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/10 15:17:16 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/12 14:58:06 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 int		render_frame(t_view *view)
 {
 	t_image	img;
+	int		fps;
 
+	view->frame_timestamp = current_millis();
 	img.img = mlx_new_image(view->mlx, view->settings->width,
 		view->settings->height);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
@@ -25,8 +27,16 @@ int		render_frame(t_view *view)
 	do_raycast(view);
 	do_spritecast(view);
 	draw_hud(view);
+	fps = (int)(1.0 / ((current_millis() - view->frame_timestamp) / 1000.0));
 	mlx_put_image_to_window(view->mlx, view->window, img.img, 0, 0);
+	mlx_string_put(view->mlx, view->window, 0, 20, 0x0FFFFFF, "FPS: ");
+	mlx_string_put(view->mlx, view->window, 30, 20, 0x0FFFFFF, ft_itoa(fps));
 	draw_health(view);
+	if (view->save)
+	{
+		save_screen(view);
+		exit(0);
+	}
 	return (0);
 }
 
@@ -87,6 +97,8 @@ void	draw_sprite(t_view *view, t_sprite *sprite)
 	x = sprite->draw_start_x;
 	y = sprite->draw_start_y;
 	texture = view->settings->sprite_texture[sprite->type];
+	if (abs(sprite->draw_end_x - sprite->draw_start_x) > 2000)
+		return ;
 	while (x < sprite->draw_end_x)
 	{
 		tx = (x - sprite->draw_start_x) * texture.width /
