@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_valid.c                                         :+:      :+:    :+:   */
+/*   validate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 09:26:39 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/13 13:58:12 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/13 14:45:52 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int				is_valid_map_char(char c)
 		is_valid_sprite_char(c) || is_wall(c));
 }
 
-int			validate_args(int ac, char **av, int *fd, t_view *view)
+int				validate_args(int ac, char **av, int *fd, t_view *view)
 {
 	if (ac < 2 || ac > 3)
 	{

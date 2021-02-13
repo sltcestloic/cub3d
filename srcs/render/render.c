@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:27:54 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/13 14:35:06 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/13 14:45:04 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,7 @@ void	draw_sprite_stripe(t_view *view, t_sprite *sprite, int x, int tx)
 	{
 		ty = (y - sprite->draw_start_y) * texture.height /
 			(sprite->draw_end_y - sprite->draw_start_y);
-		put_pixel(view, x, y++, view->settings->
-			sprite_texture[sprite->type].addr[(texture.width * ty) + tx]);
+		put_pixel(view, x, y++, get_sprite_color(view, sprite, tx, ty));
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/13 14:34:11 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/13 14:44:51 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -304,6 +304,7 @@ long long			current_millis(void);
 int					get_ground_color(t_view *view);
 int					get_sky_color(t_view *view);
 int					get_texture_color(t_view *view, t_texture texture, int tx, int ty);
+int					get_sprite_color(t_view *view, t_sprite *sprite, int tx, int ty);
 void				decrease_effects(t_view *view);
 
 #endif

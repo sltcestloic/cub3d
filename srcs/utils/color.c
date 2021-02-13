@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 11:47:20 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/13 13:55:52 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/13 14:45:41 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,28 @@ int		get_texture_color(t_view *view, t_texture texture, int tx, int ty)
 	j = view->lsd;
 	color = texture.addr[(ty * texture.width) + tx];
 	i = view->blackout;
+	if (j && !i)
+		color *= 0.9 * j;
+	while (i)
+	{
+		color = (color >> 1) & 8355711;
+		i--;
+	}
+	return (color);
+}
+
+int		get_sprite_color(t_view *view, t_sprite *sprite, int tx, int ty)
+{
+	int			color;
+	t_texture	texture;
+	int			i;
+	int			j;
+
+	j = view->lsd;
+	i = view->blackout;
+	texture = view->settings->sprite_texture[sprite->type];
+	color = view->settings->sprite_texture[sprite->type].
+		addr[(texture.width * ty) + tx];
 	if (j && !i)
 		color *= 0.9 * j;
 	while (i)
