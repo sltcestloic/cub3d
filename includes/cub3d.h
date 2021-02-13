@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/13 14:44:51 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/13 15:02:11 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,6 +214,7 @@ void				copy_content(char **old, char **next, int mlc);
 */
 
 void				init_window(t_settings settings, t_view view);
+int					create_bitmap(t_view *view);
 
 /*
 ** Print
