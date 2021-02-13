@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 15:18:31 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/13 14:27:58 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/13 15:57:30 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ void	handle_win(t_view *view)
 	}
 	view->finished = TRUE;
 	draw_win_screen(view, minutes, secondes);
-	printf("t'as win bravo\n");
-	printf("Tu as mit %d minutes et %d secondes\n", minutes, secondes);
 }
 
 int		handle_sprite_collision(t_view *view, t_sprite *sprite)
