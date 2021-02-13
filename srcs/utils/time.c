@@ -6,14 +6,15 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 14:28:57 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/12 14:31:43 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/13 14:36:12 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-long long	current_millis(void) {
-	struct timeval time;
+long long	current_millis(void)
+{
+	struct timeval	time;
 	long long		s1;
 	long long		s2;
 
