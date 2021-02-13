@@ -6,37 +6,59 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:27:54 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/12 14:58:06 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/13 14:27:38 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+void	draw_win_screen(t_view *view, int minutes, int seconds)
+{
+	int			x;
+	int			y;
+	t_texture	texture;
+	char		*time;
+
+	texture = view->settings->win_screen;
+	x = (view->settings->width - texture.width) / 2;
+	y = (view->settings->height - texture.height) / 2;
+	fill_window(view, 0);
+	mlx_put_image_to_window(view->mlx, view->window,
+			texture.img, x,
+			y);
+	x = view->settings->width / 2 - 130;
+	y = view->settings->height / 2 + 100;
+	time = ft_strdup("Tu as mis ");
+	time = ft_strjoin(time, ft_itoa(minutes));
+	time = ft_strjoin(time, " minutes et ");
+	time = ft_strjoin(time, ft_itoa(seconds));
+	time = ft_strjoin(time, " secondes");
+	mlx_string_put(view->mlx, view->window, x, y, 0x0FFFFFF, time);
+	free(time);
+}
+
 int		render_frame(t_view *view)
 {
 	t_image	img;
-	int		fps;
 
+	if (view->finished)
+		return (0);
 	view->frame_timestamp = current_millis();
-	img.img = mlx_new_image(view->mlx, view->settings->width,
+	img.img = mlx_new_image(view->mlx, view->settings->width, 
 		view->settings->height);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
 		&img.line_len, &img.endian);
 	view->image = &img;
-	handle_keyboard(view);
 	do_raycast(view);
 	do_spritecast(view);
 	draw_hud(view);
-	fps = (int)(1.0 / ((current_millis() - view->frame_timestamp) / 1000.0));
 	mlx_put_image_to_window(view->mlx, view->window, img.img, 0, 0);
-	mlx_string_put(view->mlx, view->window, 0, 20, 0x0FFFFFF, "FPS: ");
-	mlx_string_put(view->mlx, view->window, 30, 20, 0x0FFFFFF, ft_itoa(fps));
 	draw_health(view);
 	if (view->save)
-	{
 		save_screen(view);
-		exit(0);
-	}
+	decrease_effects(view);
+	draw_fps(view);
+	handle_keyboard(view);
 	return (0);
 }
 
@@ -51,7 +73,7 @@ void	draw_ray(t_view *view, t_ray *ray, int x)
 	y = 0;
 	texture = get_texture(ray->side, view);
 	while (y < ray->draw_start)
-		put_pixel(view, x, y++, view->settings->sky_color);
+		put_pixel(view, x, y++, get_sky_color(view));
 	if (ray->side == EAST || ray->side == WEST)
 		wx = view->player->pos_y + ray->wall_dist * ray->dir_y;
 	else
@@ -62,10 +84,10 @@ void	draw_ray(t_view *view, t_ray *ray, int x)
 		ty = (y - ray->draw_start) * texture.height / (ray->draw_end
 			- ray->draw_start);
 		tx = (wx - (int)wx) * texture.width;
-		put_pixel(view, x, y++, texture.addr[(ty * texture.width) + tx]);
+		put_pixel(view, x, y++, get_texture_color(view, texture, tx, ty));
 	}
 	while (y < view->settings->height)
-		put_pixel(view, x, y++, view->settings->ground_color);
+		put_pixel(view, x, y++, get_ground_color(view));
 }
 
 void	draw_sprite_stripe(t_view *view, t_sprite *sprite, int x, int tx)

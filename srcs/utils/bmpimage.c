@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 12:46:29 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/12 13:06:35 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/13 13:56:51 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,4 +108,5 @@ void		save_screen(t_view *view)
 		x++;
 	}
 	generate_bmp((unsigned char*) image, view->settings->height, view->settings->width, file_name);
+	exit(0);
 }

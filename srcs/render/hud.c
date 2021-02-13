@@ -6,11 +6,20 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 13:45:34 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/12 11:26:35 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/13 13:53:54 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+void	draw_fps(t_view *view)
+{
+	int		fps;
+
+	fps = (int)(1.0 / ((current_millis() - view->frame_timestamp) / 1000.0));
+	mlx_string_put(view->mlx, view->window, 0, 20, 0x0FFFFFF, "FPS: ");
+	mlx_string_put(view->mlx, view->window, 30, 20, 0x0FFFFFF, ft_itoa(fps));
+}
 
 void	draw_health(t_view *view)
 {

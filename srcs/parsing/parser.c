@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:36:35 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/12 14:16:58 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/13 12:55:08 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,7 @@ int			parse_line(char *line, t_view *view)
 	else if (line[0] == 'F' || line[0] == 'C')
 		return (parse_color(line, view->settings, line[0] == 'F'));
 	split = ft_split(line, ' ');
-	if (ft_strcmp(split[0], "SO") == 0 || ft_strcmp(split[0], "NO")
-		|| ft_strcmp(split[0], "EA") || ft_strcmp(split[0], "WE")
-		|| ft_strcmp(split[0], "S") || ft_strcmp(split[0], "HE"))
-		return (parse_texture(split, view));
-	return (ERROR);
+	return (parse_texture(split, view));
 }
 
 int			parse_config(int fd, t_map *map, t_view *view)

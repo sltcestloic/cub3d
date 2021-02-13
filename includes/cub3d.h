@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/12 14:46:06 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/13 14:28:00 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define SPRITE_HEALTH 1
 # define SPRITE_TRAP 2
 # define SPRITE_CUP 3
+# define SPRITE_SHROOM 4
 # define MAX_HEALTH 5
 # define BYTES_PER_PIXEL 3
 # define FILE_HEADER_SIZE 14
@@ -50,7 +51,8 @@ typedef struct		s_settings
 	t_texture		south_texture;
 	t_texture		east_texture;
 	t_texture		west_texture;
-	t_texture		sprite_texture[4];
+	t_texture		win_screen;
+	t_texture		sprite_texture[5];
 	int				ground_color;
 	int				sky_color;
 }					t_settings;
@@ -188,6 +190,9 @@ typedef struct		s_view
 	int				save;
 	long long		start_timestamp;
 	long long		frame_timestamp;
+	int				blackout;
+	int				lsd;
+	int				finished;
 }					t_view;
 
 
@@ -199,8 +204,10 @@ int					parse_config(int fd, t_map *map, t_view *view);
 int					parse_resolution(char *line, t_settings *settings);
 int					parse_color(char *line, t_settings *settings, int ground);
 int					parse_texture(char **split, t_view *view);
+int					parse_texture4(char **split, t_view *view);
 int					parse_map_line(char *line, t_view *view);
 void				parse_sprite(int x, int y, t_view *view, int type);
+t_texture			read_texture(char *path, t_view *view);
 void				copy_content(char **old, char **next, int mlc);
 
 /*
@@ -226,6 +233,7 @@ int					rgbint_g(int rgb);
 int					rgbint_b(int rgb);
 void				put_pixel(t_view *view, int x, int y, int color);
 int					get_pixel_color(t_image *image, int x, int y);
+void				fill_window(t_view *view, int color);
 
 /*
 ** Direction
@@ -240,6 +248,8 @@ t_texture			get_texture(int direction, t_view *view);
 
 int					validate_map(t_map *map, t_player *player);
 int					validate_map_line(char *line, t_view *view);
+int					validate_texture(t_texture texture);
+int					validate_args(int ac, char **av, int *fd, t_view *view);
 int					is_valid_map_char(char c);
 int					is_valid_player_char(char c);
 int					is_valid_sprite_char(char c);
@@ -268,6 +278,8 @@ void				draw_ray(t_view *view, t_ray *ray, int x);
 void				draw_sprite(t_view *view, t_sprite *sprite);
 void				draw_hud(t_view *view);
 void				draw_health(t_view *view);
+void				draw_fps(t_view *view);
+void				draw_win_screen(t_view *view, int minutes, int seconds);
 void				save_screen(t_view *view);
 
 /*
@@ -285,5 +297,14 @@ int					collision(t_view *view, double x, double y);
 */
 
 long long			current_millis(void);
+
+/*
+** Colors
+*/
+
+int					get_ground_color(t_view *view);
+int					get_sky_color(t_view *view);
+int					get_texture_color(t_view *view, t_texture texture, int tx, int ty);
+void				decrease_effects(t_view *view);
 
 #endif

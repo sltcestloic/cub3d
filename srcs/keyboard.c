@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 15:36:06 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/12 11:22:32 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/13 12:22:23 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	handle_keyboard(t_view *view)
 	t_keyboard	*keyboard;
 
 	keyboard = view->keyboard;
+	if (view->blackout > 0)
+		return ;
 	if (keyboard->d_pressed && !keyboard->a_pressed)
 		move_player_lr(view, 1);
 	else if (keyboard->a_pressed && !keyboard->d_pressed)

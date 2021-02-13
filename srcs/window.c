@@ -6,11 +6,30 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 14:57:02 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/12 13:59:57 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/13 14:06:44 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+void	fill_window(t_view *view, int color)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (x < view->settings->width)
+	{
+		while (y < view->settings->height)
+		{
+			mlx_pixel_put(view->mlx, view->window, x, y, color);
+			y++;
+		}
+		y = 0;
+		x++;
+	}
+}
 
 void	init_hooks(t_view view)
 {

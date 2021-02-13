@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 15:18:31 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/12 14:38:27 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/13 14:27:58 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int		handle_death(t_view *view)
 	player->dir_y = player->spawn_dy;
 	player->health = MAX_HEALTH;
 	player->move_count = 0;
+	view->blackout = 20;
 	return (FALSE);
 }
 
@@ -54,9 +55,10 @@ void	handle_win(t_view *view)
 		minutes = 0;
 		secondes = time;
 	}
+	view->finished = TRUE;
+	draw_win_screen(view, minutes, secondes);
 	printf("t'as win bravo\n");
-	printf("Tu as mit %d minutes et %d secondes", minutes, secondes);
-	exit(0);
+	printf("Tu as mit %d minutes et %d secondes\n", minutes, secondes);
 }
 
 int		handle_sprite_collision(t_view *view, t_sprite *sprite)
@@ -77,6 +79,8 @@ int		handle_sprite_collision(t_view *view, t_sprite *sprite)
 			return (FALSE);
 		}
 	}
+	else if (sprite->type == SPRITE_SHROOM)
+		view->lsd = 100;
 	else if (sprite->type == SPRITE_CUP)
 		handle_win(view);
 	sprite->visible = FALSE;

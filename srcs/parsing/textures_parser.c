@@ -6,20 +6,20 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 11:21:01 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/12 14:10:23 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/13 13:57:29 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static int			validate_texture(t_texture texture)
+int					validate_texture(t_texture texture)
 {
 	if (texture.img == NULL)
 		return (print_error("At least one texture is invalid in .cub file."));
 	return (SUCCESS);
 }
 
-static t_texture	read_texture(char *path, t_view *view)
+t_texture			read_texture(char *path, t_view *view)
 {
 	t_texture	texture;
 
@@ -32,20 +32,30 @@ static t_texture	read_texture(char *path, t_view *view)
 
 static int			parse_texture3(char **split, t_view *view)
 {
-	if (ft_strcmp(split[0], "TR") == 0)
+	if (ft_strcmp(split[0], "S3") == 0)
 	{
 		view->settings->sprite_texture[SPRITE_TRAP] =
 			read_texture(split[1], view);
 		free_split(split);
 		return (validate_texture(view->settings->sprite_texture[SPRITE_TRAP]));
 	}
-	else if (ft_strcmp(split[0], "WI") == 0)
+	else if (ft_strcmp(split[0], "S4") == 0)
 	{
 		view->settings->sprite_texture[SPRITE_CUP] =
 			read_texture(split[1], view);
 		free_split(split);
 		return (validate_texture(view->settings->sprite_texture[SPRITE_CUP]));
 	}
+	else if (ft_strcmp(split[0], "S5") == 0)
+	{
+		view->settings->sprite_texture[SPRITE_SHROOM] =
+			read_texture(split[1], view);
+		free_split(split);
+		return (validate_texture(view->settings->
+			sprite_texture[SPRITE_SHROOM]));
+	}
+	else
+		return (parse_texture4(split, view));
 	return (SUCCESS);
 }
 
@@ -65,7 +75,7 @@ static int			parse_texture2(char **split, t_view *view)
 		return (validate_texture(view->settings->
 			sprite_texture[SPRITE_DEFAULT]));
 	}
-	else if (ft_strcmp(split[0], "HE") == 0)
+	else if (ft_strcmp(split[0], "S2") == 0)
 	{
 		view->settings->sprite_texture[SPRITE_HEALTH] =
 			read_texture(split[1], view);
