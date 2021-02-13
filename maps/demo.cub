@@ -14,7 +14,7 @@ C 100,180,255
 10000000000000000001
 10000001S10000000001
 10000000000000000001
-10005000000000000001
+10009000000000000001
 10000000000000000001
 10004444433333330001
 10004444433333330001
@@ -29,5 +29,8 @@ SO textures/south.xpm
 EA textures/east.xpm
 WE textures/west.xpm
 S textures/pillar.xpm
-HE textures/heart32.xpm
-TR textures/trap.xpm
+S2 textures/heart32.xpm
+S3 textures/trap.xpm
+S4 textures/cup.xpm
+S5 textures/champ.xpm
+GG textures/win.xpm
