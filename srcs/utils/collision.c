@@ -6,20 +6,11 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 15:18:31 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/13 15:57:30 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/14 14:23:11 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-void	reset_sprites(t_view *view)
-{
-	int	i;
-
-	i = 0;
-	while (i < view->sprite_count)
-		view->sprites[i++].visible = TRUE;
-}
 
 int		handle_death(t_view *view)
 {
@@ -85,6 +76,22 @@ int		handle_sprite_collision(t_view *view, t_sprite *sprite)
 	return (FALSE);
 }
 
+int		wall_collision(t_view *view, double x, double y)
+{
+	double threshold;
+
+	threshold = 0.15;
+	return (view->map->content[(int)y][(int)x] == '1'
+		|| view->map->content[(int)(y + threshold)][(int)x] == '1'
+		|| view->map->content[(int)(y + threshold)][(int)(x + threshold)] == '1'
+		|| view->map->content[(int)(y + threshold)][(int)(x - threshold)] == '1'
+		|| view->map->content[(int)(y - threshold)][(int)x] == '1'
+		|| view->map->content[(int)(y - threshold)][(int)(x + threshold)] == '1'
+		|| view->map->content[(int)(y - threshold)][(int)(x - threshold)] == '1'
+		|| view->map->content[(int)y][(int)(x - threshold)] == '1'
+		|| view->map->content[(int)y][(int)(x + threshold)] == '1');
+}
+
 int		collision(t_view *view, double y, double x)
 {
 	int			i;
@@ -107,5 +114,5 @@ int		collision(t_view *view, double y, double x)
 		}
 		i++;
 	}
-	return (view->map->content[(int)y][(int)x] == '1');
+	return (wall_collision(view, x, y));
 }

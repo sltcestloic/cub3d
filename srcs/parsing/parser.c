@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:36:35 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/14 14:11:31 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/14 14:27:00 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ int			parse_config(int fd, t_map *map, t_view *view)
 			break ;
 	}
 	view->animation = 0;
-	printf("parsed\n");
 	validate_map(map, view->player);
 	if (!(view->z_buffer = malloc(sizeof(double) * view->settings->width)))
 		return (print_error_exit("Failed to malloc z buffer.", 1));

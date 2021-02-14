@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:12:30 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/14 12:54:40 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/14 14:26:54 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	init_player(t_player *player)
 	player->move_count = 0;
 }
 
-int				validate_args(int ac, char **av, int *fd, t_view *view)
+int			validate_args(int ac, char **av, int *fd, t_view *view)
 {
 	if (ac < 2 || ac > 3)
 	{

@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/14 13:32:14 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/14 14:25:02 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,6 +270,14 @@ int					handle_click_release(int button, int x, int y, t_view *view);
 int					handle_click(int button, int x, int y, t_view *view);
 int 				handle_mouse_motion(int x, int y, t_view *view);
 void				handle_keyboard(t_view *view);
+
+/*
+** Sprites
+*/
+
+void				sort_sprites(t_view *view);
+void				calculate_distances(t_view *view);
+void				reset_sprites(t_view *view);
 
 /*
 ** Render
