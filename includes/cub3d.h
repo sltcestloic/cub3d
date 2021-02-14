@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/13 15:02:11 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/14 13:32:14 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # define SPRITE_DEFAULT 0
 # define SPRITE_HEALTH 1
 # define SPRITE_TRAP 2
-# define SPRITE_CUP 3
-# define SPRITE_SHROOM 4
+# define SPRITE_SHROOM 3
+# define SPRITE_CUP 4
 # define MAX_HEALTH 5
 # define BYTES_PER_PIXEL 3
 # define FILE_HEADER_SIZE 14
@@ -52,7 +52,10 @@ typedef struct		s_settings
 	t_texture		east_texture;
 	t_texture		west_texture;
 	t_texture		win_screen;
-	t_texture		sprite_texture[5];
+	t_texture		hud_texture;
+	t_texture		heart_empty_texture;
+	t_texture		sprite_texture[4];
+	t_texture		cup_texture[3];
 	int				ground_color;
 	int				sky_color;
 }					t_settings;
@@ -192,6 +195,7 @@ typedef struct		s_view
 	int				blackout;
 	int				lsd;
 	int				finished;
+	int				animation;
 }					t_view;
 
 
@@ -249,11 +253,11 @@ t_texture			get_texture(int direction, t_view *view);
 int					validate_map(t_map *map, t_player *player);
 int					validate_map_line(char *line, t_view *view);
 int					validate_texture(t_texture texture);
-int					validate_args(int ac, char **av, int *fd, t_view *view);
 int					is_valid_map_char(char c);
 int					is_valid_player_char(char c);
 int					is_valid_sprite_char(char c);
 int					is_wall(char c);
+int					is_valid_texture_entry(char *entry);
 
 /*
 ** Hooks

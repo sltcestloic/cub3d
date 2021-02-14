@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:39:33 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/13 14:34:35 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/14 12:28:49 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,6 @@ double	get_speed(t_view *view, int forward)
 		base_speed /= 2.3;
 	else if (view->keyboard->shift_pressed && forward)
 		base_speed *= 1.8;
-	if ((view->keyboard->w_pressed && view->keyboard->a_pressed)
-		|| (view->keyboard->w_pressed && view->keyboard->d_pressed))
-		base_speed /= 1.5;
 	return (base_speed);
 }
 

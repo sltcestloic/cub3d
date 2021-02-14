@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:12:30 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/13 14:33:55 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/14 12:54:40 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,28 @@ static void	init_player(t_player *player)
 	player->pos_y = -1;
 	player->health = MAX_HEALTH;
 	player->move_count = 0;
+}
+
+int				validate_args(int ac, char **av, int *fd, t_view *view)
+{
+	if (ac < 2 || ac > 3)
+	{
+		print_error("Usage: ./cub3d <map path> (--save)");
+		return (FALSE);
+	}
+	if (ac == 3)
+	{
+		if (ft_strcmp(av[2], "--save") != 0)
+			return (print_error("Usage: ./cub3d <map path> (--save)") + 1);
+		view->save = TRUE;
+	}
+	*fd = open(av[1], O_RDONLY);
+	if (*fd == -1)
+	{
+		print_error("Please provide a valid file path.");
+		return (FALSE);
+	}
+	return (TRUE);
 }
 
 int			main(int ac, char **av)

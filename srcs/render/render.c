@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:27:54 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/13 15:05:55 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/14 13:49:09 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int		render_frame(t_view *view)
 	if (view->finished)
 		return (0);
 	view->frame_timestamp = current_millis();
+	if (++view->animation > 15)
+		view->animation = 0;
 	img.img = mlx_new_image(view->mlx, view->settings->width,
 		view->settings->height);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
@@ -51,8 +53,8 @@ int		render_frame(t_view *view)
 	view->image = &img;
 	do_raycast(view);
 	do_spritecast(view);
-	draw_hud(view);
 	mlx_put_image_to_window(view->mlx, view->window, img.img, 0, 0);
+	draw_hud(view);
 	draw_health(view);
 	decrease_effects(view);
 	draw_fps(view);
@@ -96,7 +98,10 @@ void	draw_sprite_stripe(t_view *view, t_sprite *sprite, int x, int tx)
 	int			ty;
 	t_texture	texture;
 
-	texture = view->settings->sprite_texture[sprite->type];
+	if (sprite->type < SPRITE_CUP)
+		texture = view->settings->sprite_texture[sprite->type];
+	else
+		texture = view->settings->cup_texture[(int)view->animation / 5];
 	y = sprite->draw_start_y;
 	while (y < sprite->draw_end_y)
 	{
@@ -117,7 +122,10 @@ void	draw_sprite(t_view *view, t_sprite *sprite)
 		return ;
 	x = sprite->draw_start_x;
 	y = sprite->draw_start_y;
-	texture = view->settings->sprite_texture[sprite->type];
+	if (sprite->type < SPRITE_CUP)
+		texture = view->settings->sprite_texture[sprite->type];
+	else
+		texture = view->settings->cup_texture[(int)view->animation / 5];
 	if (abs(sprite->draw_end_x - sprite->draw_start_x) > 2000)
 		return ;
 	while (x < sprite->draw_end_x)

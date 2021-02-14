@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 09:26:39 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/13 14:45:52 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/14 13:35:45 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,24 +33,14 @@ int				is_valid_map_char(char c)
 		is_valid_sprite_char(c) || is_wall(c));
 }
 
-int				validate_args(int ac, char **av, int *fd, t_view *view)
+int				is_valid_texture_entry(char *entry)
 {
-	if (ac < 2 || ac > 3)
-	{
-		print_error("Usage: ./cub3d <map path> (--save)");
-		return (FALSE);
-	}
-	if (ac == 3)
-	{
-		if (ft_strcmp(av[2], "--save") != 0)
-			return (print_error("Usage: ./cub3d <map path> (--save)") + 1);
-		view->save = TRUE;
-	}
-	*fd = open(av[1], O_RDONLY);
-	if (*fd == -1)
-	{
-		print_error("Please provide a valid file path.");
-		return (FALSE);
-	}
-	return (TRUE);
+	return (ft_strcmp(entry, "NO") == 0 || ft_strcmp(entry, "SO") == 0
+		|| ft_strcmp(entry, "EA") == 0 || ft_strcmp(entry, "WE") == 0
+		|| ft_strcmp(entry, "S") == 0 || ft_strcmp(entry, "S2") == 0
+		|| ft_strcmp(entry, "S3") == 0 || ft_strcmp(entry, "S4") == 0
+		|| ft_strcmp(entry, "W0") == 0 || ft_strcmp(entry, "W1") == 0
+		|| ft_strcmp(entry, "W2") == 0 || ft_strcmp(entry, "GG") == 0
+		|| ft_strcmp(entry, "HUD") == 0
+		|| ft_strcmp(entry, "HEART_EMPTY") == 0);
 }

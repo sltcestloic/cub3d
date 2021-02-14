@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 11:47:20 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/13 14:45:41 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/14 13:15:15 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,11 @@ int		get_sprite_color(t_view *view, t_sprite *sprite, int tx, int ty)
 
 	j = view->lsd;
 	i = view->blackout;
-	texture = view->settings->sprite_texture[sprite->type];
-	color = view->settings->sprite_texture[sprite->type].
-		addr[(texture.width * ty) + tx];
+	if (sprite->type < SPRITE_CUP)
+		texture = view->settings->sprite_texture[sprite->type];
+	else
+		texture = view->settings->cup_texture[(int)view->animation / 5];
+	color = texture.addr[(texture.width * ty) + tx];
 	if (j && !i)
 		color *= 0.9 * j;
 	while (i)
@@ -96,5 +98,7 @@ int		get_sprite_color(t_view *view, t_sprite *sprite, int tx, int ty)
 		color = (color >> 1) & 8355711;
 		i--;
 	}
+	if (color < 0)
+		color = 0;
 	return (color);
 }

@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:36:35 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/13 12:55:08 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/14 13:50:04 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int			parse_line(char *line, t_view *view)
 	else if (line[0] == 'F' || line[0] == 'C')
 		return (parse_color(line, view->settings, line[0] == 'F'));
 	split = ft_split(line, ' ');
+	if (!is_valid_texture_entry(split[0]))
+		return (print_error_exit("Invalid texture line in config.", 1));
 	return (parse_texture(split, view));
 }
 
@@ -70,6 +72,7 @@ int			parse_config(int fd, t_map *map, t_view *view)
 		if (ret == 0)
 			break ;
 	}
+	view->animation = 0;
 	validate_map(map, view->player);
 	if (!(view->z_buffer = malloc(sizeof(double) * view->settings->width)))
 		return (print_error_exit("Failed to malloc z buffer.", 1));

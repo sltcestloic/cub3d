@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 13:45:34 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/13 13:53:54 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/14 13:49:33 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,43 +17,44 @@ void	draw_fps(t_view *view)
 	int		fps;
 
 	fps = (int)(1.0 / ((current_millis() - view->frame_timestamp) / 1000.0));
-	mlx_string_put(view->mlx, view->window, 0, 20, 0x0FFFFFF, "FPS: ");
-	mlx_string_put(view->mlx, view->window, 30, 20, 0x0FFFFFF, ft_itoa(fps));
+	mlx_string_put(view->mlx, view->window, view->settings->width / 2.7 + 23,
+		view->settings->height - 25, 0x0FFFFFF, ft_itoa(fps));
+}
+
+int		draw_heart(t_view *view, t_texture texture, int x)
+{
+	mlx_put_image_to_window(view->mlx, view->window, texture.img, x,
+				view->settings->height - 15 - texture.height);
+	x += texture.width;
+	return (x);
 }
 
 void	draw_health(t_view *view)
 {
 	t_texture	health_texture;
+	t_texture	empty_texture;
 	int			health;
 	int			x;
+	int			i;
 
-	x = view->settings->width / 2 - 80;
-	health = view->player->health;
+	x = view->settings->width / 2 - 40;
+	health = view->player->health - 1;
 	health_texture = view->settings->sprite_texture[SPRITE_HEALTH];
-	while (health)
+	empty_texture = view->settings->heart_empty_texture;
+	i = 0;
+	while (i < MAX_HEALTH)
 	{
-		mlx_put_image_to_window(view->mlx, view->window, health_texture.img, x,
-			view->settings->height - 7 - health_texture.height);
-		x += health_texture.width;
-		health--;
+		if (health >= i)
+			x = draw_heart(view, health_texture, x);
+		else
+			x = draw_heart(view, empty_texture, x);
+		i++;
 	}
 }
 
 void	draw_hud(t_view *view)
 {
-	int			x;
-	int			y;
-
-	x = view->settings->width / 2 - 80;
-	y = view->settings->height - 50;
-	while (y < view->settings->height)
-	{
-		while (x < view->settings->width / 2 + 80)
-		{
-			put_pixel(view, x, y, rgbint(51, 129, 255));
-			x++;
-		}
-		x = view->settings->width / 2 - 80;
-		y++;
-	}
+	mlx_put_image_to_window(view->mlx, view->window,
+		view->settings->hud_texture.img,
+		view->settings->width / 2.7, view->settings->height - 70);
 }

@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 11:21:01 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/13 13:57:29 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/14 13:46:47 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,12 @@ int					validate_texture(t_texture texture)
 t_texture			read_texture(char *path, t_view *view)
 {
 	t_texture	texture;
+	int			fd;
 
+	fd = open(path, O_RDONLY);
+	close(fd);
+	if (fd == -1)
+		print_error_exit("Invalid texture path in .cub file.", 1);
 	texture.img = mlx_xpm_file_to_image(view->mlx, path, &texture.width,
 		&texture.height);
 	texture.addr = (int *)mlx_get_data_addr(texture.img,
@@ -41,18 +46,18 @@ static int			parse_texture3(char **split, t_view *view)
 	}
 	else if (ft_strcmp(split[0], "S4") == 0)
 	{
-		view->settings->sprite_texture[SPRITE_CUP] =
-			read_texture(split[1], view);
-		free_split(split);
-		return (validate_texture(view->settings->sprite_texture[SPRITE_CUP]));
-	}
-	else if (ft_strcmp(split[0], "S5") == 0)
-	{
 		view->settings->sprite_texture[SPRITE_SHROOM] =
 			read_texture(split[1], view);
 		free_split(split);
 		return (validate_texture(view->settings->
 			sprite_texture[SPRITE_SHROOM]));
+	}
+	else if (ft_strcmp(split[0], "W0") == 0)
+	{
+		view->settings->cup_texture[0] =
+			read_texture(split[1], view);
+		free_split(split);
+		return (validate_texture(view->settings->cup_texture[0]));
 	}
 	else
 		return (parse_texture4(split, view));
