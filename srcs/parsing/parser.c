@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:36:35 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/14 13:50:04 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/14 14:11:31 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,22 @@ int			parse_line(char *line, t_view *view)
 	return (parse_texture(split, view));
 }
 
+int			is_empty(char *line)
+{
+	int	i;
+
+	i = 0;
+	if (ft_strlen(line) == 0)
+		return (TRUE);
+	while (line[i])
+	{
+		if (line[i] != ' ')
+			return (FALSE);
+		i++;
+	}
+	return (TRUE);
+}
+
 int			parse_config(int fd, t_map *map, t_view *view)
 {
 	char	*line;
@@ -60,19 +76,21 @@ int			parse_config(int fd, t_map *map, t_view *view)
 	view->map = map;
 	while ((ret = ft_get_next_line(fd, &line)) >= 0)
 	{
-		if (ft_strlen(line) == 0)
+		if (is_empty(line) && ret)
 			continue ;
 		if (ft_isalpha(line[0]))
 		{
 			if (parse_line(line, view) == ERROR)
 				return (ERROR);
 		}
-		else if (parse_map_line(line, view) == ERROR)
-			return (ERROR);
+		else if (!is_empty(line))
+			if (parse_map_line(line, view) == ERROR)
+				return (ERROR);
 		if (ret == 0)
 			break ;
 	}
 	view->animation = 0;
+	printf("parsed\n");
 	validate_map(map, view->player);
 	if (!(view->z_buffer = malloc(sizeof(double) * view->settings->width)))
 		return (print_error_exit("Failed to malloc z buffer.", 1));
