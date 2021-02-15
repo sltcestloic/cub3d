@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:36:35 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/15 13:00:28 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/15 15:07:59 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,11 @@ int			parse_line(char *line, t_view *view)
 		return (parse_color(line, view->settings, line[0] == 'F'));
 	split = ft_split(line, ' ');
 	if (!is_valid_texture_entry(split[0]))
+	{
+		free_split(split);
 		return (print_error_exit("Invalid texture line in config.", 1));
+	}
+	free(line);
 	return (parse_texture(split, view));
 }
 
@@ -42,16 +46,19 @@ int			is_empty(char *line)
 	return (TRUE);
 }
 
-int			parse_config(int fd, t_map *map, t_view *view)
+int			read_config(int fd, t_view *view)
 {
-	char	*line;
 	int		ret;
+	char	*line;
 
-	view->map = map;
+	line = NULL;
 	while ((ret = ft_get_next_line(fd, &line)) >= 0)
 	{
 		if (is_empty(line) && ret)
+		{
+			free(line);
 			continue ;
+		}
 		if (ft_isalpha(line[0]))
 		{
 			if (parse_line(line, view) == ERROR)
@@ -63,6 +70,15 @@ int			parse_config(int fd, t_map *map, t_view *view)
 		if (ret == 0)
 			break ;
 	}
+	free(line);
+	return (SUCCESS);
+}
+
+int			parse_config(int fd, t_map *map, t_view *view)
+{
+	view->map = map;
+	if (read_config(fd, view) == ERROR)
+		return (ERROR);
 	view->animation = 0;
 	validate_map(map, view->player);
 	if (!(view->z_buffer = malloc(sizeof(double) * view->settings->width)))

@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 13:45:34 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/14 13:49:33 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/15 13:07:06 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,13 @@
 void	draw_fps(t_view *view)
 {
 	int		fps;
+	char	*fps_str;
 
 	fps = (int)(1.0 / ((current_millis() - view->frame_timestamp) / 1000.0));
+	fps_str = ft_itoa(fps);
 	mlx_string_put(view->mlx, view->window, view->settings->width / 2.7 + 23,
-		view->settings->height - 25, 0x0FFFFFF, ft_itoa(fps));
+		view->settings->height - 25, 0x0FFFFFF, fps_str);
+	free(fps_str);
 }
 
 int		draw_heart(t_view *view, t_texture texture, int x)

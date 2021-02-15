@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:27:54 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/14 13:49:09 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/15 15:08:04 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,19 @@ void	draw_win_screen(t_view *view, int minutes, int seconds)
 	y = (view->settings->height - texture.height) / 2;
 	fill_window(view, 0);
 	mlx_put_image_to_window(view->mlx, view->window,
-			texture.img, x,
-			y);
+			texture.img, x, y);
 	x = view->settings->width / 2 - 130;
 	y = view->settings->height / 2 + 100;
-	time = ft_strdup("Tu as mis ");
-	time = ft_strjoin(time, ft_itoa(minutes));
-	time = ft_strjoin(time, " minutes et ");
-	time = ft_strjoin(time, ft_itoa(seconds));
-	time = ft_strjoin(time, " secondes");
-	mlx_string_put(view->mlx, view->window, x, y, 0x0FFFFFF, time);
+	time = ft_itoa(minutes);
+	mlx_string_put(view->mlx, view->window, x, y, 0x0FFFFFF, "Tu as mis ");
+	mlx_string_put(view->mlx, view->window, x + 70, y, 0x0FFFFFF, time);
 	free(time);
+	mlx_string_put(view->mlx, view->window, x + 80, y, 0x0FFFFFF,
+		" minutes et ");
+	time = ft_itoa(seconds);
+	mlx_string_put(view->mlx, view->window, x + 165, y, 0x0FFFFFF, time);
+	free(time);
+	mlx_string_put(view->mlx, view->window, x + 180, y, 0x0FFFFFF, "secondes");
 }
 
 int		render_frame(t_view *view)

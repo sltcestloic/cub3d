@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 12:56:57 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/15 13:00:54 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/15 14:22:01 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,6 @@ int	validate_settings(t_settings *settings, t_player *player)
 	if (settings->height == 0)
 		return (print_error("Resolution height not specified in .cub file."));
 	if (player->pos_x == -1)
-		return(print_error("No player in map."));
+		return (print_error("No player in map."));
 	return (validate_settings2(settings));
 }
