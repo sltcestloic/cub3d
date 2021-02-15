@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/14 14:25:02 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/15 13:00:19 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,6 +258,7 @@ int					is_valid_player_char(char c);
 int					is_valid_sprite_char(char c);
 int					is_wall(char c);
 int					is_valid_texture_entry(char *entry);
+int					validate_settings(t_settings *settings, t_player *player);
 
 /*
 ** Hooks

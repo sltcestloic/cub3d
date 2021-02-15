@@ -6,37 +6,11 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:36:35 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/14 14:27:00 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/15 13:00:28 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-static int	validate_settings(t_settings *settings, t_player *player)
-{
-	if (settings->north_texture.img == NULL)
-		return (print_error("North texture not specified in .cub file"));
-	if (settings->south_texture.img == NULL)
-		return (print_error("South texture not specified in .cub file"));
-	if (settings->east_texture.img == NULL)
-		return (print_error("East texture not specified in .cub file."));
-	if (settings->west_texture.img == NULL)
-		return (print_error("West texture not specified in .cub file."));
-	if (settings->sprite_texture[SPRITE_DEFAULT].img == NULL)
-		return (print_error("Default sprite texture not specified \
-		in .cub file."));
-	if (settings->ground_color == 0)
-		return (print_error("Ground color not specified in .cub file."));
-	if (settings->sky_color == 0)
-		return (print_error("Sky color not specified in .cub file."));
-	if (settings->width == 0)
-		return (print_error("Resolution width not specified in .cub file."));
-	if (settings->height == 0)
-		return (print_error("Resolution height not specified in .cub file."));
-	if (player->pos_x == -1)
-		return (print_error("No player in map."));
-	return (SUCCESS);
-}
 
 int			parse_line(char *line, t_view *view)
 {

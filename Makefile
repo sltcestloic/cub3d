@@ -6,7 +6,7 @@
 #    By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/18 16:40:32 by lbertran          #+#    #+#              #
-#    Updated: 2021/02/14 14:25:17 by lbertran         ###   ########lyon.fr    #
+#    Updated: 2021/02/15 13:00:41 by lbertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC		= cub3d.c \
 			parsing/map_validation.c \
 			parsing/parser.c \
 			parsing/settings_parser.c \
+			parsing/settings_validation.c \
 			parsing/sprite_parser.c \
 			parsing/textures_parser.c \
 			parsing/textures_parser2.c \
