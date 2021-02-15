@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/15 15:03:36 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/15 16:41:27 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,7 +198,6 @@ typedef struct		s_view
 	int				animation;
 }					t_view;
 
-
 /*
 ** Parsing
 */
@@ -269,7 +268,7 @@ int					handle_key_press(int keycode, t_view *view);
 int					handle_key_release(int keycode, t_view *view);
 int					handle_click_release(int button, int x, int y, t_view *view);
 int					handle_click(int button, int x, int y, t_view *view);
-int 				handle_mouse_motion(int x, int y, t_view *view);
+int					handle_mouse_motion(int x, int y, t_view *view);
 void				handle_keyboard(t_view *view);
 
 /*
