@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 16:06:08 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/15 13:26:07 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/15 16:28:18 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,11 @@ int	parse_resolution(char *line, t_settings *settings)
 	split = ft_split(line, ' ');
 	free(line);
 	settings->width = ft_atoi(split[1]);
+	if (settings->width > 2559)
+		settings->width = 2559;
 	settings->height = ft_atoi(split[2]);
+	if (settings->height > 1440)
+		settings->height = 1440;
 	free_split(split);
 	if (settings->width == 0 || settings->height == 0)
 	{
