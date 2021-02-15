@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 13:45:34 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/15 13:07:06 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/15 16:19:07 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	draw_health(t_view *view)
 	int			x;
 	int			i;
 
-	x = view->settings->width / 2 - 40;
+	x = view->settings->width / 2.7 + 90;
 	health = view->player->health - 1;
 	health_texture = view->settings->sprite_texture[SPRITE_HEALTH];
 	empty_texture = view->settings->heart_empty_texture;
