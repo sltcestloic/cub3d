@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:27:54 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/15 15:08:04 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/15 15:53:50 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	draw_win_screen(t_view *view, int minutes, int seconds)
 	time = ft_itoa(seconds);
 	mlx_string_put(view->mlx, view->window, x + 165, y, 0x0FFFFFF, time);
 	free(time);
-	mlx_string_put(view->mlx, view->window, x + 180, y, 0x0FFFFFF, "secondes");
+	mlx_string_put(view->mlx, view->window, x + 185, y, 0x0FFFFFF, "secondes");
 }
 
 int		render_frame(t_view *view)
