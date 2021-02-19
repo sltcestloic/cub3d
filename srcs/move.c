@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:39:33 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/14 12:28:49 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/19 11:10:46 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ void	move_player_fb(t_view *view, int forward)
 	move_speed = get_speed(view, forward);
 	if (forward)
 	{
-		x = view->player->pos_x + view->player->dir_x * (move_speed * 6);
-		y = view->player->pos_y + view->player->dir_y * (move_speed * 6);
+		x = view->player->pos_x + view->player->dir_x * move_speed;
+		y = view->player->pos_y + view->player->dir_y * move_speed;
 		if (!collision(view, view->player->pos_y, x))
 			view->player->pos_x += view->player->dir_x * move_speed;
 		if (!collision(view, y, view->player->pos_x))
@@ -89,8 +89,8 @@ void	move_player_fb(t_view *view, int forward)
 	}
 	else
 	{
-		x = view->player->pos_x - view->player->dir_x * (move_speed * 6);
-		y = view->player->pos_y - view->player->dir_y * (move_speed * 6);
+		x = view->player->pos_x - view->player->dir_x * move_speed;
+		y = view->player->pos_y - view->player->dir_y * move_speed;
 		if (!collision(view, view->player->pos_y, x))
 			view->player->pos_x -= view->player->dir_x * move_speed;
 		if (!collision(view, y, view->player->pos_x))
@@ -108,8 +108,8 @@ void	move_player_lr(t_view *view, int right)
 	move_speed = get_speed(view, FALSE);
 	if (!right)
 	{
-		x = view->player->pos_x + view->player->plane_x * (move_speed * 6);
-		y = view->player->pos_y + view->player->plane_y * (move_speed * 6);
+		x = view->player->pos_x + view->player->plane_x * move_speed;
+		y = view->player->pos_y + view->player->plane_y * move_speed;
 		if (!collision(view, view->player->pos_y, x))
 			view->player->pos_x += view->player->plane_x * move_speed;
 		if (!collision(view, y, view->player->pos_x))
@@ -117,8 +117,8 @@ void	move_player_lr(t_view *view, int right)
 	}
 	else
 	{
-		x = view->player->pos_x - view->player->plane_x * (move_speed * 6);
-		y = view->player->pos_y - view->player->plane_y * (move_speed * 6);
+		x = view->player->pos_x - view->player->plane_x * move_speed;
+		y = view->player->pos_y - view->player->plane_y * move_speed;
 		if (!collision(view, view->player->pos_y, x))
 			view->player->pos_x -= view->player->plane_x * move_speed;
 		if (!collision(view, y, view->player->pos_x))

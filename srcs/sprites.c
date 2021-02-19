@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 14:23:49 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/17 14:38:46 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/19 11:15:15 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	calculate_distances(t_view *view)
 			(view->player->pos_x - sprite.pos_x) +
 			(view->player->pos_y - sprite.pos_y) *
 			(view->player->pos_y - sprite.pos_y));
+		view->sprites[i].distance = sprite.distance;
 		i++;
 	}
 }
