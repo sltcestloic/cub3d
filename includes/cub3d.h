@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/19 14:25:47 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/19 14:57:32 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,23 +129,6 @@ typedef struct		s_ray
 	int				draw_start;
 	int				draw_end;
 }					t_ray;
-
-typedef struct		s_fray
-{
-	double			dir_x_0;
-	double			dir_y_0;
-	double			dir_x_1;
-	double			dir_y_1;
-	int				y_dif;
-	double			pos_z;
-	double			row_distance;
-	double			step_x;
-	double			step_y;
-	double			floor_x;
-	double			floor_y;
-	int				cell_x;
-	int				cell_y;
-}					t_fray;
 
 typedef struct		s_image
 {
