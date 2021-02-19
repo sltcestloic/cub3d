@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/19 10:57:17 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/19 11:08:21 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/19 11:09:28 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	update_horizon(t_view *view)
 	if (view->player->vel_y == 0)
 		return ;
 	view->horizon += view->player->vel_y;
-	if (view->horizon - 0.5 < view->player->ground_y)
+	if (view->horizon - 1.55 < view->player->ground_y)
 	{
 		view->player->vel_y = 0;
 		view->horizon = view->player->ground_y;
