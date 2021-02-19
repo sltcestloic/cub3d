@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:27:54 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/19 11:00:29 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/19 14:23:47 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,15 @@ void	draw_win_screen(t_view *view, int minutes, int seconds)
 
 int		render_frame(t_view *view)
 {
-	t_image	img;
-
 	if (view->finished)
 		return (0);
 	view->frame_timestamp = current_millis();
 	if (++view->animation > 15)
 		view->animation = 0;
-	img.img = mlx_new_image(view->mlx, view->settings->width,
-		view->settings->height);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
-		&img.line_len, &img.endian);
-	view->image = &img;
 	update_horizon(view);
 	do_raycast(view);
 	do_spritecast(view);
-	mlx_put_image_to_window(view->mlx, view->window, img.img, 0, 0);
+	mlx_put_image_to_window(view->mlx, view->window, view->image->img, 0, 0);
 	draw_hud(view);
 	draw_health(view);
 	decrease_effects(view);

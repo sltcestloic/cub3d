@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 14:57:02 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/15 16:40:50 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/19 14:30:27 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,24 @@ void	init_hooks(t_view view)
 	mlx_loop(view.mlx);
 }
 
+void	init_keyboard(t_keyboard *keyboard)
+{
+	keyboard->w_pressed = FALSE;
+	keyboard->a_pressed = FALSE;
+	keyboard->s_pressed = FALSE;
+	keyboard->d_pressed = FALSE;
+	keyboard->la_pressed = FALSE;
+	keyboard->ra_pressed = FALSE;
+	keyboard->ua_pressed = FALSE;
+	keyboard->da_pressed = FALSE;
+	keyboard->shift_pressed = FALSE;
+	keyboard->ctrl_pressed = FALSE;
+}
+
 void	init_window(t_settings settings, t_view view)
 {
 	t_mouse		mouse;
+	t_image		img;
 	t_keyboard	keyboard;
 
 	view.window = mlx_new_window(view.mlx, settings.width, settings.height,
@@ -53,18 +68,15 @@ void	init_window(t_settings settings, t_view view)
 	mouse.x = -1;
 	mouse.y = -1;
 	mouse.pressed = FALSE;
-	keyboard.w_pressed = FALSE;
-	keyboard.a_pressed = FALSE;
-	keyboard.s_pressed = FALSE;
-	keyboard.d_pressed = FALSE;
-	keyboard.la_pressed = FALSE;
-	keyboard.ra_pressed = FALSE;
-	keyboard.ua_pressed = FALSE;
-	keyboard.da_pressed = FALSE;
-	keyboard.shift_pressed = FALSE;
-	keyboard.ctrl_pressed = FALSE;
-	view.mouse = &mouse;
+	init_keyboard(&keyboard);
 	view.keyboard = &keyboard;
+	view.mouse = &mouse;
+	view.image = &img;
+	view.image->img = mlx_new_image(view.mlx, view.settings->width,
+		view.settings->height);
+	view.image->addr = mlx_get_data_addr(view.image->img,
+		&view.image->bits_per_pixel,
+		&view.image->line_len, &view.image->endian);
 	mlx_mouse_hide();
 	init_hooks(view);
 }
