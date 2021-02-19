@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:27:54 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/15 15:53:50 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/19 11:00:29 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int		render_frame(t_view *view)
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
 		&img.line_len, &img.endian);
 	view->image = &img;
+	update_horizon(view);
 	do_raycast(view);
 	do_spritecast(view);
 	mlx_put_image_to_window(view->mlx, view->window, img.img, 0, 0);

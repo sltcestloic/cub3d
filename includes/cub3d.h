@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/15 16:41:27 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/19 11:03:37 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ typedef struct		s_player
 	double			dir_y;
 	double			plane_x;
 	double			plane_y;
+	double			vel_y;
+	double			ground_y;
 	double			spawn_px;
 	double			spawn_py;
 	double			spawn_dx;
@@ -319,5 +321,12 @@ int					get_sky_color(t_view *view);
 int					get_texture_color(t_view *view, t_texture texture, int tx, int ty);
 int					get_sprite_color(t_view *view, t_sprite *sprite, int tx, int ty);
 void				decrease_effects(t_view *view);
+
+/*
+** Jump
+*/
+
+void				update_horizon(t_view *view);
+void				player_jump(t_view *view);
 
 #endif

@@ -6,11 +6,12 @@
 #    By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/18 16:40:32 by lbertran          #+#    #+#              #
-#    Updated: 2021/02/15 13:00:41 by lbertran         ###   ########lyon.fr    #
+#    Updated: 2021/02/19 10:57:26 by lbertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 SRC		= cub3d.c \
+			jump.c \
 			keyboard.c \
 			move.c \
 			sprites.c \
