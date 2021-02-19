@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 12:46:29 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/15 12:50:35 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/19 11:26:19 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	data_to_bitmap(t_view *view, int fd)
 	return (SUCCESS);
 }
 
-static void	mir_verti_pixel(t_image *img, int line_cnt, int *e, int f)
+static void	reverse_pixel(t_image *img, int line_cnt, int *e, int f)
 {
 	char	save;
 	int		k;
@@ -43,7 +43,7 @@ static void	mir_verti_pixel(t_image *img, int line_cnt, int *e, int f)
 	}
 }
 
-static int	mir_verti(t_view *view)
+static int	reverse_content(t_view *view)
 {
 	int		line_cnt;
 	int		e;
@@ -56,7 +56,7 @@ static int	mir_verti(t_view *view)
 		f = view->image->line_len;
 		while (e < f && e != f)
 		{
-			mir_verti_pixel(view->image, line_cnt, &e, f);
+			reverse_pixel(view->image, line_cnt, &e, f);
 			f -= 4;
 		}
 		line_cnt++;
@@ -103,7 +103,7 @@ int			create_bitmap(t_view *view)
 	write(fd, "\0\0\0\0", 4);
 	write(fd, &first_pix, 4);
 	bitmap_info_header(view, fd);
-	mir_verti(view);
+	reverse_content(view);
 	data_to_bitmap(view, fd);
 	close(fd);
 	free(name);
