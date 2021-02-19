@@ -51,3 +51,6 @@ Module.symvers
 
 # MacOS
 .DS_Store
+
+# Cub3D
+cub3d
