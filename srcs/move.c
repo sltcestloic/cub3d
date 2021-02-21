@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:39:33 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/19 14:08:11 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/21 16:54:24 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	rotate_camera_ud(t_view *view, int up, int mouse)
 		rot_speed = mouse;
 	if (up && view->horizon < (view->settings->height * 2.5))
 		view->horizon += rot_speed;
-	else if (view->horizon > -(view->settings->height * 2.5))
+	else if (!up && view->horizon > -(view->settings->height * 2.5))
 		view->horizon -= rot_speed;
 }
 
