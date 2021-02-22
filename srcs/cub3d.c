@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:12:30 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/19 14:18:27 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/22 14:41:29 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static void	init_settings(t_settings *settings)
 {
 	settings->width = 0;
 	settings->height = 0;
-	settings->sky_color = 0;
-	settings->ground_color = 0;
+	settings->sky_color = -1;
+	settings->ground_color = -1;
 	settings->north_texture.img = NULL;
 	settings->south_texture.img = NULL;
 	settings->east_texture.img = NULL;

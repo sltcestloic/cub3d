@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 12:56:57 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/15 14:22:01 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/22 14:33:05 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ int	validate_settings(t_settings *settings, t_player *player)
 	if (settings->sprite_texture[SPRITE_DEFAULT].img == NULL)
 		return (print_error("Default sprite texture not specified \
 		in .cub file."));
-	if (settings->ground_color == 0)
+	if (settings->ground_color == -1)
 		return (print_error("Ground color not specified in .cub file."));
-	if (settings->sky_color == 0)
+	if (settings->sky_color == -1)
 		return (print_error("Sky color not specified in .cub file."));
 	if (settings->width == 0)
 		return (print_error("Resolution width not specified in .cub file."));

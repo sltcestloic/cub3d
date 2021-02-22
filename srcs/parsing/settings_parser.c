@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 16:06:08 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/19 14:10:07 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/22 14:33:15 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	parse_color_sky(t_settings *settings, char **colorsplit)
 		rgbint(ft_atoi(colorsplit[0]), ft_atoi(colorsplit[1]),
 			ft_atoi(colorsplit[2]));
 	free_split(colorsplit);
-	if (settings->sky_color == 0)
+	if (settings->sky_color == -1)
 		return (print_error_exit("Invalid sky color in .cub file.", 1));
 	return (SUCCESS);
 }
@@ -59,7 +59,7 @@ int	parse_color(char *line, t_settings *settings, int ground)
 		rgbint(ft_atoi(colorsplit[0]), ft_atoi(colorsplit[1]),
 			ft_atoi(colorsplit[2]));
 		free_split(colorsplit);
-		if (settings->ground_color == 0)
+		if (settings->ground_color == -1)
 			return (print_error("Invalid ground color in .cub file."));
 	}
 	else

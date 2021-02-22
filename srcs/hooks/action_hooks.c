@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 11:27:01 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/19 11:03:49 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/22 14:47:41 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ int		handle_click_release(int button, int x, int y, t_view *view)
 	(void)y;
 	if (button == 1)
 		view->mouse->pressed = 0;
+	return (0);
+}
+
+int		handle_close_button(void)
+{
+	exit(0);
 	return (0);
 }
 
@@ -81,11 +87,5 @@ int		handle_key_release(int keycode, t_view *view)
 		view->keyboard->shift_pressed = FALSE;
 	else if (keycode == 256)
 		view->keyboard->ctrl_pressed = FALSE;
-	return (0);
-}
-
-int		handle_close_button(void)
-{
-	exit(0);
 	return (0);
 }

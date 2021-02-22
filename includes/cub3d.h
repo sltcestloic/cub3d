@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/19 14:57:32 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/22 14:47:53 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,7 @@ typedef struct		s_view
 	int				horizon;
 	double			move_speed;
 	double			*z_buffer;
-	t_sprite		sprites[50];
+	t_sprite		*sprites;
 	int				sprite_count;
 	int				save;
 	long long		start_timestamp;
@@ -248,7 +248,7 @@ int					validate_settings(t_settings *settings, t_player *player);
 ** Hooks
 */
 
-int					handle_close_button();
+int					handle_close_button(void);
 int					handle_key_press(int keycode, t_view *view);
 int					handle_key_release(int keycode, t_view *view);
 int					handle_click_release(int button, int x, int y, t_view *view);
