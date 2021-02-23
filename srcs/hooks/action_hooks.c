@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 11:27:01 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/22 14:47:41 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/23 13:50:48 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ int		handle_key_press(int keycode, t_view *view)
 		view->keyboard->ctrl_pressed = TRUE;
 	else if (keycode == 49)
 		player_jump(view);
+	else if (keycode == 48)
+		toggle_mouse(view);
 	return (0);
 }
 

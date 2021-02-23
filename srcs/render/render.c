@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:27:54 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/19 14:23:47 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/23 13:51:43 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	draw_win_screen(t_view *view, int minutes, int seconds)
 	mlx_string_put(view->mlx, view->window, x + 165, y, 0x0FFFFFF, time);
 	free(time);
 	mlx_string_put(view->mlx, view->window, x + 185, y, 0x0FFFFFF, "secondes");
+	show_mouse(view);
 }
 
 int		render_frame(t_view *view)
@@ -81,7 +82,7 @@ void	draw_ray(t_view *view, t_ray *ray, int x)
 	{
 		ty = (y - ray->draw_start) * texture.height / (ray->draw_end
 			- ray->draw_start);
-		tx = (wx - (int)wx) * texture.width;
+		tx = wx * texture.width;
 		put_pixel(view, x, y++, get_texture_color(view, texture, tx, ty));
 	}
 	while (y < view->settings->height)

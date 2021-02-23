@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/22 14:47:53 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/23 13:49:49 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct		s_map
 typedef struct		s_mouse
 {
 	int				pressed;
+	int				visible;
 	int				x;
 	int				y;
 }					t_mouse;
@@ -311,5 +312,13 @@ void				decrease_effects(t_view *view);
 
 void				update_horizon(t_view *view);
 void				player_jump(t_view *view);
+
+/*
+** Mouse
+*/
+
+void				hide_mouse(t_view *view);
+void				show_mouse(t_view *view);
+void				toggle_mouse(t_view *view);
 
 #endif
