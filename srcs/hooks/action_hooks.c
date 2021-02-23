@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 11:27:01 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/23 13:50:48 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/23 13:55:41 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,8 @@ int		handle_key_press(int keycode, t_view *view)
 		view->keyboard->shift_pressed = TRUE;
 	else if (keycode == 256)
 		view->keyboard->ctrl_pressed = TRUE;
-	else if (keycode == 49)
-		player_jump(view);
-	else if (keycode == 48)
-		toggle_mouse(view);
+	else
+		return (handle_key_press2(keycode, view));
 	return (0);
 }
 
