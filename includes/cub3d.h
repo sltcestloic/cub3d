@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/23 13:55:29 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/24 13:28:06 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,7 @@ typedef struct		s_view
 	int				horizon;
 	double			move_speed;
 	double			*z_buffer;
-	t_sprite		*sprites;
+	t_sprite		sprites[50];
 	int				sprite_count;
 	int				save;
 	long long		start_timestamp;

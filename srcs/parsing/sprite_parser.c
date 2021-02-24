@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 14:18:48 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/22 14:43:37 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/24 13:28:28 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,8 @@ void	parse_sprite(int x, int y, t_view *view, int type)
 {
 	t_sprite	sprite;
 
-	if (view->sprites == NULL)
-		view->sprites = malloc(sizeof(t_sprite) *
-		(view->map->lines * view->map->longest));
+	if (view->sprite_count >= 50)
+		return ;
 	sprite.pos_x = x + 0.5;
 	sprite.pos_y = y + 0.5;
 	sprite.type = type - 2;

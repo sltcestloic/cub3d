@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:36:35 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/22 14:42:15 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/24 13:28:12 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ int			read_config(int fd, t_view *view)
 int			parse_config(int fd, t_map *map, t_view *view)
 {
 	view->map = map;
-	view->sprites = NULL;
 	if (read_config(fd, view) == ERROR)
 		return (ERROR);
 	view->animation = 0;
