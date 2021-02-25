@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/24 13:28:06 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/25 11:24:55 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,7 @@ typedef struct		s_view
 	int				horizon;
 	double			move_speed;
 	double			*z_buffer;
-	t_sprite		sprites[50];
+	t_sprite		sprites[200];
 	int				sprite_count;
 	int				save;
 	long long		start_timestamp;
@@ -221,6 +221,7 @@ int					rgbint_r(int rgb);
 int					rgbint_g(int rgb);
 int					rgbint_b(int rgb);
 void				put_pixel(t_view *view, int x, int y, int color);
+void				put_pixel_ignore_black(t_view *view, int x, int y, int color);
 int					get_pixel_color(t_image *image, int x, int y);
 void				fill_window(t_view *view, int color);
 
