@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 14:18:48 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/24 13:28:28 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/25 13:37:01 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	parse_sprite(int x, int y, t_view *view, int type)
 {
 	t_sprite	sprite;
 
-	if (view->sprite_count >= 50)
+	if (view->sprite_count >= MAX_SPRITES)
 		return ;
 	sprite.pos_x = x + 0.5;
 	sprite.pos_y = y + 0.5;

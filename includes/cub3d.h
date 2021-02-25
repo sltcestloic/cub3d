@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/25 11:24:55 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/25 13:49:45 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define BYTES_PER_PIXEL 3
 # define FILE_HEADER_SIZE 14
 # define INFO_HEADER_SIZE 40
+# define MAX_SPRITES 500
 
 typedef struct		s_texture
 {
@@ -173,7 +174,7 @@ typedef struct		s_view
 	int				horizon;
 	double			move_speed;
 	double			*z_buffer;
-	t_sprite		sprites[200];
+	t_sprite		sprites[MAX_SPRITES];
 	int				sprite_count;
 	int				save;
 	long long		start_timestamp;
@@ -280,6 +281,7 @@ void				draw_hud(t_view *view);
 void				draw_health(t_view *view);
 void				draw_fps(t_view *view);
 void				draw_win_screen(t_view *view, int minutes, int seconds);
+void				draw_scaled_win_screen(t_view *view);
 void				save_screen(t_view *view);
 
 /*

@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:27:54 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/25 11:25:01 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/25 13:49:57 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,8 @@ void	draw_win_screen(t_view *view, int minutes, int seconds)
 	texture = view->settings->win_screen;
 	x = (view->settings->width - texture.width) / 2;
 	y = (view->settings->height - texture.height) / 2;
-	fill_window(view, 0);
-	mlx_put_image_to_window(view->mlx, view->window,
-			texture.img, x, y);
+	//fill_window(view, 0);
+	draw_scaled_win_screen(view);
 	x = view->settings->width / 2 - 130;
 	y = view->settings->height / 2 + 100;
 	time = ft_itoa(minutes);

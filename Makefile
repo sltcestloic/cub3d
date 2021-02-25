@@ -6,7 +6,7 @@
 #    By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/18 16:40:32 by lbertran          #+#    #+#              #
-#    Updated: 2021/02/23 13:54:39 by lbertran         ###   ########lyon.fr    #
+#    Updated: 2021/02/25 13:50:13 by lbertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRC		= cub3d.c \
 			render/hud.c \
 			render/pixel.c \
 			render/render.c \
+			render/scale.c \
 			render/wallcaster.c \
 			render/spritecaster.c \
 			utils/bmpimage.c \
