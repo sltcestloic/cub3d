@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:12:30 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/26 16:10:05 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/26 16:18:59 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ int			main(int ac, char **av)
 	view.player = &player;
 	view.settings = &settings;
 	view.horizon = 0;
-	view.move_speed = 0.03;
 	view.sprite_count = 0;
 	view.blackout = 0;
 	view.lsd = 0;

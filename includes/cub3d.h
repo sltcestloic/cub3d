@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/26 15:58:34 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/26 16:18:54 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,6 @@ typedef struct		s_view
 	t_map			*map;
 	t_image			*image;
 	int				horizon;
-	double			move_speed;
 	double			*z_buffer;
 	t_sprite		sprites[MAX_SPRITES];
 	int				sprite_count;
