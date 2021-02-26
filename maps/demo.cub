@@ -1,13 +1,15 @@
 R 1000 700
 
+NO textures/north.xpm
+SO textures/east.xpm
+WE textures/north.xpm
+EA textures/east.xpm
+
+S textures/tonneau.xpm
 F 128,128,128
 C 100,180,255
 
-NO textures/north.xpm
-SO textures/east.xpm
-EA textures/east.xpm
-WE textures/north.xpm
-S textures/tonneau.xpm
+
 S2 textures/heart32.xpm
 S3 textures/trap.xpm
 S4 textures/champ.xpm
