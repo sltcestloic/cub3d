@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/25 13:49:45 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/26 12:25:05 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,7 +222,8 @@ int					rgbint_r(int rgb);
 int					rgbint_g(int rgb);
 int					rgbint_b(int rgb);
 void				put_pixel(t_view *view, int x, int y, int color);
-void				put_pixel_ignore_black(t_view *view, int x, int y, int color);
+void				put_pixel_ignore_black(t_view *view, int x, int y,
+					int color);
 int					get_pixel_color(t_image *image, int x, int y);
 void				fill_window(t_view *view, int color);
 
@@ -255,7 +256,8 @@ int					handle_close_button(void);
 int					handle_key_press(int keycode, t_view *view);
 int					handle_key_press2(int keycode, t_view *view);
 int					handle_key_release(int keycode, t_view *view);
-int					handle_click_release(int button, int x, int y, t_view *view);
+int					handle_click_release(int button, int x, int y,
+					t_view *view);
 int					handle_click(int button, int x, int y, t_view *view);
 int					handle_mouse_motion(int x, int y, t_view *view);
 void				handle_keyboard(t_view *view);
@@ -306,8 +308,10 @@ long long			current_millis(void);
 
 int					get_ground_color(t_view *view);
 int					get_sky_color(t_view *view);
-int					get_texture_color(t_view *view, t_texture texture, int tx, int ty);
-int					get_sprite_color(t_view *view, t_sprite *sprite, int tx, int ty);
+int					get_texture_color(t_view *view, t_texture texture, int tx,
+					int ty);
+int					get_sprite_color(t_view *view, t_sprite *sprite, int tx,
+					int ty);
 void				decrease_effects(t_view *view);
 
 /*
