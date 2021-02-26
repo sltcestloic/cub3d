@@ -6,18 +6,14 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 16:06:08 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/25 10:47:37 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/26 14:25:23 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	parse_resolution(char *line, t_settings *settings)
+int	parse_resolution(char **split, t_settings *settings)
 {
-	char	**split;
-
-	split = ft_split(line, ' ');
-	free(line);
 	settings->width = ft_atoi(split[1]);
 	if (settings->width > 2559)
 		settings->width = 2559;
@@ -44,13 +40,10 @@ int	parse_color_sky(t_settings *settings, char **colorsplit)
 	return (SUCCESS);
 }
 
-int	parse_color(char *line, t_settings *settings, int ground)
+int	parse_color(char **split, t_settings *settings, int ground)
 {
-	char	**split;
 	char	**colorsplit;
 
-	split = ft_split(line, ' ');
-	free(line);
 	colorsplit = ft_split(split[1], ',');
 	free_split(split);
 	if (ground)

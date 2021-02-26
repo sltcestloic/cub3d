@@ -6,7 +6,7 @@
 #    By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/18 16:40:32 by lbertran          #+#    #+#              #
-#    Updated: 2021/02/25 13:50:13 by lbertran         ###   ########lyon.fr    #
+#    Updated: 2021/02/26 14:17:11 by lbertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ SRCS 	= $(addprefix srcs/, ${SRC})
 OBJS	= ${SRCS:.c=.o}
 INCS	= includes/cub3d.h
 MLX		= ./mlx
-NAME	= cub3d
+NAME	= cub3D
 LIBC	= ar rcs
 CC		= gcc
 RM		= rm -f

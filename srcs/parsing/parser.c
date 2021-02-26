@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:36:35 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/24 13:28:12 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/26 14:26:02 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@ int			parse_line(char *line, t_view *view)
 {
 	char	**split;
 
-	if (line[0] == 'R')
-		return (parse_resolution(line, view->settings));
-	else if (line[0] == 'F' || line[0] == 'C')
-		return (parse_color(line, view->settings, line[0] == 'F'));
 	split = ft_split(line, ' ');
+	free(line);
+	if (ft_strcmp(split[0], "R") == 0)
+		return (parse_resolution(split, view->settings));
+	else if (ft_strcmp(split[0], "F") == 0 || ft_strcmp(split[0], "C") == 0)
+		return (parse_color(split, view->settings, ft_strcmp(split[0], "F") == 0));
 	if (!is_valid_texture_entry(split[0]))
 	{
 		free_split(split);
-		return (print_error_exit("Invalid texture line in config.", 1));
+		return (print_error_exit("Invalid line in config.", 1));
 	}
-	free(line);
 	return (parse_texture(split, view));
 }
 
