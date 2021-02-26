@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:36:35 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/26 14:26:02 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/26 16:05:34 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ int			parse_line(char *line, t_view *view)
 	if (ft_strcmp(split[0], "R") == 0)
 		return (parse_resolution(split, view->settings));
 	else if (ft_strcmp(split[0], "F") == 0 || ft_strcmp(split[0], "C") == 0)
-		return (parse_color(split, view->settings, ft_strcmp(split[0], "F") == 0));
+	{
+		return (parse_color(split, view->settings,
+			ft_strcmp(split[0], "F") == 0));
+	}
 	if (!is_valid_texture_entry(split[0]))
 	{
 		free_split(split);

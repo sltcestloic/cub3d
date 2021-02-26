@@ -6,14 +6,29 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 16:06:08 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/26 14:25:23 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/26 16:14:02 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+int	splitlen(char **split)
+{
+	int	i;
+
+	i = 0;
+	while (split[i])
+		i++;
+	return (i);
+}
+
 int	parse_resolution(char **split, t_settings *settings)
 {
+	if (splitlen(split) != 3)
+	{
+		free_split(split);
+		return (print_error("Invalid resolution in .cub file."));
+	}
 	settings->width = ft_atoi(split[1]);
 	if (settings->width > 2559)
 		settings->width = 2559;
@@ -22,10 +37,7 @@ int	parse_resolution(char **split, t_settings *settings)
 		settings->height = 1390;
 	free_split(split);
 	if (settings->width <= 0 || settings->height <= 0)
-	{
-		print_error("Invalid width or height in .cub file.");
-		return (ERROR);
-	}
+		return (print_error("Invalid resolution in .cub file."));
 	return (SUCCESS);
 }
 
@@ -46,6 +58,11 @@ int	parse_color(char **split, t_settings *settings, int ground)
 
 	colorsplit = ft_split(split[1], ',');
 	free_split(split);
+	if (splitlen(colorsplit) != 3)
+	{
+		free_split(colorsplit);
+		return (print_error("Invalid color in .cub file."));
+	}
 	if (ground)
 	{
 		settings->ground_color =

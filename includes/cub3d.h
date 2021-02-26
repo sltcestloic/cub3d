@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/26 14:25:34 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/26 15:58:34 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <fcntl.h>
 # include <math.h>
 # include <sys/time.h>
+# include <dirent.h>
 # define NORTH	0
 # define SOUTH	1
 # define EAST 	2
