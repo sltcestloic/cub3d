@@ -9,16 +9,6 @@ S textures/tonneau.xpm
 F 128,128,128
 C 100,180,255
 
-S2 textures/heart32.xpm
-S3 textures/trap.xpm
-S4 textures/champ.xpm
-W0 textures/cup0.xpm
-W1 textures/cup1.xpm
-W2 textures/cup2.xpm
-GG textures/win.xpm
-HUD textures/hud.xpm
-HEART_EMPTY textures/heart_empty.xpm
-
 11111111111111111111
 10111111111111111111
 10000000044400000001
