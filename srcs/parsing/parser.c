@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:36:35 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/28 14:07:32 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/28 14:41:03 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int			read_config(int fd, t_view *view)
 	char	*line;
 
 	line = NULL;
+	parse_static_textures(view);
 	while ((ret = ft_get_next_line(fd, &line)) >= 0)
 	{
 		if (is_empty(line) && ret)
@@ -73,7 +74,6 @@ int			read_config(int fd, t_view *view)
 		if (ret == 0)
 			break ;
 	}
-	parse_static_textures(view);
 	free(line);
 	return (SUCCESS);
 }
