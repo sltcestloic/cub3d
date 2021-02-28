@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 14:57:02 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/26 15:21:46 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/28 14:44:43 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,11 @@ void	init_hooks(t_view view)
 	mlx_hook(view.window, 3, 1L << 1, handle_key_release, &view);
 	mlx_hook(view.window, 17, 1L << 17, handle_close_button, 0);
 	mlx_hook(view.window, 6, 1L << 6, handle_mouse_motion, &view);
-	mlx_loop_hook(view.mlx, render_frame, &view);
-	mlx_loop(view.mlx);
+	if (view.save)
+		render_frame(&view);
+	else
+		mlx_loop_hook(view.mlx, render_frame, &view);
+		mlx_loop(view.mlx);
 }
 
 void	init_keyboard(t_keyboard *keyboard)
