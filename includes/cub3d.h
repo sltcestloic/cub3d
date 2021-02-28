@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/26 16:18:54 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/28 13:48:36 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,7 @@ typedef struct		s_view
 	int				lsd;
 	int				finished;
 	int				animation;
+	int				fps;
 }					t_view;
 
 /*

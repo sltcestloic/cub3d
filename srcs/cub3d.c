@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:12:30 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/26 16:18:59 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/28 13:49:28 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int			main(int ac, char **av)
 	view.blackout = 0;
 	view.lsd = 0;
 	view.finished = 0;
+	view.fps = 0;
 	view.start_timestamp = current_millis();
 	if (parse_config(fd, &map, &view) == SUCCESS)
 		init_window(settings, view);

@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:27:54 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/26 15:21:39 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/28 13:45:30 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,16 @@ int		render_frame(t_view *view)
 	if (view->finished)
 		return (0);
 	view->frame_timestamp = current_millis();
-	if (++view->animation > 15)
+	if (++view->animation > 14)
 		view->animation = 0;
 	update_horizon(view);
 	do_raycast(view);
 	do_spritecast(view);
 	if (view->save)
 		create_bitmap(view);
-	mlx_put_image_to_window(view->mlx, view->window, view->image->img, 0, 0);
 	draw_hud(view);
 	draw_health(view);
+	mlx_put_image_to_window(view->mlx, view->window, view->image->img, 0, 0);
 	decrease_effects(view);
 	draw_fps(view);
 	handle_keyboard(view);
