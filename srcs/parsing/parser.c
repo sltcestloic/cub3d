@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:36:35 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/26 16:05:34 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/28 14:07:32 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int			read_config(int fd, t_view *view)
 		if (ret == 0)
 			break ;
 	}
+	parse_static_textures(view);
 	free(line);
 	return (SUCCESS);
 }

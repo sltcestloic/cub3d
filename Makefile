@@ -6,7 +6,7 @@
 #    By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/18 16:40:32 by lbertran          #+#    #+#              #
-#    Updated: 2021/02/28 12:47:08 by lbertran         ###   ########lyon.fr    #
+#    Updated: 2021/02/28 14:10:27 by lbertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,6 @@ SRC		= cub3d.c \
 			parsing/settings_validation.c \
 			parsing/sprite_parser.c \
 			parsing/textures_parser.c \
-			parsing/textures_parser2.c \
 			render/hud.c \
 			render/pixel.c \
 			render/render.c \
@@ -50,7 +49,7 @@ NAME	= cub3D
 LIBC	= ar rcs
 CC		= gcc
 RM		= rm -f
-CFLAGS	= -Wall -Wextra -Werror -g3 -O3
+CFLAGS	= -Wall -Wextra -Werror -g3
 
 srcs/%.o: srcs/%.c ${INCS}
 	${CC} ${CFLAGS} -c $< -o $@ -I${INCS}

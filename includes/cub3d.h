@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/28 13:48:36 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/28 14:05:58 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,7 +194,7 @@ int					parse_config(int fd, t_map *map, t_view *view);
 int					parse_resolution(char **split, t_settings *settings);
 int					parse_color(char **split, t_settings *settings, int ground);
 int					parse_texture(char **split, t_view *view);
-int					parse_texture4(char **split, t_view *view);
+void				parse_static_textures(t_view *view);
 int					parse_map_line(char *line, t_view *view);
 void				parse_sprite(int x, int y, t_view *view, int type);
 t_texture			read_texture(char *path, t_view *view);
