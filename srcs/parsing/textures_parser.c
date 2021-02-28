@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 11:21:01 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/28 14:05:48 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/28 15:26:05 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_texture			read_texture(char *path, t_view *view)
 	int			fd;
 
 	fd = open(path, O_RDONLY);
+	printf("%s : %d\n", path, fd);
 	close(fd);
 	if (fd == -1)
 		print_error_exit("Invalid texture path in .cub file.", 1);
