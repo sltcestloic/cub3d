@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:12:30 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/28 14:52:56 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/02/28 15:14:04 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ static void	init_player(t_player *player)
 
 int			validate_args(int ac, char **av, int *fd, t_view *view)
 {
-	DIR	*ffd;
-
 	if (ac < 2 || ac > 3)
 	{
 		print_error("Usage: ./cub3d <map path> (--save)");
@@ -64,8 +62,7 @@ int			validate_args(int ac, char **av, int *fd, t_view *view)
 	*fd = open(av[1], O_RDONLY);
 	if (ft_strcmp(".cub", &(av[1])[ft_strlen(av[1]) - 4]) != 0)
 		print_error_exit("File is not a .cub file.", 1);
-	ffd = opendir(av[1]);
-	if (*fd == -1 || ffd != NULL)
+	if (*fd == -1)
 	{
 		print_error("Please provide a valid file path.");
 		return (FALSE);
