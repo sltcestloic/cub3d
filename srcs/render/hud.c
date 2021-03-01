@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 13:45:34 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/28 14:56:04 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/03/01 13:42:55 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ int		draw_heart(t_view *view, t_texture texture, int x)
 		x = old_x;
 		while (x - old_x < texture.width / ratio_x)
 		{
-			int tx = (x - old_x) * ratio_x;
-			int ty = (y - (view->settings->height * 0.93)) * ratio_y;
-			put_pixel_ignore_black(view, x, y, texture.addr[ty * texture.width + tx]);
+			put_pixel_ignore_black(view, x, y, texture.addr[(int)((y -
+				(view->settings->height * 0.93)) * ratio_y) * texture.width +
+				(int)((x - old_x) * ratio_x)]);
 			x++;
 		}
 		y++;
