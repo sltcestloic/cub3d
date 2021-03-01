@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/28 14:05:58 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/03/01 13:54:05 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,13 @@ int					parse_map_line(char *line, t_view *view);
 void				parse_sprite(int x, int y, t_view *view, int type);
 t_texture			read_texture(char *path, t_view *view);
 void				copy_content(char **old, char **next, int mlc);
+
+/*
+** Texture reading
+*/
+
+t_texture			read_texture(char *path, t_view *view);
+int					validate_texture(t_texture texture);
 
 /*
 ** Window

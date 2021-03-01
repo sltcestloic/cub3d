@@ -6,36 +6,11 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 11:21:01 by lbertran          #+#    #+#             */
-/*   Updated: 2021/03/01 13:42:13 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/03/01 13:55:20 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-int					validate_texture(t_texture texture)
-{
-	if (texture.img == NULL)
-		return (print_error("At least one texture is invalid in .cub file."));
-	return (SUCCESS);
-}
-
-t_texture			read_texture(char *path, t_view *view)
-{
-	t_texture	texture;
-	int			fd;
-
-	fd = open(path, O_RDONLY);
-	close(fd);
-	if (fd == -1)
-		print_error_exit("Invalid texture path in .cub file.", 1);
-	texture.img = mlx_xpm_file_to_image(view->mlx, path, &texture.width,
-		&texture.height);
-	if (texture.img == NULL)
-		print_error_exit("Invalid texture file in .cub file.", 1);
-	texture.addr = (int *)mlx_get_data_addr(texture.img,
-		&texture.bits_per_pixel, &texture.line_len, &texture.endian);
-	return (texture);
-}
 
 void				parse_static_textures(t_view *view)
 {
@@ -59,44 +34,74 @@ void				parse_static_textures(t_view *view)
 		read_texture("./textures/.static/hud.xpm", view);
 }
 
+static int			parse_texture3(char **split, t_view *view)
+{
+	if (ft_strcmp(split[0], "EA") == 0)
+	{
+		if (view->settings->east_texture.img != NULL)
+		{
+			free_split(split);
+			print_error_exit("Duplicate east texture in .cub file", 1);
+		}
+		view->settings->east_texture = read_texture(split[1], view);
+		free_split(split);
+		return (validate_texture(view->settings->east_texture));
+	}
+	return (ERROR);
+}
+
 static int			parse_texture2(char **split, t_view *view)
 {
 	if (ft_strcmp(split[0], "WE") == 0)
 	{
+		if (view->settings->west_texture.img != NULL)
+		{
+			free_split(split);
+			print_error_exit("Duplicate west texture in .cub file", 1);
+		}
 		view->settings->west_texture = read_texture(split[1], view);
 		free_split(split);
 		return (validate_texture(view->settings->west_texture));
 	}
 	else if (ft_strcmp(split[0], "S") == 0)
 	{
+		if (view->settings->sprite_texture[SPRITE_DEFAULT].img != NULL)
+		{
+			free_split(split);
+			print_error_exit("Duplicate sprite texture in .cub file", 1);
+		}
 		view->settings->sprite_texture[SPRITE_DEFAULT] =
 			read_texture(split[1], view);
 		free_split(split);
 		return (validate_texture(view->settings->
 			sprite_texture[SPRITE_DEFAULT]));
 	}
-	return (SUCCESS);
+	return (parse_texture3(split, view));
 }
 
 int					parse_texture(char **split, t_view *view)
 {
 	if (ft_strcmp(split[0], "NO") == 0)
 	{
+		if (view->settings->north_texture.img != NULL)
+		{
+			free_split(split);
+			print_error_exit("Duplicate north texture in .cub file", 1);
+		}
 		view->settings->north_texture = read_texture(split[1], view);
 		free_split(split);
 		return (validate_texture(view->settings->north_texture));
 	}
 	else if (ft_strcmp(split[0], "SO") == 0)
 	{
+		if (view->settings->south_texture.img != NULL)
+		{
+			free_split(split);
+			print_error_exit("Duplicate south texture in .cub file", 1);
+		}
 		view->settings->south_texture = read_texture(split[1], view);
 		free_split(split);
 		return (validate_texture(view->settings->south_texture));
-	}
-	else if (ft_strcmp(split[0], "EA") == 0)
-	{
-		view->settings->east_texture = read_texture(split[1], view);
-		free_split(split);
-		return (validate_texture(view->settings->east_texture));
 	}
 	return (parse_texture2(split, view));
 }
