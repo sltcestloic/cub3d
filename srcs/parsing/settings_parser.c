@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 16:06:08 by lbertran          #+#    #+#             */
-/*   Updated: 2021/03/01 14:58:31 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/03/01 15:01:27 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	parse_resolution(char **split, t_settings *settings)
 int	parse_color_sky(t_settings *settings, char **colorsplit)
 {
 	if (settings->sky_color != -1)
-			print_error_exit("Duplicate sky color in .cub file.", 1);
+		print_error_exit("Duplicate sky color in .cub file.", 1);
 	settings->sky_color =
 		rgbint(ft_atoi(colorsplit[0]), ft_atoi(colorsplit[1]),
 			ft_atoi(colorsplit[2]));
