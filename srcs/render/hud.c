@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 13:45:34 by lbertran          #+#    #+#             */
-/*   Updated: 2021/03/01 13:42:55 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/03/01 13:47:07 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@ void	draw_fps(t_view *view)
 	int		fps;
 	char	*fps_str;
 
-	if (view->settings->width < 500)
+	if (view->settings->width < 500 || view->settings->height < 300)
 		return ;
 	fps = (int)(1.0 / ((current_millis() - view->frame_timestamp) / 1000.0));
+	if (fps < 0)
+		fps = 0;
 	if (view->animation == 0)
 		view->fps = fps;
 	fps_str = ft_itoa(view->fps);
