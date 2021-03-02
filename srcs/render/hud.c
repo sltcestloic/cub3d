@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 13:45:34 by lbertran          #+#    #+#             */
-/*   Updated: 2021/03/01 13:47:07 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/03/02 14:01:54 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	draw_fps(t_view *view)
 	if (view->animation == 0)
 		view->fps = fps;
 	fps_str = ft_itoa(view->fps);
-	mlx_string_put(view->mlx, view->window, view->settings->width / 2.53,
+	mlx_string_put(view->mlx, view->window, view->settings->width / 2.56,
 		view->settings->height * 0.97, 0x0FFFFFF, fps_str);
 	free(fps_str);
 }
