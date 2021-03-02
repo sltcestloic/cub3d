@@ -6,7 +6,7 @@
 #    By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/18 16:40:32 by lbertran          #+#    #+#              #
-#    Updated: 2021/03/01 13:54:23 by lbertran         ###   ########lyon.fr    #
+#    Updated: 2021/03/02 12:37:29 by lbertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,8 @@ ${NAME}: ${OBJS}
 	@${MAKE} -C ${MLX}
 	${CC} -Lmlx -lmlx -framework OpenGL -framework AppKit -o ${NAME} ${OBJS} libft/libft.a ${MLX}/libmlx.a
 all: ${NAME}
+
+bonus: all
 
 clean:
 	${MAKE} clean -C ./libft
