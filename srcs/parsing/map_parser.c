@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 12:14:16 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/12 14:04:13 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/03/03 12:59:07 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void			copy_content(char **old, char **next, int mlc)
 	i = 0;
 	while (old[i])
 	{
-		if (!(next[i] = malloc(sizeof(char) * mlc)))
+		if (!(next[i] = malloc(sizeof(char) * (mlc + 1))))
 			return ;
 		ft_strlcpy(next[i], old[i], ft_strlen(old[i]) + 1);
 		i++;

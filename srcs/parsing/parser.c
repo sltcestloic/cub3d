@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:36:35 by lbertran          #+#    #+#             */
-/*   Updated: 2021/03/01 13:49:27 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/03/03 12:58:32 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ int			read_config(int fd, t_view *view)
 		if (ret == 0)
 			break ;
 	}
-	free(line);
 	return (ret == -1 ? print_error("Invalid .cub file.") : SUCCESS);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 14:26:16 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/10 14:14:46 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/03/03 12:59:24 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ void	run_map_validation(t_map *map, int x, int y)
 	if (map->content_copy[y][x] != '1')
 	{
 		if (x == 0 || y == 0 || x == map->longest - 1 || y == map->lines - 1)
+		{
+			printf("%d %d = %c\n", x, y, map->content_copy[y][x]);
 			print_error_exit("Invalid map. (Check #1)", 1);
+		}
 		if (map->content_copy[y][x] == ' ')
 			print_error_exit("Invalid map. (Check #2)", 1);
 		map->content_copy[y][x] = '1';
