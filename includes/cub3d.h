@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/03/01 13:54:05 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/03/05 11:33:37 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,7 +232,6 @@ int					rgbint_b(int rgb);
 void				put_pixel(t_view *view, int x, int y, int color);
 void				put_pixel_ignore_black(t_view *view, int x, int y,
 					int color);
-int					get_pixel_color(t_image *image, int x, int y);
 void				fill_window(t_view *view, int color);
 
 /*
