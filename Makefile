@@ -6,7 +6,7 @@
 #    By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/18 16:40:32 by lbertran          #+#    #+#              #
-#    Updated: 2021/03/03 11:12:57 by lbertran         ###   ########lyon.fr    #
+#    Updated: 2021/03/06 13:32:51 by lbertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ NAME	= cub3D
 LIBC	= ar rcs
 CC		= gcc
 RM		= rm -f
-CFLAGS	= -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS	= -Wall -Wextra -Werror -g3 -O3
 
 srcs/%.o: srcs/%.c ${INCS}
 	${CC} ${CFLAGS} -c $< -o $@ -I${INCS}
@@ -58,7 +58,7 @@ srcs/%.o: srcs/%.c ${INCS}
 ${NAME}: ${OBJS}
 	@${MAKE} bonus -C ./libft
 	@${MAKE} -C ${MLX}
-	${CC} -Lmlx -lmlx -g3 -fsanitize=address -framework OpenGL -framework AppKit -o ${NAME} ${OBJS} libft/libft.a ${MLX}/libmlx.a
+	${CC} -Lmlx -lmlx -framework OpenGL -framework AppKit -o ${NAME} ${OBJS} libft/libft.a ${MLX}/libmlx.a
 all: ${NAME}
 
 bonus: all

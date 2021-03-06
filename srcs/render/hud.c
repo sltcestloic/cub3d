@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 13:45:34 by lbertran          #+#    #+#             */
-/*   Updated: 2021/03/02 14:01:54 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/03/06 13:31:57 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void	draw_health(t_view *view)
 	int			x;
 	int			i;
 
+	if (view->settings->height < 20 || view->settings->width < 20)
+		return ;
 	x = view->settings->width / 2.155;
 	health = view->player->health - 1;
 	health_texture = view->settings->sprite_texture[SPRITE_HEALTH];
