@@ -5,7 +5,7 @@ SO textures/east.xpm
 WE textures/north.xpm
 EA textures/east.xpm
 
-S textures/tonneau.xpm
+S textures/pillar.xpm
 F 128,128,128
 C 100,180,255
 
