@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 16:06:08 by lbertran          #+#    #+#             */
-/*   Updated: 2021/03/01 15:01:27 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/03/08 16:51:03 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,13 @@ int	parse_color(char **split, t_settings *settings, int ground)
 	char	**colorsplit;
 
 	colorsplit = ft_split(split[1], ',');
-	free_split(split);
-	if (splitlen(colorsplit) != 3)
+	if (splitlen(colorsplit) != 3 || splitlen(split) != 2)
 	{
 		free_split(colorsplit);
+		free_split(split);
 		return (print_error("Invalid color in .cub file."));
 	}
+	free_split(split);
 	if (ground)
 	{
 		if (settings->ground_color != -1)

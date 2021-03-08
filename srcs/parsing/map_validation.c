@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 14:26:16 by lbertran          #+#    #+#             */
-/*   Updated: 2021/03/03 12:59:24 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/03/08 16:48:25 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ int		validate_map(t_map *map, t_player *player)
 	if (!(map->content_copy = malloc(sizeof(char *) * (map->lines + 2))))
 		return (print_error_exit("Map copy malloc failed.", 1));
 	copy_content(map->content, map->content_copy, map->longest);
+	if (player->pos_x < 0)
+		print_error_exit("No player in map.", 1);
 	map->content_copy[(int)player->pos_y][(int)player->pos_x] = '0';
 	run_map_validation(map, (int)player->pos_x, (int)player->pos_y);
 	return (TRUE);
