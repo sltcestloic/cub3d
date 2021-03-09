@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:36:35 by lbertran          #+#    #+#             */
-/*   Updated: 2021/03/03 12:58:32 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/03/09 11:09:30 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,28 +49,36 @@ int			is_empty(char *line)
 	return (TRUE);
 }
 
+void		handle_empty_line(t_view *view, char *line)
+{
+	if (!view->map->parsed && view->map->content != NULL)
+		view->map->parsed = TRUE;
+	free(line);
+}
+
 int			read_config(int fd, t_view *view)
 {
 	int		ret;
 	char	*line;
 
-	line = NULL;
-	parse_static_textures(view);
 	while ((ret = ft_get_next_line(fd, &line)) >= 0)
 	{
-		if (is_empty(line) && ret)
+		if (is_empty(line))
 		{
-			free(line);
-			continue ;
+			handle_empty_line(view, line);
+			if (ret)
+				continue ;
+			break ;
 		}
 		if (ft_isalpha(line[0]))
 		{
 			if (parse_line(line, view) == ERROR)
 				return (ERROR);
 		}
-		else if (!is_empty(line))
-			if (parse_map_line(line, view) == ERROR)
-				return (ERROR);
+		else if (view->map->parsed)
+			return (print_error_exit("Invalid map.", 1));
+		else if (parse_map_line(line, view) == ERROR)
+			return (ERROR);
 		if (ret == 0)
 			break ;
 	}
@@ -80,6 +88,7 @@ int			read_config(int fd, t_view *view)
 int			parse_config(int fd, t_map *map, t_view *view)
 {
 	view->map = map;
+	parse_static_textures(view);
 	if (read_config(fd, view) == ERROR)
 		return (ERROR);
 	view->animation = 0;

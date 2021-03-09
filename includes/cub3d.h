@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/03/05 11:33:37 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/03/09 10:51:17 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct		s_map
 	char			**content_copy;
 	int				lines;
 	int				longest;
+	int				parsed;
 }					t_map;
 
 typedef struct		s_mouse

@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:12:30 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/28 15:14:04 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/03/09 10:53:25 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void	init_map(t_map *map)
 	map->content = NULL;
 	map->lines = 0;
 	map->longest = 0;
+	map->parsed = FALSE;
 }
 
 static void	init_player(t_player *player)
