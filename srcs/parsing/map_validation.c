@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 14:26:16 by lbertran          #+#    #+#             */
-/*   Updated: 2021/03/08 16:48:25 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/03/16 13:23:56 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	check_player(int x, int y, char direction, t_player *player)
 		print_error_exit("More than one player in map.", 1);
 }
 
-int		validate_map_line(char *line, t_view *view)
+int	validate_map_line(char *line, t_view *view)
 {
 	size_t	i;
 
@@ -75,9 +75,10 @@ int		validate_map_line(char *line, t_view *view)
 	return (TRUE);
 }
 
-int		validate_map(t_map *map, t_player *player)
+int	validate_map(t_map *map, t_player *player)
 {
-	if (!(map->content_copy = malloc(sizeof(char *) * (map->lines + 2))))
+	map->content_copy = malloc(sizeof(char *) * (map->lines + 2));
+	if (!map->content_copy)
 		return (print_error_exit("Map copy malloc failed.", 1));
 	copy_content(map->content, map->content_copy, map->longest);
 	if (player->pos_x < 0)

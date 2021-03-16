@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 16:09:44 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/19 11:15:27 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/03/16 13:39:35 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ void	spritecast(t_view *view, t_sprite *sprite, t_player *player)
 
 	sx = sprite->pos_x - player->pos_x;
 	sy = sprite->pos_y - player->pos_y;
-	sprite->invdet = 1.0 / (player->plane_x * player->dir_y -
-		player->dir_x * player->plane_y);
+	sprite->invdet = 1.0 / (player->plane_x * player->dir_y
+			- player->dir_x * player->plane_y);
 	sprite->tr_x = sprite->invdet * (player->dir_y * sx - player->dir_x * sy);
-	sprite->tr_y = sprite->invdet * (-player->plane_y * sx +
-		player->plane_x * sy);
-	sprite->screen_x = (int)view->settings->width / 2 *
-		(1 + sprite->tr_x / sprite->tr_y);
+	sprite->tr_y = sprite->invdet * (-player->plane_y * sx
+			+ player->plane_x * sy);
+	sprite->screen_x = (int)view->settings->width / 2
+		* (1 + sprite->tr_x / sprite->tr_y);
 	set_size(view, sprite);
 	sprite->draw_start_x = -sprite->width / 2 + sprite->screen_x;
 	sprite->draw_end_x = sprite->width / 2 + sprite->screen_x;

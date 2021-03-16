@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   action_hooks2.c                                    :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/23 13:54:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/03/16 13:19:32 by lbertran         ###   ########lyon.fr   */
+/*   Created: 2021/03/16 13:51:55 by lbertran          #+#    #+#             */
+/*   Updated: 2021/03/16 14:09:55 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	handle_key_press2(int keycode, t_view *view)
+int	is_empty(char *line)
 {
-	if (keycode == 49)
-		player_jump(view);
-	else if (keycode == 48)
-		toggle_mouse(view);
-	return (0);
+	int	i;
+
+	i = 0;
+	if (ft_strlen(line) == 0)
+		return (TRUE);
+	while (line[i])
+	{
+		if (line[i] != ' ')
+			return (FALSE);
+		i++;
+	}
+	return (TRUE);
 }

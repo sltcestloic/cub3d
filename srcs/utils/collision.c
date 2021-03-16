@@ -6,13 +6,13 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 15:18:31 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/14 14:23:11 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/03/16 13:46:06 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int		handle_death(t_view *view)
+int	handle_death(t_view *view)
 {
 	t_player	*player;
 
@@ -50,7 +50,7 @@ void	handle_win(t_view *view)
 	draw_win_screen(view, minutes, secondes);
 }
 
-int		handle_sprite_collision(t_view *view, t_sprite *sprite)
+int	handle_sprite_collision(t_view *view, t_sprite *sprite)
 {
 	if (sprite->type == SPRITE_HEALTH)
 	{
@@ -76,9 +76,9 @@ int		handle_sprite_collision(t_view *view, t_sprite *sprite)
 	return (FALSE);
 }
 
-int		wall_collision(t_view *view, double x, double y)
+int	wall_collision(t_view *view, double x, double y)
 {
-	double threshold;
+	double	threshold;
 
 	threshold = 0.15;
 	return (view->map->content[(int)y][(int)x] == '1'
@@ -92,7 +92,7 @@ int		wall_collision(t_view *view, double x, double y)
 		|| view->map->content[(int)y][(int)(x + threshold)] == '1');
 }
 
-int		collision(t_view *view, double y, double x)
+int	collision(t_view *view, double y, double x)
 {
 	int			i;
 	t_sprite	*sprite;
@@ -102,10 +102,10 @@ int		collision(t_view *view, double y, double x)
 	while (i < view->sprite_count)
 	{
 		sprite = &view->sprites[i];
-		distance = ((x - sprite->pos_x) *
-			(x - sprite->pos_x) +
-			(y - sprite->pos_y) *
-			(y - sprite->pos_y));
+		distance = ((x - sprite->pos_x)
+				* (x - sprite->pos_x)
+				+ (y - sprite->pos_y)
+				* (y - sprite->pos_y));
 		if (distance < 0.2 && sprite->visible && view->player->move_count > 0)
 		{
 			if (sprite->type != SPRITE_DEFAULT)

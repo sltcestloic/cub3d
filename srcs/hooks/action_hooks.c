@@ -6,13 +6,13 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 11:27:01 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/23 13:55:41 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/03/16 13:19:58 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int		handle_click(int button, int x, int y, t_view *view)
+int	handle_click(int button, int x, int y, t_view *view)
 {
 	(void)x;
 	(void)y;
@@ -21,7 +21,7 @@ int		handle_click(int button, int x, int y, t_view *view)
 	return (0);
 }
 
-int		handle_click_release(int button, int x, int y, t_view *view)
+int	handle_click_release(int button, int x, int y, t_view *view)
 {
 	(void)x;
 	(void)y;
@@ -30,13 +30,13 @@ int		handle_click_release(int button, int x, int y, t_view *view)
 	return (0);
 }
 
-int		handle_close_button(void)
+int	handle_close_button(void)
 {
 	exit(0);
 	return (0);
 }
 
-int		handle_key_press(int keycode, t_view *view)
+int	handle_key_press(int keycode, t_view *view)
 {
 	if (keycode == 53)
 		exit(0);
@@ -65,7 +65,7 @@ int		handle_key_press(int keycode, t_view *view)
 	return (0);
 }
 
-int		handle_key_release(int keycode, t_view *view)
+int	handle_key_release(int keycode, t_view *view)
 {
 	if (keycode == 13)
 		view->keyboard->w_pressed = FALSE;

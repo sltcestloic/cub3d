@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 13:45:34 by lbertran          #+#    #+#             */
-/*   Updated: 2021/03/06 13:31:57 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/03/16 13:35:24 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	draw_fps(t_view *view)
 	free(fps_str);
 }
 
-int		draw_heart(t_view *view, t_texture texture, int x)
+int	draw_heart(t_view *view, t_texture texture, int x)
 {
 	double		ratio_x;
 	double		ratio_y;
@@ -46,9 +46,11 @@ int		draw_heart(t_view *view, t_texture texture, int x)
 		x = old_x;
 		while (x - old_x < texture.width / ratio_x)
 		{
-			put_pixel_ignore_black(view, x, y, texture.addr[(int)((y -
-				(view->settings->height * 0.93)) * ratio_y) * texture.width +
-				(int)((x - old_x) * ratio_x)]);
+			put_pixel_ignore_black(
+				view, x, y, texture.addr[(int)((y
+						- (view->settings->height * 0.93)) * ratio_y)
+				*texture.width
+				+ (int)((x - old_x) * ratio_x)]);
 			x++;
 		}
 		y++;
@@ -93,15 +95,16 @@ void	draw_hud(t_view *view)
 	x = view->settings->width / 2.7;
 	y = view->settings->height * 0.9;
 	ratio_x = (double)texture.width / (int)((int)(view->settings->width
-		/ 1.507) - x);
+				/ 1.507) - x);
 	ratio_y = (double)texture.height / (view->settings->height - y);
 	while (x < (int)(view->settings->width / 1.507))
 	{
 		y = view->settings->height * 0.9;
 		while (y < view->settings->height)
 		{
-			put_pixel(view, x, y, texture.addr[(int)((y -
-				(view->settings->height * 0.9)) * ratio_y) * texture.width
+			put_pixel(view, x, y, texture.addr[(int)((y
+						- (view->settings->height * 0.9)) * ratio_y)
+				*texture.width
 				+ (int)((x - (view->settings->width / 2.7)) * ratio_x)]);
 			y++;
 		}

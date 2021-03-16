@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 13:56:05 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/23 13:52:13 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/03/16 13:20:25 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ int	handle_mouse_motion(int x, int y, t_view *view)
 {
 	if (view->mouse->visible)
 		return (0);
-	if (x > view->settings->width || x < 0 || y < 0 ||
-		y > view->settings->height)
+	if (x > view->settings->width || x < 0 || y < 0
+		|| y > view->settings->height)
 	{
 		mlx_mouse_move(view->window, view->settings->width / 2,
-		view->settings->height / 2);
+			view->settings->height / 2);
 		return (0);
 	}
 	if (x > view->settings->width / 2)

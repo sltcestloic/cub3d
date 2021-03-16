@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:27:54 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/28 14:45:11 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/03/16 13:37:40 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	draw_win_screen(t_view *view, int minutes, int seconds)
 	show_mouse(view);
 }
 
-int		render_frame(t_view *view)
+int	render_frame(t_view *view)
 {
 	if (view->finished)
 		return (0);
@@ -79,7 +79,7 @@ void	draw_ray(t_view *view, t_ray *ray, int x)
 	while (y < ray->draw_end)
 	{
 		ty = (y - ray->draw_start) * texture.height / (ray->draw_end
-			- ray->draw_start);
+				- ray->draw_start);
 		tx = wx * texture.width;
 		put_pixel(view, x, y++, get_texture_color(view, texture, tx, ty));
 	}
@@ -100,8 +100,8 @@ void	draw_sprite_stripe(t_view *view, t_sprite *sprite, int x, int tx)
 	y = sprite->draw_start_y;
 	while (y < sprite->draw_end_y)
 	{
-		ty = (y - sprite->draw_start_y) * texture.height /
-			(sprite->draw_end_y - sprite->draw_start_y);
+		ty = (y - sprite->draw_start_y) * texture.height
+			/ (sprite->draw_end_y - sprite->draw_start_y);
 		put_pixel_ignore_black(view, x, y++,
 			get_sprite_color(view, sprite, tx, ty));
 	}
@@ -126,10 +126,10 @@ void	draw_sprite(t_view *view, t_sprite *sprite)
 		return ;
 	while (x < sprite->draw_end_x)
 	{
-		tx = (x - sprite->draw_start_x) * texture.width /
-			(sprite->draw_end_x - sprite->draw_start_x);
-		if (sprite->tr_y > 0 && x > 0 && x < view->settings->width &&
-			sprite->tr_y < view->z_buffer[x])
+		tx = (x - sprite->draw_start_x) * texture.width
+			/ (sprite->draw_end_x - sprite->draw_start_x);
+		if (sprite->tr_y > 0 && x > 0 && x < view->settings->width
+			&& sprite->tr_y < view->z_buffer[x])
 			draw_sprite_stripe(view, sprite, view->settings->width - x, tx);
 		x++;
 	}

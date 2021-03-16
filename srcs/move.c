@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/19 13:39:33 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/21 16:54:24 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/03/16 13:16:47 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ void	rotate_camera_lr(t_view *view, int right, int mouse)
 	if (!right)
 		rot_speed = -rot_speed;
 	dx_old = player->dir_x;
-	player->dir_x = player->dir_x * cos(rot_speed) - player->dir_y *
-		sin(rot_speed);
+	player->dir_x = player->dir_x * cos(rot_speed) - player->dir_y
+		* sin(rot_speed);
 	player->dir_y = dx_old * sin(rot_speed) + player->dir_y * cos(rot_speed);
 	px_old = player->plane_x;
-	player->plane_x = player->plane_x * cos(rot_speed) - player->plane_y *
-		sin(rot_speed);
-	player->plane_y = px_old * sin(rot_speed) + player->plane_y *
-		cos(rot_speed);
+	player->plane_x = player->plane_x * cos(rot_speed) - player->plane_y
+		* sin(rot_speed);
+	player->plane_y = px_old * sin(rot_speed) + player->plane_y
+		* cos(rot_speed);
 }
 
 void	rotate_camera_ud(t_view *view, int up, int mouse)

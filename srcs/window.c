@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 14:57:02 by lbertran          #+#    #+#             */
-/*   Updated: 2021/03/01 13:43:14 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/03/16 13:17:43 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,10 @@ void	init_window(t_settings settings, t_view view)
 	view.mouse = &mouse;
 	view.image = &img;
 	view.image->img = mlx_new_image(view.mlx, view.settings->width,
-		view.settings->height);
+			view.settings->height);
 	view.image->addr = mlx_get_data_addr(view.image->img,
-		&view.image->bits_per_pixel,
-		&view.image->line_len, &view.image->endian);
+			&view.image->bits_per_pixel,
+			&view.image->line_len, &view.image->endian);
 	hide_mouse(&view);
 	init_hooks(view);
 }

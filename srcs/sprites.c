@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 14:23:49 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/19 11:15:15 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/03/16 13:17:29 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ void	calculate_distances(t_view *view)
 	while (i < view->sprite_count)
 	{
 		sprite = view->sprites[i];
-		sprite.distance = ((view->player->pos_x - sprite.pos_x) *
-			(view->player->pos_x - sprite.pos_x) +
-			(view->player->pos_y - sprite.pos_y) *
-			(view->player->pos_y - sprite.pos_y));
+		sprite.distance = ((view->player->pos_x - sprite.pos_x)
+				* (view->player->pos_x - sprite.pos_x)
+				+ (view->player->pos_y - sprite.pos_y)
+				* (view->player->pos_y - sprite.pos_y));
 		view->sprites[i].distance = sprite.distance;
 		i++;
 	}

@@ -6,7 +6,7 @@
 #    By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/18 16:40:32 by lbertran          #+#    #+#              #
-#    Updated: 2021/03/06 13:32:51 by lbertran         ###   ########lyon.fr    #
+#    Updated: 2021/03/16 14:06:14 by lbertran         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRC		= cub3d.c \
 			utils/error.c \
 			utils/rgbint.c \
 			utils/time.c \
+			utils/utils.c \
 			utils/validate.c
 SRCS 	= $(addprefix srcs/, ${SRC})
 OBJS	= ${SRCS:.c=.o}

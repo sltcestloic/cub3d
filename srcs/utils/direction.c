@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 14:14:41 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/13 16:01:02 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/03/16 13:46:56 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	set_direction2(t_player *player, char dir)
 	}
 }
 
-void		set_direction(t_player *player, char dir)
+void	set_direction(t_player *player, char dir)
 {
 	if (dir == 'S')
 	{

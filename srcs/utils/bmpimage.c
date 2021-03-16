@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 12:46:29 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/19 12:38:09 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/03/16 13:44:53 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	data_to_bitmap(t_view *view, int fd)
 {
-	int i;
+	int	i;
 
 	i = view->settings->width * view->settings->height - 1;
 	while (i >= 0)
@@ -34,10 +34,10 @@ static void	reverse_pixel(t_image *img, int line_cnt, int *e, int f)
 	while (k >= 0)
 	{
 		save = img->addr[*e + (line_cnt * img->line_len)];
-		img->addr[*e + (line_cnt * img->line_len)] =
-			img->addr[f - k + (line_cnt * img->line_len - 1)];
-		img->addr[f - k + (line_cnt * img->line_len - 1)] =
-			save;
+		img->addr[*e + (line_cnt * img->line_len)]
+			= img->addr[f - k + (line_cnt * img->line_len - 1)];
+		img->addr[f - k + (line_cnt * img->line_len - 1)]
+			= save;
 		k--;
 		*e = *e + 1;
 	}
@@ -86,7 +86,7 @@ static int	bitmap_info_header(t_view *view, int fd)
 	return (SUCCESS);
 }
 
-int			create_bitmap(t_view *view)
+int	create_bitmap(t_view *view)
 {
 	int		fd;
 	int		file_size;
@@ -95,8 +95,8 @@ int			create_bitmap(t_view *view)
 
 	name = ft_strdup("image.bmp");
 	fd = open(name, O_CREAT | O_RDWR, 0777);
-	file_size = FILE_HEADER_SIZE + INFO_HEADER_SIZE + 4 +
-		(view->settings->width * view->settings->height) * 4;
+	file_size = FILE_HEADER_SIZE + INFO_HEADER_SIZE + 4
+		+ (view->settings->width * view->settings->height) * 4;
 	first_pix = FILE_HEADER_SIZE + INFO_HEADER_SIZE + 4;
 	write(fd, "BM", 2);
 	write(fd, &file_size, 4);

@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 11:47:20 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/28 13:44:04 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/03/16 13:46:33 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	decrease_effects(t_view *view)
 		view->lsd--;
 }
 
-int		get_ground_color(t_view *view)
+int	get_ground_color(t_view *view)
 {
 	int	color;
 	int	i;
@@ -39,7 +39,7 @@ int		get_ground_color(t_view *view)
 	return (color);
 }
 
-int		get_sky_color(t_view *view)
+int	get_sky_color(t_view *view)
 {
 	int	color;
 	int	i;
@@ -58,7 +58,7 @@ int		get_sky_color(t_view *view)
 	return (color);
 }
 
-int		get_texture_color(t_view *view, t_texture texture, int tx, int ty)
+int	get_texture_color(t_view *view, t_texture texture, int tx, int ty)
 {
 	int	color;
 	int	i;
@@ -77,7 +77,7 @@ int		get_texture_color(t_view *view, t_texture texture, int tx, int ty)
 	return (color);
 }
 
-int		get_sprite_color(t_view *view, t_sprite *sprite, int tx, int ty)
+int	get_sprite_color(t_view *view, t_sprite *sprite, int tx, int ty)
 {
 	int			color;
 	t_texture	texture;

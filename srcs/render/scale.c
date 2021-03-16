@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 13:39:20 by lbertran          #+#    #+#             */
-/*   Updated: 2021/02/28 11:49:28 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/03/16 13:38:35 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	draw_scaled_win_screen(t_view *view)
 		while (x < view->settings->width)
 		{
 			mlx_pixel_put(view->mlx, view->window, x, y, texture.addr[(int)
-				((int)(y * ratio_y) * texture.width + (int)(x * ratio_x))]);
+				((int)(y * ratio_y) *texture.width + (int)(x * ratio_x))]);
 			x++;
 		}
 		y++;

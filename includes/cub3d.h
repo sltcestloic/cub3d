@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/03/09 10:51:17 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/03/16 14:09:34 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define INFO_HEADER_SIZE 40
 # define MAX_SPRITES 500
 
-typedef struct		s_texture
+typedef struct s_texture
 {
 	void			*img;
 	int				width;
@@ -45,7 +45,7 @@ typedef struct		s_texture
 	int				endian;
 }					t_texture;
 
-typedef struct		s_settings
+typedef struct s_settings
 {
 	int				width;
 	int				height;
@@ -62,7 +62,7 @@ typedef struct		s_settings
 	int				sky_color;
 }					t_settings;
 
-typedef struct		s_map
+typedef struct s_map
 {
 	char			**content;
 	char			**content_copy;
@@ -71,7 +71,7 @@ typedef struct		s_map
 	int				parsed;
 }					t_map;
 
-typedef struct		s_mouse
+typedef struct s_mouse
 {
 	int				pressed;
 	int				visible;
@@ -79,7 +79,7 @@ typedef struct		s_mouse
 	int				y;
 }					t_mouse;
 
-typedef struct		s_keyboard
+typedef struct s_keyboard
 {
 	int				w_pressed;
 	int				a_pressed;
@@ -93,7 +93,7 @@ typedef struct		s_keyboard
 	int				ctrl_pressed;
 }					t_keyboard;
 
-typedef struct		s_player
+typedef struct s_player
 {
 	double			pos_x;
 	double			pos_y;
@@ -113,7 +113,7 @@ typedef struct		s_player
 	int				move_count;
 }					t_player;
 
-typedef struct		s_ray
+typedef struct s_ray
 {
 	double			cam_x;
 	double			dir_x;
@@ -134,7 +134,7 @@ typedef struct		s_ray
 	int				draw_end;
 }					t_ray;
 
-typedef struct		s_image
+typedef struct s_image
 {
 	void			*img;
 	char			*addr;
@@ -143,7 +143,7 @@ typedef struct		s_image
 	int				endian;
 }					t_image;
 
-typedef struct		s_sprite
+typedef struct s_sprite
 {
 	double			pos_x;
 	double			pos_y;
@@ -163,7 +163,7 @@ typedef struct		s_sprite
 	int				visible;
 }					t_sprite;
 
-typedef struct		s_view
+typedef struct s_view
 {
 	void			*mlx;
 	void			*window;
@@ -200,6 +200,7 @@ int					parse_map_line(char *line, t_view *view);
 void				parse_sprite(int x, int y, t_view *view, int type);
 t_texture			read_texture(char *path, t_view *view);
 void				copy_content(char **old, char **next, int mlc);
+int					is_empty(char *line);
 
 /*
 ** Texture reading
@@ -231,8 +232,7 @@ int					rgbint_r(int rgb);
 int					rgbint_g(int rgb);
 int					rgbint_b(int rgb);
 void				put_pixel(t_view *view, int x, int y, int color);
-void				put_pixel_ignore_black(t_view *view, int x, int y,
-					int color);
+void				put_pixel_ignore_black(t_view *view, int x, int y, int c);
 void				fill_window(t_view *view, int color);
 
 /*
@@ -264,8 +264,7 @@ int					handle_close_button(void);
 int					handle_key_press(int keycode, t_view *view);
 int					handle_key_press2(int keycode, t_view *view);
 int					handle_key_release(int keycode, t_view *view);
-int					handle_click_release(int button, int x, int y,
-					t_view *view);
+int					handle_click_release(int button, int x, int y, t_view *v);
 int					handle_click(int button, int x, int y, t_view *view);
 int					handle_mouse_motion(int x, int y, t_view *view);
 void				handle_keyboard(t_view *view);
@@ -316,10 +315,8 @@ long long			current_millis(void);
 
 int					get_ground_color(t_view *view);
 int					get_sky_color(t_view *view);
-int					get_texture_color(t_view *view, t_texture texture, int tx,
-					int ty);
-int					get_sprite_color(t_view *view, t_sprite *sprite, int tx,
-					int ty);
+int					get_texture_color(t_view *v, t_texture t, int tx, int ty);
+int					get_sprite_color(t_view *v, t_sprite *s, int tx, int ty);
 void				decrease_effects(t_view *view);
 
 /*
