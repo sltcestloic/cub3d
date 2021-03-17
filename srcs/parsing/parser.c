@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:36:35 by lbertran          #+#    #+#             */
-/*   Updated: 2021/03/17 13:07:26 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/03/17 13:11:00 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 int	parse_line(char *line, t_view *view)
 {
 	char	**split;
+	int		floor;
 
 	split = ft_split(line, ' ');
+	floor = ft_strcmp(split[0], "F") == 0;
 	if (ft_strcmp(split[0], "R") == 0)
 	{
 		free(line);
@@ -24,8 +26,9 @@ int	parse_line(char *line, t_view *view)
 	}
 	else if (ft_strcmp(split[0], "F") == 0 || ft_strcmp(split[0], "C") == 0)
 	{
+		free_split(split);
 		return (parse_color(line, view->settings,
-				ft_strcmp(split[0], "F") == 0));
+				floor));
 	}
 	free(line);
 	if (!is_valid_texture_entry(split[0]))
