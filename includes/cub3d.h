@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 11:13:47 by lbertran          #+#    #+#             */
-/*   Updated: 2021/03/16 14:09:34 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/03/17 12:58:48 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,7 @@ typedef struct s_view
 
 int					parse_config(int fd, t_map *map, t_view *view);
 int					parse_resolution(char **split, t_settings *settings);
-int					parse_color(char **split, t_settings *settings, int ground);
+int					parse_color(char *line, t_settings *settings, int ground);
 int					parse_texture(char **split, t_view *view);
 void				parse_static_textures(t_view *view);
 int					parse_map_line(char *line, t_view *view);
@@ -228,6 +228,7 @@ int					print_error_exit(char *message, int ext);
 */
 
 int					rgbint(int r, int g, int b);
+int					rgbint_chr(char *r, char *g, char *b);
 int					rgbint_r(int rgb);
 int					rgbint_g(int rgb);
 int					rgbint_b(int rgb);

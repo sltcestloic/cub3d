@@ -6,7 +6,7 @@
 /*   By: lbertran <lbertran@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 16:06:08 by lbertran          #+#    #+#             */
-/*   Updated: 2021/03/16 13:27:52 by lbertran         ###   ########lyon.fr   */
+/*   Updated: 2021/03/17 13:08:29 by lbertran         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,33 +48,32 @@ int	parse_color_sky(t_settings *settings, char **colorsplit)
 	if (settings->sky_color != -1)
 		print_error_exit("Duplicate sky color in .cub file.", 1);
 	settings->sky_color
-		= rgbint(ft_atoi(colorsplit[0]), ft_atoi(colorsplit[1]),
-			ft_atoi(colorsplit[2]));
+		= rgbint_chr(colorsplit[0], colorsplit[1],
+			colorsplit[2]);
 	free_split(colorsplit);
 	if (settings->sky_color == -1)
 		return (print_error_exit("Invalid sky color in .cub file.", 1));
 	return (SUCCESS);
 }
 
-int	parse_color(char **split, t_settings *settings, int ground)
+int	parse_color(char *line, t_settings *settings, int ground)
 {
 	char	**colorsplit;
 
-	colorsplit = ft_split(split[1], ',');
-	if (splitlen(colorsplit) != 3 || splitlen(split) != 2)
+	colorsplit = ft_split(&line[1], ',');
+	free(line);
+	if (splitlen(colorsplit) != 3)
 	{
 		free_split(colorsplit);
-		free_split(split);
 		return (print_error("Invalid color in .cub file."));
 	}
-	free_split(split);
 	if (ground)
 	{
 		if (settings->ground_color != -1)
 			print_error_exit("Duplicate ground color in .cub file.", 1);
 		settings->ground_color
-			= rgbint(ft_atoi(colorsplit[0]), ft_atoi(colorsplit[1]),
-				ft_atoi(colorsplit[2]));
+			= rgbint_chr(colorsplit[0], colorsplit[1],
+				colorsplit[2]);
 		free_split(colorsplit);
 		if (settings->ground_color == -1)
 			return (print_error("Invalid ground color in .cub file."));
